@@ -25,6 +25,14 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h3 class="mb-0">Master Section</h3>
+                <div class="form-group d-flex" style="margin-bottom: 0 !important;">
+                    <select name="searchPage" id="searchPage" class="form-control">
+                        <option value="">-- Filter Pages --</option>
+                        @foreach ($pages as $page)
+                            <option value="{{ $page->id }}" class="text-dark">{{ $page->page_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <button type="button" class="btn btn-primary" id="btn-add-modal" data-toggle="modal"
                     data-target="#createModal">Add Section</button>
             </div>
@@ -164,7 +172,7 @@
                 ]
             });
 
-            $('#btn-add-modal').click(function(e) {
+            $('#btn-add-modal').click(function() {
                 $('#addPage').val("");
                 $('#addSectionName').val("");
             });
@@ -254,7 +262,7 @@
                 });
             });
 
-            $('#btn-save-edit').click(function(e) {
+            $('#btn-save-edit').click(function() {
                 var id = $('#editId').val();
                 var page = $('#editPage').val();
                 var sectionName = $('#editSectionName').val();
@@ -297,6 +305,11 @@
                         }
                     });
                 }
+            });
+
+            $('#searchPage').change(function() {
+                table.ajax.url("{{ route('backend.section.index') }}?search_pages=" + $(this).val())
+                    .load();
             });
         });
     </script>

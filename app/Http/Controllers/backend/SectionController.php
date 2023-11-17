@@ -19,6 +19,10 @@ class SectionController extends Controller
                 ->join('pages as b', 'a.page_id', '=', 'b.id')
                 ->select('a.*', 'b.page_name');
 
+            if (isset($request->search_pages)) {
+                $data = $data->where('a.page_id', $request->search_pages)->get();
+            }
+
             return DataTables::of($data)->make(true);
         }
         return view('backend.pages.section.index', $data);
