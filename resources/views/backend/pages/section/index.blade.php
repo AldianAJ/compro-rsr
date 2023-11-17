@@ -1,11 +1,11 @@
 @extends('backend.layouts.app')
 
 @section('title')
-    Pages
+    Section
 @endsection
 
 @section('page-breadcumb')
-    Pages
+    Section
 @endsection
 
 @section('page-section')
@@ -24,10 +24,9 @@
     <div class="col">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
-                <h3 class="mb-0">Master Pages</h3>
+                <h3 class="mb-0">Master Section</h3>
                 <button type="button" class="btn btn-primary" id="btn-add-modal" data-toggle="modal"
-                    data-target="#createModal">Add
-                    Page</button>
+                    data-target="#createModal">Add Section</button>
             </div>
 
             <div class="table-responsive py-4">
@@ -35,6 +34,7 @@
                     <thead class="thead-light">
                         <tr>
                             <th>No</th>
+                            <th>Section</th>
                             <th>Page</th>
                             <th>Action</th>
                         </tr>
@@ -49,7 +49,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Data Page</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Data Section</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -57,9 +57,20 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="" class="form-control-label">
-                            Page Name
+                            Section Name
                         </label>
-                        <input type="text" class="form-control text-dark" name="addPage" id="addPage">
+                        <input type="text" class="form-control text-dark" name="addSectionName" id="addSectionName">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
+                            Page
+                        </label>
+                        <select name="addPage" id="addPage" class="form-control">
+                            <option value="">-- Select Pages --</option>
+                            @foreach ($pages as $page)
+                                <option value="{{ $page->id }}" class="text-dark">{{ $page->page_name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -75,18 +86,29 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Page</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Section</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
+                    <input type="hidden" name="editId" id="editId">
                     <div class="form-group">
                         <label for="" class="form-control-label">
-                            Page Name
+                            Section Name
                         </label>
-                        <input type="hidden" name="editId" id="editId">
-                        <input type="text" class="form-control text-dark" name="editPage" id="editPage">
+                        <input type="text" class="form-control text-dark" name="editSectionName" id="editSectionName">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
+                            Page
+                        </label>
+                        <select name="editPage" id="editPage" class="form-control text-dark">
+                            <option value="">-- Select Pages --</option>
+                            @foreach ($pages as $page)
+                                <option value="{{ $page->id }}">{{ $page->page_name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -119,6 +141,10 @@
                         }
                     },
                     {
+                        data: "section",
+                        name: "section"
+                    },
+                    {
                         data: "page_name",
                         name: "page_name"
                     },
@@ -139,12 +165,14 @@
             });
 
             $('#btn-add-modal').click(function(e) {
-                $('#addPage').val("")
+                $('#addPage').val("");
+                $('#addSectionName').val("");
             });
 
             $('#btn-save-add').click(function(e) {
+                var section_name = $('#addSectionName').val();
                 var page = $('#addPage').val();
-                if (page == "") {
+                if (page == "" || section_name == "") {
                     $('#createModal').modal('hide');
                     Swal.fire({
                         icon: "error",
@@ -155,15 +183,17 @@
                 } else {
                     $.ajax({
                         type: "POST",
-                        url: "{{ route('backend.pages.store') }}",
+                        url: "{{ route('backend.section.store') }}",
                         data: {
                             'page': page,
+                            'section_name': section_name,
                             '_token': "{{ csrf_token() }}"
                         },
                         dataType: "json",
                         success: function(resp) {
                             $('#createModal').modal('hide');
                             $('#addPage').val("")
+                            $('#addSectionName').val();
                             if (resp.code == 200) {
                                 Swal.fire({
                                     icon: "success",
@@ -191,7 +221,7 @@
                 var id = $(this).data("id");
                 $.ajax({
                     type: "GET",
-                    url: "{{ route('backend.pages.destroy') }}",
+                    url: "{{ route('backend.section.destroy') }}",
                     data: {
                         "id": id
                     },
@@ -211,14 +241,15 @@
                 var id = $(this).data("id");
                 $.ajax({
                     type: "GET",
-                    url: "{{ route('backend.pages.edit') }}",
+                    url: "{{ route('backend.section.edit') }}",
                     data: {
                         "id": id
                     },
                     success: function(resp) {
                         $('#editModal').modal('show');
                         $('#editId').val(resp.data.id);
-                        $('#editPage').val(resp.data.page_name);
+                        $('#editPage').val(resp.data.page_id);
+                        $('#editSectionName').val(resp.data.section);
                     }
                 });
             });
@@ -226,6 +257,7 @@
             $('#btn-save-edit').click(function(e) {
                 var id = $('#editId').val();
                 var page = $('#editPage').val();
+                var sectionName = $('#editSectionName').val();
                 if (page == "") {
                     $('#editModal').modal('hide');
                     Swal.fire({
@@ -237,10 +269,11 @@
                 } else {
                     $.ajax({
                         type: "POST",
-                        url: "{{ route('backend.pages.update') }}",
+                        url: "{{ route('backend.section.update') }}",
                         data: {
                             "id": id,
                             "page": page,
+                            "section_name": sectionName,
                             "_token": "{{ csrf_token() }}"
                         },
                         success: function(resp) {
