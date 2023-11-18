@@ -21,7 +21,7 @@ Route::controller(PagesController::class)->name('frontend.')->group(function () 
     Route::get('/', 'home')->name('home');
     Route::get('/about', 'about')->name('about');
     Route::get('/brand/{slug}', 'brand')->name('brand');
-    Route::get('/news', 'news')->name('news');
+    Route::get('/media', 'media')->name('media');
     Route::get('/career', 'career')->name('career');
 });
 

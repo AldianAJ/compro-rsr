@@ -127,6 +127,7 @@
       color: #fff;
     }
   </style>
+  @stack('styles')
 </head>
 
 <body>
@@ -146,7 +147,7 @@
               <a href="#">Products</a>
             </li>
             <li>
-              <a href="#">Media</a>
+              <a href="{{route('frontend.media')}}">Media</a>
             </li>
             <li>
               <a href="{{route('frontend.career')}}">Career</a>
@@ -337,7 +338,7 @@
       document.getElementById('home').style.backgroundImage = image;
     }
   </script>
-
+  @stack('scripts')
 </body>
 
 </html>

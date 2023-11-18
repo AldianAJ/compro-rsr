@@ -45,13 +45,9 @@ class PagesController extends Controller
         ));
     }
 
-    public function news()
+    public function media()
     {
-        $berita = News::latest()->paginate(9);
-
-        return view('frontend.pages.news.index', compact(
-            'berita'
-        ));
+        return view('frontend.pages.media.index');
     }
 
     public function career()
