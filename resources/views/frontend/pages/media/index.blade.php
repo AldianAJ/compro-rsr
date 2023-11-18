@@ -123,5 +123,4 @@
 @endsection
 
 @push('scripts')
-<script src="//unpkg.com/alpinejs" defer></script>
 @endpush
