@@ -53,4 +53,9 @@ class PagesController extends Controller
             'berita'
         ));
     }
+
+    public function career()
+    {
+        return view('frontend.pages.career.index');
+    }
 }

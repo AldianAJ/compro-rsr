@@ -149,7 +149,7 @@
               <a href="#">Media</a>
             </li>
             <li>
-              <a href="#">Career</a>
+              <a href="{{route('frontend.career')}}">Career</a>
             </li>
           </ul>
         </div>
