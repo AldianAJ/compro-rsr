@@ -165,7 +165,7 @@
               <a href="{{route('frontend.about')}}">About Us</a>
             </li>
             <li>
-              <a href="#">Products</a>
+              <a href="{{route('frontend.products')}}">Products</a>
             </li>
             <li>
               <a href="{{route('frontend.media')}}">Media</a>

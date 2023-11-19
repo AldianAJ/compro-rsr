@@ -22,17 +22,9 @@ class PagesController extends Controller
         return view('frontend.pages.about.index');
     }
 
-    public function brand($slug)
+    public function products()
     {
-        $merk = Brand::where('slug', $slug)->first();
-        $produk = Product::where('brand_id', $merk->id)->paginate(6);
-        $section_produk = Home::where('section', 'Produk')->first();
-
-        return view('frontend.pages.brand.index', compact(
-            'merk',
-            'produk',
-            'section_produk'
-        ));
+        return view('frontend.pages.products.index');
     }
 
     public function media()
