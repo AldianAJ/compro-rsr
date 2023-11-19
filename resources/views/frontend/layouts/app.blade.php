@@ -162,7 +162,7 @@
           <i class="fa-solid fa-bars" @click="open = !open" style="font-size:1.5rem; color:#fff; cursor: pointer;"></i>
           <ul>
             <li>
-              <a href="#">About Us</a>
+              <a href="{{route('frontend.about')}}">About Us</a>
             </li>
             <li>
               <a href="#">Products</a>

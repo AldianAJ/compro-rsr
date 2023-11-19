@@ -19,17 +19,7 @@ class PagesController extends Controller
 
     public function about()
     {
-        $section_visi = About::where('section', 'Visi')->first();
-        $section_misi = About::where('section', 'Misi')->first();
-        $section_budaya_kerja = About::where('section', 'Budaya Kerja')->first();
-        $section_histori = History::get();
-
-        return view('frontend.pages.about.index', compact(
-            'section_visi',
-            'section_misi',
-            'section_budaya_kerja',
-            'section_histori',
-        ));
+        return view('frontend.pages.about.index');
     }
 
     public function brand($slug)
