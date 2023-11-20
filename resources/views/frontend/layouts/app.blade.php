@@ -19,6 +19,7 @@
   <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}" type="image/vnd.microsoft.icon" />
   <link rel="stylesheet" href="{{asset('assets/styles/main.css')}}">
   <link rel="stylesheet" href="{{asset('assets/styles/style.css')}}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <!--[if lt IE 10]> <link rel="stylesheet" href="/static/ggtbk/styles/ie.css"> <![endif]-->
   <script src="{{asset('assets/javascripts/main.js')}}"></script>
   <script src="{{asset('assets/javascripts/customffaf.js?v=1.4')}}"></script>
@@ -78,6 +79,7 @@
 
     #topbar {
       height: unset !important;
+      position: relative !important;
     }
 
     .navbar-header {
@@ -89,16 +91,34 @@
 
     .navbar-header ul {
       display: flex;
-      /* position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background-color: #000;
-      padding-left: 0;
-      padding: 1rem 4rem;
-      flex-direction: column; */
       list-style: none;
       gap: 1.5rem;
       margin-bottom: 0;
+    }
+
+    .navbar-header i {
+      display: none;
+    }
+
+    @media (max-width: 575.98px) {
+      .navbar-header i {
+        display: block;
+      }
+
+      .navbar-header ul {
+        visibility: hidden;
+        position: absolute;
+        top: 2.8rem;
+        right: -1rem;
+        background-color: #000;
+        padding-left: 0;
+        padding: 1rem 4rem;
+        flex-direction: column;
+      }
+
+      .navbar-header.active ul {
+        visibility: visible !important;
+      }
     }
 
     .navbar-header ul li a {
@@ -127,29 +147,31 @@
       color: #fff;
     }
   </style>
+  @stack('styles')
 </head>
 
 <body>
   <header>
     <nav class="navbar navbar-trans navbar-fixed-top" role="navigation">
-      <div id="topbar" class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="index.html">
+      <div id="topbar" class="container-fluid" x-data="{ open: false }">
+        <div class="navbar-header" x-bind:class="open ? 'active' : ''">
+          <a class="navbar-brand" href="{{route('frontend.home')}}">
             <img alt="Gudang Garam" src="{{asset('assets/images/pjsp-logo.png')}}">
             <h1>PT PUTERA JAYA SAKTI PERKASA</h1>
           </a>
+          <i class="fa-solid fa-bars" @click="open = !open" style="font-size:1.5rem; color:#fff; cursor: pointer;"></i>
           <ul>
             <li>
-              <a href="#">About Us</a>
+              <a href="{{route('frontend.about')}}">About Us</a>
             </li>
             <li>
-              <a href="#">Products</a>
+              <a href="{{route('frontend.products')}}">Products</a>
             </li>
             <li>
-              <a href="#">Media</a>
+              <a href="{{route('frontend.media')}}">Media</a>
             </li>
             <li>
-              <a href="#">Career</a>
+              <a href="{{route('frontend.career')}}">Career</a>
             </li>
           </ul>
         </div>
@@ -337,7 +359,8 @@
       document.getElementById('home').style.backgroundImage = image;
     }
   </script>
-
+  <script src="//unpkg.com/alpinejs" defer></script>
+  @stack('scripts')
 </body>
 
 </html>

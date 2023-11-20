@@ -19,38 +19,21 @@ class PagesController extends Controller
 
     public function about()
     {
-        $section_visi = About::where('section', 'Visi')->first();
-        $section_misi = About::where('section', 'Misi')->first();
-        $section_budaya_kerja = About::where('section', 'Budaya Kerja')->first();
-        $section_histori = History::get();
-
-        return view('frontend.pages.about.index', compact(
-            'section_visi',
-            'section_misi',
-            'section_budaya_kerja',
-            'section_histori',
-        ));
+        return view('frontend.pages.about.index');
     }
 
-    public function brand($slug)
+    public function products()
     {
-        $merk = Brand::where('slug', $slug)->first();
-        $produk = Product::where('brand_id', $merk->id)->paginate(6);
-        $section_produk = Home::where('section', 'Produk')->first();
-
-        return view('frontend.pages.brand.index', compact(
-            'merk',
-            'produk',
-            'section_produk'
-        ));
+        return view('frontend.pages.products.index');
     }
 
-    public function news()
+    public function media()
     {
-        $berita = News::latest()->paginate(9);
+        return view('frontend.pages.media.index');
+    }
 
-        return view('frontend.pages.news.index', compact(
-            'berita'
-        ));
+    public function career()
+    {
+        return view('frontend.pages.career.index');
     }
 }

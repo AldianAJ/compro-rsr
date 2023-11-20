@@ -22,8 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::controller(PagesController::class)->name('frontend.')->group(function () {
     Route::get('/', 'home')->name('home');
     Route::get('/about', 'about')->name('about');
-    Route::get('/brand/{slug}', 'brand')->name('brand');
-    Route::get('/news', 'news')->name('news');
+    Route::get('/products', 'products')->name('products');
+    Route::get('/media', 'media')->name('media');
+    Route::get('/career', 'career')->name('career');
 });
 
 Route::prefix('/admin')->name('backend.')->group(function () {

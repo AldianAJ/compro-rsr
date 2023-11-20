@@ -1,223 +1,193 @@
 @extends('frontend.layouts.app')
-@section('title', 'Tentang Kami')
+@section('title', 'About Us')
 
 @push('styles')
 <style>
-  .navbar-elixir {
-    margin-bottom: 0 !important;
+  #home,
+  html,
+  body,
+  main {
+    height: unset !important;
   }
 
-  .hero_section {
-    height: 100vh;
+  #home .row {
+    background-color: transparent;
+    height: unset;
   }
 
-  .control_select {
-    display: none;
+  .row-wrapper {
+    padding-left: 3.25rem !important;
+    padding-top: 6rem !important;
+    padding-bottom: 3rem;
+  }
+
+  .row-wrapper p {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .content {
+    position: relative;
+    display: flex;
+    justify-content: end;
+    padding-left: 4.25rem !important;
+    padding-top: 10rem !important;
+    padding-bottom: 4rem !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .content .visi_misi {
+    width: 40%;
+    background-color: rgb(0 0 0 / 70%);
+    position: absolute;
+    right: 2rem;
+    top: -7rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .content .visi_misi h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .content .visi_misi p {
+    text-align: justify;
+    font-size: 0.8rem;
+    margin: 0;
+  }
+
+  .content .visi_misi h1,
+  .content .visi_misi p {
+    color: #fff;
+  }
+
+  .content .content-wrapper {
+    background-color: #fff;
+    width: 50%;
+    padding: 1rem;
+  }
+
+  .content .content-wrapper .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 1rem;
+  }
+
+  .content .content-wrapper p {
+    text-align: justify;
+    margin-bottom: 0;
+  }
+
+
+  .content .content-wrapper h1,
+  .content .content-wrapper h2 {
+    font-size: 1.5rem;
+    color: #d64c42;
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .content .content-wrapper h2 {
+    background-color: #000;
+    display: inline-block;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    padding-right: 0.5rem;
+    padding-left: 2rem;
+    margin-bottom: 1.5rem;
+    margin-left: -1rem;
   }
 
   @media (max-width: 575.98px) {
-    .hero_section {
-      height: 50vh;
+    .row-wrapper {
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
     }
 
-    .control_select {
-      display: block;
+    .row-wrapper p {
+      text-align: justify !important;
     }
 
-    .control_button {
-      display: none;
+    .content .visi_misi {
+      width: 100%;
+      position: static !important;
+    }
+
+    .content {
+      justify-content: start;
+      flex-direction: column;
+      gap: 1rem;
+      padding-top: 4rem !important;
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
+
+    .content .content-wrapper {
+      width: 100%;
     }
   }
 </style>
 @endpush
 
 @section('content')
-<section class="color-white py-0" id="header-video">
-  <div>
-    <div class="background-holder" style="background-image:url({{asset('frontend/assets/images/bg-hero.jpg')}});"></div>
-    {{-- <div class="background-holder" style="background-image:url(assets/images/video-1.html);">
-      <video autoplay="autoplay" loop="loop" muted="muted" style="-o-filter: blur(0); filter: blur(0);">
-        <source src="{{asset('frontend/assets/videos/home-intro.mp4')}}" type="video/mp4" />
-      </video>
-    </div> --}}
-    <!--/.background-holder-->
-    <div class="container" data-zanim-timeline="{}" data-zanim-trigger="scroll">
-      <div class="row d-flex align-items-center hero_section">
-      </div>
+<section id="home" class="container-fluid" desktop="{{asset('assets/media/uploads/images/banner_tentangkami.jpg')}}"
+  tablet="{{asset('assets/media/uploads/images/banner-tentang-kami-m.jpg')}}"
+  mobile="{{asset('assets/media/uploads/images/banner-tentang-kami-m.jpg')}}">
+  <div class="row row-wrapper">
+    <div class="col-lg-6">
+      <p>
+        <strong>PT Putera Jaya Sakti Perkasa</strong> menjalankan bisnisnya
+        dengan profesionalitas dan didukung oleh tenaga produksi
+        dan manajerial yang handal. Seiring perkembangan zaman
+        dan sesuai visi misi perusahaan, maka kami bertekad untuk
+        terus melakukan perubahan dan inovasi demi menjadi perusahaan
+        yang handal dan mampu mencakup pasar nasional.
+      </p>
     </div>
-    <!--/.row-->
   </div>
-  <!--/.container-->
 </section>
-<section class="background-11">
-  {{-- <img src="{{asset('frontend/assets/images/bakau-bg-l-to-r.png')}}" alt="gambar corak daun bakau"
-    style="height: 20rem; position: absolute; left: -2rem; bottom: 0; z-index: 50;"> --}}
-  <div class="container">
-    <div class="row" x-data="{ open: '{{$section_histori[0]->year}}' }">
-      <div class="col-12">
-        <h3 class="text-center fs-2 fs-md-3">PERJALANAN PT. SINAR SURYA TEMBAKAU</h3>
-        <hr class="short"
-          data-zanim='{"from":{"opacity":0,"width":0},"to":{"opacity":1,"width":"4.20873rem"},"duration":0.8}'
-          data-zanim-trigger="scroll" />
-      </div>
-      <div class="col-lg-3 mb-3">
-        <div class="background-white px-3 px-0 py-5 px-lg-5 radius-secondary text-center control_button">
-          <h6 class="mb-3">Tahun Perjalanan</h6>
-          @foreach($section_histori as $item)
-          <button @click="open = '{{$item->year}}'" type="button"
-            x-bind:class="open == '{{$item->year}}' ? 'bg-secondary text-white' : ''"
-            class="btn btn-outline-secondary d-block mx-auto mb-2">{{$item->year}}</button>
-          @endforeach
-        </div>
-        <div class="background-white px-3 px-0 py-5 px-lg-5 radius-secondary text-center control_select">
-          <h6 class="mb-3">Tahun Perjalanan</h6>
-          <div class="form-group">
-            <select x-model="open" class="form-control" id="exampleFormControlSelect1">
-              @foreach($section_histori as $item)
-              <option>{{$item->year}}</option>
-              @endforeach
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        @foreach($section_histori as $item)
-        <div class="background-white px-3 px-0 py-5 px-lg-5 radius-secondary" x-show="open == '{{$item->year}}'">
-          <h5 class="text-center">{{$item->year}}</h5>
-          @if(!empty($item->image_url))
-          <div class="d-flex justify-content-center mb-4">
-            <img class="radius-secondary" style="height: 25rem; object-fit: cover;"
-              src="{{asset('storage/' . $item->image_url)}}" alt="" />
-          </div>
-          @endif
-          <div class="mt-3">
-            {!! $item->content !!}
-          </div>
-        </div>
-        @endforeach
-      </div>
+<section>
+  <div class="content" style="background-image: url('{{asset('assets/media/uploads/images/banner-kretek-m.jpg')}}')">
+    <div class="visi_misi">
+      <h1>VISI</h1>
+      <p style="margin-bottom: 1rem;">
+        Menjadi salah satu perusahaan rokok terkemuka di Indonesia dan dapat menembus pasar internasional
+        dengan memanfaatkan potensi sumber daya manusia (SDM) dan sumber daya alam (SDA) local yang terbaik.
+      </p>
+      <h1>MISI</h1>
+      <p>
+        Meningkatkan produktifitas SDM agar memiliki daya saing dan integritas yang tinggi.
+        Mengembangkan konsep pengelolaan bahan dasar yang berkualitas.
+        Meningkatkan efektifitas pemasaran serta penjualan secara optimal.
+      </p>
     </div>
-    <!--/.row-->
+    <div class="content-wrapper">
+      <div class="header">
+        <h1>History of PJSP</h1>
+        <p>1/10</p>
+      </div>
+      <h2>2014</h2>
+      <p>
+        Pada Tahun 1960 telah berdiri CV. Podo Tresno yang bergerak di bidang Trading
+        Tembakau yang dijalankan oleh orang tua dari Bapak Santjoko dan
+        Bapak Fx. Iswanto. Pada Tahun 1982 terjadi perubahan manajemen dan pergantian
+        nama perusahaan menjadi CV. Putra Bakti Utama dengan di pimpin Bapak Fx. Iswanto
+        dan Bapak Santjoko, hingga saat ini masih tetap berjalan di bidang Trading Tembakau.
+        Pada tahun 2014, CV. Putra Bakti Utama mengembangkan bisnis usahanya
+        di bidang rokok dengan nama PT Putra Jaya Sakti Perkasa yang saat itu hanya
+        memproduksi rokok SKT (Sigarete Kretek Tangan). Pabrik rokok ini berada
+        di kawasan Bojonegoro dan dipimpin oleh Bapak Fx. Iswanto selaku Direktur,
+        Bapak Juli Utama dan Bapak Santjoko selaku Komisaris. Bapak Fx. Iswanto
+        terus bekerja sama membangun dan mengembangkan perusahaan rokok
+        di daerah ini untuk terus tumbuh agar bisa masuk di skala nasional.
+      </p>
+    </div>
   </div>
-  <!--/.container-->
-</section>
-<section class="background-11">
-  {{-- <img src="{{asset('frontend/assets/images/bakau-bg-l-to-r.png')}}" alt="gambar corak daun bakau"
-    style="height: 20rem; position: absolute; left: -2rem; bottom: 0; z-index: 50;"> --}}
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <h3 class="text-center fs-2 fs-md-3">VISI & MISI PERUSAHAAN</h3>
-        <hr class="short"
-          data-zanim='{"from":{"opacity":0,"width":0},"to":{"opacity":1,"width":"4.20873rem"},"duration":0.8}'
-          data-zanim-trigger="scroll" />
-      </div>
-      <div class="col-12">
-        <div class="background-white px-3 px-0 py-5 px-lg-5 radius-secondary">
-          <h5 class="text-center">VISI</h5>
-          <div class="mt-3">{!!$section_visi->content!!}</div>
-        </div>
-        <div class="background-white px-3 mt-4 px-0 py-5 px-lg-5 radius-secondary">
-          <h5 class="text-center">MISI</h5>
-          <div class="mt-3">{!!$section_misi->content!!}</div>
-        </div>
-      </div>
-    </div>
-    <!--/.row-->
-  </div>
-  <!--/.container-->
-</section>
-<section class="background-11">
-  {{-- <img src="{{asset('frontend/assets/images/bakau-bg-l-to-r.png')}}" alt="gambar corak daun bakau"
-    style="height: 20rem; position: absolute; right: -2rem; bottom: 0; transform: scaleX(-1); z-index: 50;"> --}}
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <h3 class="text-center fs-2 fs-md-3">{{$section_budaya_kerja->section}}</h3>
-        <hr class="short"
-          data-zanim='{"from":{"opacity":0,"width":0},"to":{"opacity":1,"width":"4.20873rem"},"duration":0.8}'
-          data-zanim-trigger="scroll" />
-      </div>
-    </div>
-    <div class="row align-items-center">
-      <div class="col-lg-6">
-        <img class="radius-secondary" src="{{asset('storage/' . $section_budaya_kerja->image_url)}}" alt="" />
-      </div>
-      <div class="col-lg-6 px-lg-5 mt-6 mt-lg-0" data-zanim-timeline="{}" data-zanim-trigger="scroll">
-        <div>{!!$section_budaya_kerja->content!!}</div>
-        {{-- <div class="overflow-hidden">
-          <div class="px-4 px-sm-0" data-zanim='{"delay":0}'>
-            <h5 class="fs-0 fs-lg-1">
-              <span class="ion-chatbubble-working fs-2 mr-2 icon-position-fix fw-800"></span>Integritas
-            </h5>
-            <p class="mt-2 px-lg-3">
-              Selaras antara hati, pikiran, perkataan dan perbuatan yang baik dan benar.
-            </p>
-          </div>
-        </div>
-        <div class="overflow-hidden mt-4">
-          <div class="px-4 px-sm-0" data-zanim='{"delay":0}'>
-            <h5 class="fs-0 fs-lg-1">
-              <span class="ion-chatbubble-working fs-2 mr-2 icon-position-fix fw-800"></span>Profesionalitas
-            </h5>
-            <p class="mt-2 px-lg-3">
-              Bekerja secara disiplin, kompeten dan tepat waktu dengan hal terbaik.
-            </p>
-          </div>
-        </div>
-        <div class="overflow-hidden mt-4">
-          <div class="px-4 px-sm-0" data-zanim='{"delay":0}'>
-            <h5 class="fs-0 fs-lg-1">
-              <span class="ion-chatbubble-working fs-2 mr-2 icon-position-fix fw-800"></span>Inovasi
-            </h5>
-            <p class="mt-2 px-lg-3">
-              Menyempurnakan yang sudah ada dan menciptakan kreasi yang baru untuk menjadi lebih baik.
-            </p>
-          </div>
-        </div>
-        <div class="overflow-hidden mt-4">
-          <div class="px-4 px-sm-0" data-zanim='{"delay":0}'>
-            <h5 class="fs-0 fs-lg-1">
-              <span class="ion-chatbubble-working fs-2 mr-2 icon-position-fix fw-800"></span>Tanggung jawab
-            </h5>
-            <p class="mt-2 px-lg-3">
-              Bekerja secara tuntas dan konsekuen.
-            </p>
-          </div>
-        </div>
-        <div class="overflow-hidden mt-4">
-          <div class="px-4 px-sm-0" data-zanim='{"delay":0}'>
-            <h5 class="fs-0 fs-lg-1">
-              <span class="ion-chatbubble-working fs-2 mr-2 icon-position-fix fw-800"></span>Keteladanan
-            </h5>
-            <p class="mt-2 px-lg-3">
-              Menjadi contoh yang baik bagi orang lain.
-            </p>
-          </div>
-        </div> --}}
-      </div>
-    </div>
-    <!--/.row-->
-  </div>
-  <!--/.container-->
-</section>
-<section class="background-11" style="padding-bottom: 0;">
-  {{-- <img src="{{asset('frontend/assets/images/bakau-bg-l-to-r.png')}}" alt="gambar corak daun bakau"
-    style="height: 20rem; position: absolute; right: -2rem; bottom: 0; transform: scaleX(-1); z-index: 50;"> --}}
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <h3 class="text-center fs-2 fs-md-3">LOKASI</h3>
-        <hr class="short"
-          data-zanim='{"from":{"opacity":0,"width":0},"to":{"opacity":1,"width":"4.20873rem"},"duration":0.8}'
-          data-zanim-trigger="scroll" />
-      </div>
-    </div>
-    <!--/.row-->
-  </div>
-  <iframe class="w-100" height="500"
-    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7917.663090344349!2d111.888176!3d-7.145469!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e778226bc8e8697%3A0xb3ce907f355d77!2sPT.%20Putera%20Jaya%20Sakti%20Perkasa!5e0!3m2!1sid!2sid!4v1693062109681!5m2!1sid!2sid"
-    style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-  <!--/.container-->
 </section>
 @endsection
+
+@push('scripts')
+@endpush
