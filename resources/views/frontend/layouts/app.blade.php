@@ -156,7 +156,7 @@
       flex-direction: column;
       gap: 0.5rem;
       position: absolute;
-      top: 3.4rem;
+      top: 2.2rem;
       left: 0;
       padding-left: 0;
       padding: 0.5rem;
