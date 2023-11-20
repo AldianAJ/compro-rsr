@@ -1,3 +1,10 @@
+@php
+use App\Models\Lang;
+
+$langs = Lang::get();
+$cuurent_lang = $_GET['lang'] ?? $langs[0]->code;
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -182,23 +189,23 @@
     <nav class="navbar navbar-trans navbar-fixed-top" role="navigation">
       <div id="topbar" class="container-fluid" x-data="{ open: false, langOpen: false }">
         <div class="navbar-header" x-bind:class="open ? 'active' : ''">
-          <a class="navbar-brand" href="{{route('frontend.home')}}">
+          <a class="navbar-brand" href="{{route('frontend.home', ['lang' => $cuurent_lang])}}">
             <img alt="Gudang Garam" src="{{asset('assets/images/pjsp-logo.png')}}">
             <h1>PT PUTERA JAYA SAKTI PERKASA</h1>
           </a>
           <i class="fa-solid fa-bars" @click="open = !open" style="font-size:1.5rem; color:#fff; cursor: pointer;"></i>
           <ul>
             <li>
-              <a href="{{route('frontend.about')}}">About Us</a>
+              <a href="{{route('frontend.about', ['lang' => $cuurent_lang])}}">About Us</a>
             </li>
             <li>
-              <a href="{{route('frontend.products')}}">Products</a>
+              <a href="{{route('frontend.products', ['lang' => $cuurent_lang])}}">Products</a>
             </li>
             <li>
-              <a href="{{route('frontend.media')}}">Media</a>
+              <a href="{{route('frontend.media', ['lang' => $cuurent_lang])}}">Media</a>
             </li>
             <li>
-              <a href="{{route('frontend.career')}}">Career</a>
+              <a href="{{route('frontend.career', ['lang' => $cuurent_lang])}}">Career</a>
             </li>
             <li>
               <div class="dropdown">
@@ -207,8 +214,9 @@
                   <i class="fa-solid fa-chevron-down"></i>
                 </a>
                 <ul class="menu" x-show="langOpen">
-                  <li><a class="item" href="#">Indonesia</a></li>
-                  <li><a class="item" href="#">English</a></li>
+                  @foreach($langs as $lang)
+                  <li><a class="item" href="?lang={{$lang->code}}">{{$lang->language}}</a></li>
+                  @endforeach
                 </ul>
               </div>
             </li>
