@@ -1,11 +1,11 @@
 @extends('backend.layouts.app')
 
 @section('title')
-    Pages
+    Content
 @endsection
 
 @section('page-breadcumb')
-    Pages
+    Content
 @endsection
 
 @section('page-section')
@@ -24,10 +24,10 @@
     <div class="col">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
-                <h3 class="mb-0">Master Pages</h3>
+                <h3 class="mb-0">Master Content</h3>
                 <button type="button" class="btn btn-primary" id="btn-add-modal" data-toggle="modal"
                     data-target="#createModal">Add
-                    Page</button>
+                    Content</button>
             </div>
 
             <div class="table-responsive py-4">
@@ -36,6 +36,9 @@
                         <tr>
                             <th>No</th>
                             <th>Page</th>
+                            <th>Language</th>
+                            <th>Section</th>
+                            <th>Content</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -49,7 +52,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Data Page</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Data Language</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -57,9 +60,37 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="" class="form-control-label">
-                            Page Name
+                            Page
                         </label>
-                        <input type="text" class="form-control text-dark" name="addPage" id="addPage">
+                        <select name="addPage" id="addPage" class="form-control text-dark">
+                            <option value="">-- Select Pages --</option>
+                            @foreach ($pages as $page)
+                                <option value="{{ $page->id }}">{{ $page->page_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
+                            Language
+                        </label>
+                        <select name="addLang" id="addLang" class="form-control text-dark">
+                            <option value="">-- Select Languages --</option>
+                            @foreach ($langs as $lang)
+                                <option value="{{ $lang->id }}">{{ $lang->language }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
+                            Code
+                        </label>
+                        <input type="text" class="form-control text-dark" name="addCode" id="addCode">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
+                            Language
+                        </label>
+                        <input type="text" class="form-control text-dark" name="addLanguage" id="addLanguage">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -75,7 +106,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Page</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Language</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -83,10 +114,16 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="" class="form-control-label">
-                            Page Name
+                            Code
                         </label>
                         <input type="hidden" name="editId" id="editId">
-                        <input type="text" class="form-control text-dark" name="editPage" id="editPage">
+                        <input type="text" class="form-control text-dark" name="editCode" id="editCode">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
+                            Language
+                        </label>
+                        <input type="text" class="form-control text-dark" name="editLanguage" id="editLanguage">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -111,7 +148,7 @@
     <script>
         $(document).ready(function() {
             var table = $('#datatable').DataTable({
-                ajax: "{{ route('backend.pages.index') }}",
+                ajax: "{{ route('backend.content.index') }}",
                 columns: [{
                         data: "id",
                         render: function(data, type, row, meta) {
@@ -121,6 +158,18 @@
                     {
                         data: "page_name",
                         name: "page_name"
+                    },
+                    {
+                        data: "language",
+                        name: "language"
+                    },
+                    {
+                        data: "section",
+                        name: "section"
+                    },
+                    {
+                        data: "content_value",
+                        name: "content_value"
                     },
                     {
                         data: "id",
@@ -139,12 +188,14 @@
             });
 
             $('#btn-add-modal').click(function(e) {
-                $('#addPage').val("")
+                $('#addCode').val("")
+                $('#addLanguage').val("")
             });
 
             $('#btn-save-add').click(function(e) {
-                var page = $('#addPage').val();
-                if (page == "") {
+                var code = $('#addCode').val();
+                var language = $('#addLanguage').val();
+                if (code == "" || language == "") {
                     $('#createModal').modal('hide');
                     Swal.fire({
                         icon: "error",
@@ -155,17 +206,18 @@
                 } else {
                     $.ajax({
                         type: "POST",
-                        url: "{{ route('backend.pages.store') }}",
+                        url: "{{ route('backend.lang.store') }}",
                         data: {
-                            'page': page,
+                            'code': code,
+                            'language': language,
                             '_token': "{{ csrf_token() }}"
                         },
                         dataType: "json",
                         success: function(resp) {
                             $('#createModal').modal('hide');
-                            $('#addPage').val("")
+                            $('#addLanguage').val("")
+                            $('#addCode').val("")
                             if (resp.code == 200) {
-                                table.ajax.reload();
                                 Swal.fire({
                                     icon: "success",
                                     title: "Success",
@@ -180,7 +232,7 @@
                                     timer: 3000
                                 });
                             }
-
+                            table.ajax.reload();
                         }
                     });
                 }
@@ -192,7 +244,7 @@
                 var id = $(this).data("id");
                 $.ajax({
                     type: "GET",
-                    url: "{{ route('backend.pages.destroy') }}",
+                    url: "{{ route('backend.lang.destroy') }}",
                     data: {
                         "id": id
                     },
@@ -212,22 +264,24 @@
                 var id = $(this).data("id");
                 $.ajax({
                     type: "GET",
-                    url: "{{ route('backend.pages.edit') }}",
+                    url: "{{ route('backend.lang.edit') }}",
                     data: {
                         "id": id
                     },
                     success: function(resp) {
                         $('#editModal').modal('show');
                         $('#editId').val(resp.data.id);
-                        $('#editPage').val(resp.data.page_name);
+                        $('#editCode').val(resp.data.code);
+                        $('#editLanguage').val(resp.data.language);
                     }
                 });
             });
 
             $('#btn-save-edit').click(function(e) {
                 var id = $('#editId').val();
-                var page = $('#editPage').val();
-                if (page == "") {
+                var code = $('#editCode').val();
+                var language = $('#editLanguage').val();
+                if (code == "" || language == "") {
                     $('#editModal').modal('hide');
                     Swal.fire({
                         icon: "error",
@@ -238,10 +292,11 @@
                 } else {
                     $.ajax({
                         type: "POST",
-                        url: "{{ route('backend.pages.update') }}",
+                        url: "{{ route('backend.lang.update') }}",
                         data: {
                             "id": id,
-                            "page": page,
+                            "code": code,
+                            "language": language,
                             "_token": "{{ csrf_token() }}"
                         },
                         success: function(resp) {

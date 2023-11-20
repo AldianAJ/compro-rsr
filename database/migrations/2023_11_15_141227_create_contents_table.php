@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("lang_id");
+            $table->unsignedBigInteger("section_id");
             $table->text("content_value");
             $table->timestamps();
         });

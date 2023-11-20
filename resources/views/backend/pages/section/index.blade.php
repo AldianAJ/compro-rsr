@@ -42,8 +42,8 @@
                     <thead class="thead-light">
                         <tr>
                             <th>No</th>
-                            <th>Section</th>
                             <th>Page</th>
+                            <th>Section</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -149,12 +149,12 @@
                         }
                     },
                     {
-                        data: "section",
-                        name: "section"
-                    },
-                    {
                         data: "page_name",
                         name: "page_name"
+                    },
+                    {
+                        data: "section",
+                        name: "section"
                     },
                     {
                         data: "id",
