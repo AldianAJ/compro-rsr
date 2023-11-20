@@ -100,6 +100,35 @@
     margin-bottom: 1.5rem;
     margin-left: -1rem;
   }
+
+  @media (max-width: 575.98px) {
+    .row-wrapper {
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
+
+    .row-wrapper p {
+      text-align: justify !important;
+    }
+
+    .content .visi_misi {
+      width: 100%;
+      position: static !important;
+    }
+
+    .content {
+      justify-content: start;
+      flex-direction: column;
+      gap: 1rem;
+      padding-top: 4rem !important;
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
+    }
+
+    .content .content-wrapper {
+      width: 100%;
+    }
+  }
 </style>
 @endpush
 

@@ -3,13 +3,6 @@
 
 @push('styles')
 <style>
-  #home,
-  html,
-  body,
-  main {
-    min-height: 100% !important;
-  }
-
   .col-wrapper {
     margin-left: 3.25rem !important;
     margin-top: 4rem !important;
@@ -65,6 +58,34 @@
     font-size: 0.8rem;
     text-decoration: none;
     color: #3d3d3d;
+  }
+
+  @media (max-width: 575.98px) {
+
+    html,
+    body,
+    main {
+      height: max-content;
+      min-height: 100%;
+    }
+
+    .col-wrapper {
+      margin-left: 1rem !important;
+      margin-right: 1rem !important;
+    }
+
+    .media-choose {
+      justify-content: center;
+    }
+
+    .content-wrapper .card {
+      flex-direction: column;
+    }
+
+    .content-wrapper .card img {
+      height: 15rem !important;
+      object-fit: cover !important;
+    }
   }
 </style>
 @endpush

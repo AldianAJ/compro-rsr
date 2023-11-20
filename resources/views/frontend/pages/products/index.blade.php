@@ -68,6 +68,40 @@
     width: 20rem;
     height: 20rem;
   }
+
+  @media (max-width: 575.98px) {
+    .col-wrapper {
+      margin-left: 1rem !important;
+      margin-right: 1rem !important;
+    }
+
+    .col-wrapper.title p {
+      text-align: justify !important;
+      width: 100%;
+    }
+
+    .col-wrapper:nth-child(2) {
+      padding: 0;
+    }
+
+    .media-choose {
+      gap: 0;
+    }
+
+    .media-choose .box h1 {
+      font-size: 1.2rem;
+    }
+
+    .content-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .content-wrapper .card img {
+      width: 100%;
+      height: 100%;
+    }
+  }
 </style>
 @endpush
 
