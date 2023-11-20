@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sections', function (Blueprint $table) {
+        Schema::create('about_pages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("page_id");
-            $table->string("section");
-            $table->text("image_url")->nullable();
+            $table->string('slug')->unique();
+            $table->string('section');
+            $table->text('image')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sections');
+        Schema::dropIfExists('about_pages');
     }
 };

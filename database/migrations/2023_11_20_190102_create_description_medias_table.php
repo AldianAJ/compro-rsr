@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contents', function (Blueprint $table) {
+        Schema::create('description_medias', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("lang_id");
-            $table->unsignedBigInteger("section_id");
-            $table->String("title");
-            $table->text("content_value");
+            $table->unsignedBigInteger('media_id');
+            $table->unsignedBigInteger('lang_id');
+            $table->text('title');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contents');
+        Schema::dropIfExists('description_medias');
     }
 };

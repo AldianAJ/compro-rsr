@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\backend\AboutPageController;
 use App\Http\Controllers\backend\AdminPagesController;
+use App\Http\Controllers\backend\ContentAboutPageController;
 use App\Http\Controllers\backend\ContentController;
 use App\Http\Controllers\backend\LangController;
 use App\Http\Controllers\backend\SectionController;
@@ -28,6 +30,12 @@ Route::controller(PagesController::class)->name('frontend.')->group(function () 
 });
 
 Route::prefix('/admin')->name('backend.')->group(function () {
+
+    Route::controller(ContentAboutPageController::class)->prefix('/about/content/')->name('about.content.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+    });
+
     Route::controller(AdminPagesController::class)->prefix('/pages')->name('pages.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
