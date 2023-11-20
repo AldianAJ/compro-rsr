@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("lang_id");
             $table->unsignedBigInteger("section_id");
+            $table->String("title");
             $table->text("content_value");
             $table->timestamps();
         });

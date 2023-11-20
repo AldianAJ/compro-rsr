@@ -38,6 +38,7 @@
                             <th>Page</th>
                             <th>Language</th>
                             <th>Section</th>
+                            <th>Title</th>
                             <th>Content</th>
                             <th>Action</th>
                         </tr>
@@ -82,15 +83,24 @@
                     </div>
                     <div class="form-group">
                         <label for="" class="form-control-label">
-                            Code
+                            Section
                         </label>
-                        <input type="text" class="form-control text-dark" name="addCode" id="addCode">
+                        <select name="addSection" id="addSection" class="form-control text-dark" disabled>
+                            <option value="">-- Select Sections --</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="" class="form-control-label">
-                            Language
+                            Title
                         </label>
-                        <input type="text" class="form-control text-dark" name="addLanguage" id="addLanguage">
+                        <input type="text" class="form-control text-dark" name="addTitle" id="addTitle" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
+                            Content
+                        </label>
+                        <input type="text" class="form-control text-dark" name="addContent" id="addContent" disabled>
+
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -168,6 +178,10 @@
                         name: "section"
                     },
                     {
+                        data: "title",
+                        name: "title"
+                    },
+                    {
                         data: "content_value",
                         name: "content_value"
                     },
@@ -188,14 +202,24 @@
             });
 
             $('#btn-add-modal').click(function(e) {
-                $('#addCode').val("")
-                $('#addLanguage').val("")
+                $('#addSection option').remove();
+                addSectionOption("-- Select Sections --", "");
+                $('#addSection').attr('disabled', true);
+                $('#addTitle').attr('disabled', true);
+                $('#addContent').attr('disabled', true);
+                $('#addTitle').val('');
+                $('#addContent').val('');
+                $('#addPage').val('');
+                $('#addLang').val('');
             });
 
             $('#btn-save-add').click(function(e) {
-                var code = $('#addCode').val();
-                var language = $('#addLanguage').val();
-                if (code == "" || language == "") {
+                var page = $('#addPage').val();
+                var lang = $('#addLang').val();
+                var section = $('#addSection').val();
+                var title = $('#addTitle').val();
+                var content = $('#addContent').val();
+                if (page == "" || lang == "" || section == "" || title == "" || content == "") {
                     $('#createModal').modal('hide');
                     Swal.fire({
                         icon: "error",
@@ -206,17 +230,18 @@
                 } else {
                     $.ajax({
                         type: "POST",
-                        url: "{{ route('backend.lang.store') }}",
+                        url: "{{ route('backend.content.store') }}",
                         data: {
-                            'code': code,
-                            'language': language,
+                            'page_id': page,
+                            'lang_id': lang,
+                            'title': title,
+                            'section': section,
+                            'content': content,
                             '_token': "{{ csrf_token() }}"
                         },
                         dataType: "json",
                         success: function(resp) {
                             $('#createModal').modal('hide');
-                            $('#addLanguage').val("")
-                            $('#addCode').val("")
                             if (resp.code == 200) {
                                 Swal.fire({
                                     icon: "success",
@@ -319,6 +344,59 @@
                             }
                         }
                     });
+                }
+            });
+
+            $('#addPage').change(function() {
+                if ($(this).val() != "") {
+                    $('#addSection').removeAttr('disabled');
+                    $('#addTitle').attr('disabled', true);
+                    $('#addContent').attr('disabled', true);
+                    $('#addTitle').val('');
+                    $('#addContent').val('');
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ route('backend.content.index') }}",
+                        data: {
+                            "page_id": $(this).val()
+                        },
+                        success: function(resp) {
+                            $('#addSection option').remove();
+                            addSectionOption("-- Select Sections --", "");
+                            data = resp.data;
+                            data.forEach(element => {
+                                addSectionOption(element.section, element.id);
+                            });
+                        }
+                    });
+                } else {
+                    $('#addSection option').remove();
+                    addSectionOption("-- Select Sections --", "");
+                    $('#addSection').attr('disabled', true);
+                    $('#addTitle').attr('disabled', true);
+                    $('#addContent').attr('disabled', true);
+                    $('#addTitle').val('');
+                    $('#addContent').val('');
+                }
+            });
+
+            function addSectionOption(text, value) {
+                var o = new Option(text, value);
+                $(o).html(text);
+                $('#addSection').append(o);
+            }
+
+            $('#addSection').change(function() {
+                if ($(this).val() != "") {
+                    $('#addTitle').removeAttr('disabled');
+                    $('#addContent').removeAttr('disabled');
+                    $('#addTitle').val('');
+                    $('#addContent').val('');
+                } else {
+                    $('#addTitle').attr('disabled', true);
+                    $('#addContent').attr('disabled', true);
+                    $('#addTitle').val('');
+                    $('#addContent').val('');
                 }
             });
         });
