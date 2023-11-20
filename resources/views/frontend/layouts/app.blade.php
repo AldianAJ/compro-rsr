@@ -135,6 +135,33 @@
       content: unset !important;
     }
 
+    .navbar-header .dropdown {
+      position: relative;
+    }
+
+    .navbar-header .dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .navbar-header .dropdown i {
+      display: block;
+      font-size: 0.8rem;
+    }
+
+    .navbar-header .dropdown .menu {
+      background-color: #000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      position: absolute;
+      top: 3.4rem;
+      left: 0;
+      padding-left: 0;
+      padding: 0.5rem;
+    }
+
     footer {
       padding: 0.5rem 0;
       background-color: #000;
@@ -153,7 +180,7 @@
 <body>
   <header>
     <nav class="navbar navbar-trans navbar-fixed-top" role="navigation">
-      <div id="topbar" class="container-fluid" x-data="{ open: false }">
+      <div id="topbar" class="container-fluid" x-data="{ open: false, langOpen: false }">
         <div class="navbar-header" x-bind:class="open ? 'active' : ''">
           <a class="navbar-brand" href="{{route('frontend.home')}}">
             <img alt="Gudang Garam" src="{{asset('assets/images/pjsp-logo.png')}}">
@@ -173,6 +200,18 @@
             <li>
               <a href="{{route('frontend.career')}}">Career</a>
             </li>
+            <li>
+              <div class="dropdown">
+                <a href="#" @click="langOpen = !langOpen">
+                  Language
+                  <i class="fa-solid fa-chevron-down"></i>
+                </a>
+                <ul class="menu" x-show="langOpen">
+                  <li><a class="item" href="#">Indonesia</a></li>
+                  <li><a class="item" href="#">English</a></li>
+                </ul>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
@@ -182,12 +221,6 @@
     <div id="sidebar" class="visible-md visible-lg" role="navigation">
       <div class="top">
         <img alt="gg-bar" src="{{asset('assets/images/ggbar.png')}}">
-      </div>
-      <div class="bottom">
-        <ul class="nav navbar-nav">
-          <li>
-            <a class="lang-switch" href="en/index.html">EN</a>
-          </li>
       </div>
     </div>
 
