@@ -34,6 +34,7 @@ Route::prefix('/admin')->name('backend.')->group(function () {
     Route::controller(ContentAboutPageController::class)->prefix('/about/content/')->name('about.content.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
+        Route::post('/update', 'update')->name('update');
     });
 
     Route::controller(AdminPagesController::class)->prefix('/pages')->name('pages.')->group(function () {

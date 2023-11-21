@@ -1,11 +1,11 @@
 @extends('backend.layouts.app')
 
 @section('title')
-    About Pages
+    Language
 @endsection
 
 @section('page-breadcumb')
-    About Pages Content
+    Language
 @endsection
 
 @section('page-section')
@@ -24,10 +24,10 @@
     <div class="col">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
-                <h3 class="mb-0">About Pages Content</h3>
+                <h3 class="mb-0">Master Language</h3>
                 <button type="button" class="btn btn-primary" id="btn-add-modal" data-toggle="modal"
                     data-target="#createModal">Add
-                    Content</button>
+                    Language</button>
             </div>
 
             <div class="table-responsive py-4">
@@ -35,11 +35,8 @@
                     <thead class="thead-light">
                         <tr>
                             <th>No</th>
-                            <th>Slug</th>
                             <th>Section</th>
-                            <th>Language</th>
-                            <th>Title</th>
-                            <th>Content</th>
+                            <th>Image</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -53,7 +50,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Content About</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Data Language</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -61,37 +58,15 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="" class="form-control-label">
-                            Section
+                            Code
                         </label>
-                        <select name="addSection" id="addSection" class="form-control text-dark">
-                            <option value="">-- Select Sections --</option>
-                            @foreach ($about_pages as $about_page)
-                                <option value="{{ $about_page->id }}">{{ $about_page->section }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" class="form-control text-dark" name="addCode" id="addCode">
                     </div>
                     <div class="form-group">
                         <label for="" class="form-control-label">
                             Language
                         </label>
-                        <select name="addLang" id="addLang" class="form-control text-dark">
-                            <option value="">-- Select Languages --</option>
-                            @foreach ($langs as $lang)
-                                <option value="{{ $lang->id }}">{{ $lang->language }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Title
-                        </label>
-                        <input type="text" class="form-control text-dark" name="addTitle" id="addTitle">
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Content
-                        </label>
-                        <textarea name="addContent" id="addContent" cols="30" rows="10" class="form-control"></textarea>
+                        <input type="text" class="form-control text-dark" name="addLanguage" id="addLanguage">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -107,7 +82,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Content About</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Language</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -115,38 +90,16 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="" class="form-control-label">
-                            Section
+                            Code
                         </label>
                         <input type="hidden" name="editId" id="editId">
-                        <select name="editSection" id="editSection" class="form-control text-dark">
-                            <option value="">-- Select Sections --</option>
-                            @foreach ($about_pages as $about_page)
-                                <option value="{{ $about_page->id }}">{{ $about_page->section }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" class="form-control text-dark" name="editCode" id="editCode">
                     </div>
                     <div class="form-group">
                         <label for="" class="form-control-label">
                             Language
                         </label>
-                        <select name="editLang" id="editLang" class="form-control text-dark">
-                            <option value="">-- Select Languages --</option>
-                            @foreach ($langs as $lang)
-                                <option value="{{ $lang->id }}">{{ $lang->language }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Title
-                        </label>
-                        <input type="text" class="form-control text-dark" name="editTitle" id="editTitle">
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Content
-                        </label>
-                        <textarea name="editContent" id="editContent" cols="30" rows="10" class="form-control"></textarea>
+                        <input type="text" class="form-control text-dark" name="editLanguage" id="editLanguage">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -171,40 +124,23 @@
     <script>
         $(document).ready(function() {
             var table = $('#datatable').DataTable({
-                ajax: "{{ route('backend.about.content.index') }}",
+                ajax: "{{ route('backend.lang.index') }}",
                 columns: [{
-                        data: null,
+                        data: "id",
                         render: function(data, type, row, meta) {
                             return meta.row + 1
                         }
                     },
                     {
-                        data: "content_about_slug",
-                        name: "content_about_slug"
-                    },
-                    {
-                        data: "section",
-                        nama: "section"
+                        data: "code",
+                        name: "code"
                     },
                     {
                         data: "language",
-                        nama: "language"
+                        name: "language"
                     },
                     {
-                        data: "title",
-                        render: function(data, type, row, meta) {
-                            var result = data == null ? '-' : data;
-                            return result;
-                        }
-                    },
-                    {
-                        data: "content",
-                        render: function(data, type, row, meta) {
-                            return data.substr(0, 20) + ". . . . .";
-                        }
-                    },
-                    {
-                        data: "content_about_id",
+                        data: "id",
                         render: function(data, type, row, meta) {
                             let html = "<button class='btn btn-success btn-edit' data-id='" +
                                 data +
@@ -220,18 +156,14 @@
             });
 
             $('#btn-add-modal').click(function(e) {
-                $('#addLang').val("");
-                $('#addSection').val("");
-                $('#addTitle').val("");
-                $('#addContent').val("");
+                $('#addCode').val("")
+                $('#addLanguage').val("")
             });
 
             $('#btn-save-add').click(function(e) {
-                var lang = $('#addLang').val();
-                var section = $('#addSection').val();
-                var title = $('#addTitle').val();
-                var content = $('#addContent').val();
-                if (lang == "" || section == "" || content == "") {
+                var code = $('#addCode').val();
+                var language = $('#addLanguage').val();
+                if (code == "" || language == "") {
                     $('#createModal').modal('hide');
                     Swal.fire({
                         icon: "error",
@@ -242,19 +174,18 @@
                 } else {
                     $.ajax({
                         type: "POST",
-                        url: "{{ route('backend.about.content.store') }}",
+                        url: "{{ route('backend.lang.store') }}",
                         data: {
-                            'lang_id': lang,
-                            'about_page_id': section,
-                            'title': title,
-                            'content': content,
+                            'code': code,
+                            'language': language,
                             '_token': "{{ csrf_token() }}"
                         },
                         dataType: "json",
                         success: function(resp) {
                             $('#createModal').modal('hide');
+                            $('#addLanguage').val("")
+                            $('#addCode').val("")
                             if (resp.code == 200) {
-                                table.ajax.reload();
                                 Swal.fire({
                                     icon: "success",
                                     title: "Success",
@@ -269,7 +200,7 @@
                                     timer: 3000
                                 });
                             }
-
+                            table.ajax.reload();
                         }
                     });
                 }
@@ -281,7 +212,7 @@
                 var id = $(this).data("id");
                 $.ajax({
                     type: "GET",
-                    url: "{{ route('backend.pages.destroy') }}",
+                    url: "{{ route('backend.lang.destroy') }}",
                     data: {
                         "id": id
                     },
@@ -301,28 +232,24 @@
                 var id = $(this).data("id");
                 $.ajax({
                     type: "GET",
-                    url: "{{ route('backend.about.content.index') }}",
+                    url: "{{ route('backend.lang.edit') }}",
                     data: {
                         "id": id
                     },
                     success: function(resp) {
                         $('#editModal').modal('show');
                         $('#editId').val(resp.data.id);
-                        $('#editLang').val(resp.data.lang_id);
-                        $('#editSection').val(resp.data.about_page_id);
-                        $('#editTitle').val(resp.data.title);
-                        $('#editContent').val(resp.data.content);
+                        $('#editCode').val(resp.data.code);
+                        $('#editLanguage').val(resp.data.language);
                     }
                 });
             });
 
             $('#btn-save-edit').click(function(e) {
                 var id = $('#editId').val();
-                var lang = $('#editLang').val();
-                var section = $('#editSection').val();
-                var title = $('#editTitle').val();
-                var content = $('#editContent').val();
-                if (lang == "" || section == "" || content == "") {
+                var code = $('#editCode').val();
+                var language = $('#editLanguage').val();
+                if (code == "" || language == "") {
                     $('#editModal').modal('hide');
                     Swal.fire({
                         icon: "error",
@@ -333,13 +260,11 @@
                 } else {
                     $.ajax({
                         type: "POST",
-                        url: "{{ route('backend.about.content.update') }}",
+                        url: "{{ route('backend.lang.update') }}",
                         data: {
                             "id": id,
-                            'lang_id': lang,
-                            'about_page_id': section,
-                            'title': title,
-                            'content': content,
+                            "code": code,
+                            "language": language,
                             "_token": "{{ csrf_token() }}"
                         },
                         success: function(resp) {

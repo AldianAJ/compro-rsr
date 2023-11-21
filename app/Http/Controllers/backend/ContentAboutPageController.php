@@ -18,6 +18,13 @@ class ContentAboutPageController extends Controller
         $data['langs'] = Lang::all();
         $data['about_pages'] = AboutPage::all();
         if ($request->ajax()) {
+
+            if (isset($request->id)) {
+                $data = ContentAboutPage::where('id', $request->id)->first();
+
+                return response()->json(["data" => $data, "code" => 200], 200);
+            }
+
             $data = DB::table('about_pages as a')
                 ->join('content_about_pages as b', 'a.id', '=', 'b.about_page_id')
                 ->join('langs as c', 'b.lang_id', '=', 'c.id')
@@ -42,7 +49,7 @@ class ContentAboutPageController extends Controller
         ])->first();
 
         if ($check) {
-            return response()->json(["message" => "Content with section and id input already exist", "code" => 409], 200);
+            return response()->json(["message" => "Content with section and language input already exist", "code" => 409], 200);
         }
 
         DB::beginTransaction();
@@ -56,6 +63,45 @@ class ContentAboutPageController extends Controller
             $data->save();
             DB::commit();
             return response()->json(["message" => "Content about successfully added", "code" => 200], 200);
+        } catch (\Exception $ex) {
+            //throw $th;
+            Db::rollBack();
+            return response()->json(["message" => $ex->getMessage(), "code" => 500], 200);
+        }
+    }
+
+    public function update(Request $request)
+    {
+        $id = $request->id;
+        $lang_id = $request->lang_id;
+        $about_page_id = $request->about_page_id;
+        $title = empty($request->title) ? null : $request->title;
+        $content = $request->content;
+
+        $data = ContentAboutPage::where('id', $id)->first();
+
+        $check = ContentAboutPage::where(function ($q) use ($lang_id, $about_page_id) {
+            $q->where('lang_id', $lang_id)
+                ->orWhere('about_page_id', $about_page_id);
+        })->where(function ($q) use ($data) {
+            $q->where('lang_id', '<>', $data->lang_id)
+                ->orWhere('about_page_id', '<>', $data->about_page_id);
+        })->first();
+
+        if ($check) {
+            return response()->json(["message" => "Content with section and language input already exist", "code" => 409], 200);
+        }
+
+        DB::beginTransaction();
+        try {
+            $data->about_page_id = $about_page_id;
+            $data->lang_id = $lang_id;
+            $data->slug = empty($title) ? Str::random(16) : Str::slug($title, '-') . '-' . Str::random(5);
+            $data->title = $title;
+            $data->content = $content;
+            $data->save();
+            DB::commit();
+            return response()->json(["message" => "Content about successfully updated", "code" => 200], 200);
         } catch (\Exception $ex) {
             //throw $th;
             Db::rollBack();
