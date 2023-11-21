@@ -58,17 +58,29 @@
                         </div>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('backend.brand.index') }}">
+                            <i class="ni ni-chart-pie-35 text-info"></i>
+                            <span class="nav-link-text">Brands</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('backend.lang.index') }}">
+                            <i class="ni ni-archive-2 text-green"></i>
+                            <span class="nav-link-text">Language</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#navbar-components" data-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="navbar-components">
                             <i class="ni ni-ui-04 text-info"></i>
-                            <span class="nav-link-text">Components</span>
+                            <span class="nav-link-text">Products</span>
                         </a>
                         <div class="collapse" id="navbar-components">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="../components/buttons.html" class="nav-link">
-                                        <span class="sidenav-mini-icon"> B </span>
-                                        <span class="sidenav-normal"> Buttons </span>
+                                    <a href="{{ route('backend.product.content.index') }}" class="nav-link">
+                                        <span class="sidenav-mini-icon"> C </span>
+                                        <span class="sidenav-normal"> Contents </span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -76,50 +88,6 @@
                                         <span class="sidenav-mini-icon"> C </span>
                                         <span class="sidenav-normal"> Cards </span>
                                     </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../components/grid.html" class="nav-link">
-                                        <span class="sidenav-mini-icon"> G </span>
-                                        <span class="sidenav-normal"> Grid </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../components/notifications.html" class="nav-link">
-                                        <span class="sidenav-mini-icon"> N </span>
-                                        <span class="sidenav-normal"> Notifications </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../components/icons.html" class="nav-link">
-                                        <span class="sidenav-mini-icon"> I </span>
-                                        <span class="sidenav-normal"> Icons </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../components/typography.html" class="nav-link">
-                                        <span class="sidenav-mini-icon"> T </span>
-                                        <span class="sidenav-normal"> Typography </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#navbar-multilevel" class="nav-link" data-toggle="collapse"
-                                        role="button" aria-expanded="true" aria-controls="navbar-multilevel">
-                                        <span class="sidenav-mini-icon"> M </span>
-                                        <span class="sidenav-normal"> Multi level </span>
-                                    </a>
-                                    <div class="collapse show" id="navbar-multilevel" style>
-                                        <ul class="nav nav-sm flex-column">
-                                            <li class="nav-item">
-                                                <a href="#!" class="nav-link">Third level menu</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#!" class="nav-link">Just another link</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#!" class="nav-link">One last link</a>
-                                            </li>
-                                        </ul>
-                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -205,18 +173,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../widgets.html">
-                            <i class="ni ni-archive-2 text-green"></i>
-                            <span class="nav-link-text">Widgets</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../charts.html">
-                            <i class="ni ni-chart-pie-35 text-info"></i>
-                            <span class="nav-link-text">Charts</span>
-                        </a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="../calendar.html">
                             <i class="ni ni-calendar-grid-58 text-red"></i>

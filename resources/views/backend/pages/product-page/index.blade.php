@@ -219,26 +219,6 @@
 
             var DTbody = $('#datatable tbody');
 
-            // DTbody.on('click', '.btn-delete', function() {
-            //     var id = $(this).data("id");
-            //     $.ajax({
-            //         type: "GET",
-            //         url: "{{ route('backend.pages.destroy') }}",
-            //         data: {
-            //             "id": id
-            //         },
-            //         success: function(resp) {
-            //             Swal.fire({
-            //                 icon: "success",
-            //                 title: "Success",
-            //                 text: resp.message,
-            //                 timer: 3000
-            //             });
-            //             table.ajax.reload();
-            //         }
-            //     });
-            // });
-
             DTbody.on('click', '.btn-edit', function() {
                 var id = $(this).data("id");
                 $.ajax({
