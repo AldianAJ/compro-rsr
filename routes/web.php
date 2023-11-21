@@ -1,12 +1,9 @@
 <?php
 
-use App\Http\Controllers\backend\AboutPageController;
-use App\Http\Controllers\backend\AdminPagesController;
+use App\Http\Controllers\backend\BrandController;
 use App\Http\Controllers\backend\ContentAboutPageController;
-use App\Http\Controllers\backend\ContentController;
 use App\Http\Controllers\backend\LangController;
 use App\Http\Controllers\backend\ProductPageController;
-use App\Http\Controllers\backend\SectionController;
 use App\Http\Controllers\frontend\PagesController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,22 +41,6 @@ Route::prefix('/admin')->name('backend.')->group(function () {
         Route::post('/update', 'update')->name('update');
     });
 
-    Route::controller(AdminPagesController::class)->prefix('/pages')->name('pages.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::post('/store', 'store')->name('store');
-        Route::get('/destroy', 'destroy')->name('destroy');
-        Route::get('/edit', 'edit')->name('edit');
-        Route::post('/update', 'update')->name('update');
-    });
-
-    Route::controller(SectionController::class)->prefix('/section')->name('section.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::post('/store', 'store')->name('store');
-        Route::get('/destroy', 'destroy')->name('destroy');
-        Route::get('/edit', 'edit')->name('edit');
-        Route::post('/update', 'update')->name('update');
-    });
-
     Route::controller(LangController::class)->prefix('/lang')->name('lang.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
@@ -68,7 +49,7 @@ Route::prefix('/admin')->name('backend.')->group(function () {
         Route::post('/update', 'update')->name('update');
     });
 
-    Route::controller(ContentController::class)->prefix('/content')->name('content.')->group(function () {
+    Route::controller(BrandController::class)->prefix('/brand')->name('brand.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
         Route::get('/destroy', 'destroy')->name('destroy');
