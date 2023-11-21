@@ -24,21 +24,19 @@ class PagesController extends Controller
 
     public function about(Request $request)
     {
-        $page_about_us = Page::find(1);
-        $current_lang = Lang::where('code', $request->lang)->first();
+        // $page_about_us = Page::find(1);
+        // $current_lang = Lang::where('code', $request->lang)->first();
 
-        $section_visi_misi = Section::where([
-            'page_id' => $page_about_us->id,
-            'section' => 'Visi Misi'
-        ])->first();
-        $section_visi_misi_content = Content::where([
-            'section_id' => $section_visi_misi->id,
-            'lang_id' => $current_lang->id
-        ])->get();
+        // $section_visi_misi = Section::where([
+        //     'page_id' => $page_about_us->id,
+        //     'section' => 'Visi Misi'
+        // ])->first();
+        // $section_visi_misi_content = Content::where([
+        //     'section_id' => $section_visi_misi->id,
+        //     'lang_id' => $current_lang->id
+        // ])->get();
 
-        return view('frontend.pages.about.index', [
-            'section_visi_misi_content' => $section_visi_misi_content
-        ]);
+        return view('frontend.pages.about.index');
     }
 
     public function products()

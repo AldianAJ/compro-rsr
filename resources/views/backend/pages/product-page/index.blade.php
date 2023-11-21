@@ -1,11 +1,11 @@
 @extends('backend.layouts.app')
 
 @section('title')
-    About Pages
+    Product Pages
 @endsection
 
 @section('page-breadcumb')
-    About Pages Content
+    Product Pages Content
 @endsection
 
 @section('page-section')
@@ -24,7 +24,7 @@
     <div class="col">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
-                <h3 class="mb-0">About Pages Content</h3>
+                <h3 class="mb-0">Product Pages Content</h3>
                 <button type="button" class="btn btn-primary" id="btn-add-modal" data-toggle="modal"
                     data-target="#createModal">Add
                     Content</button>
@@ -35,10 +35,7 @@
                     <thead class="thead-light">
                         <tr>
                             <th>No</th>
-                            <th>Slug</th>
-                            <th>Section</th>
                             <th>Language</th>
-                            <th>Title</th>
                             <th>Content</th>
                             <th>Action</th>
                         </tr>
@@ -53,23 +50,12 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Content About</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Content Product</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Section
-                        </label>
-                        <select name="addSection" id="addSection" class="form-control text-dark">
-                            <option value="">-- Select Sections --</option>
-                            @foreach ($about_pages as $about_page)
-                                <option value="{{ $about_page->id }}">{{ $about_page->section }}</option>
-                            @endforeach
-                        </select>
-                    </div>
                     <div class="form-group">
                         <label for="" class="form-control-label">
                             Language
@@ -80,12 +66,6 @@
                                 <option value="{{ $lang->id }}">{{ $lang->language }}</option>
                             @endforeach
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Title
-                        </label>
-                        <input type="text" class="form-control text-dark" name="addTitle" id="addTitle">
                     </div>
                     <div class="form-group">
                         <label for="" class="form-control-label">
@@ -107,25 +87,14 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Content About</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Content Product</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Section
-                        </label>
                         <input type="hidden" name="editId" id="editId">
-                        <select name="editSection" id="editSection" class="form-control text-dark">
-                            <option value="">-- Select Sections --</option>
-                            @foreach ($about_pages as $about_page)
-                                <option value="{{ $about_page->id }}">{{ $about_page->section }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="" class="form-control-label">
                             Language
                         </label>
@@ -135,12 +104,6 @@
                                 <option value="{{ $lang->id }}">{{ $lang->language }}</option>
                             @endforeach
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Title
-                        </label>
-                        <input type="text" class="form-control text-dark" name="editTitle" id="editTitle">
                     </div>
                     <div class="form-group">
                         <label for="" class="form-control-label">
@@ -171,7 +134,7 @@
     <script>
         $(document).ready(function() {
             var table = $('#datatable').DataTable({
-                ajax: "{{ route('backend.about.content.index') }}",
+                ajax: "{{ route('backend.product.content.index') }}",
                 columns: [{
                         data: null,
                         render: function(data, type, row, meta) {
@@ -179,23 +142,8 @@
                         }
                     },
                     {
-                        data: "content_about_slug",
-                        name: "content_about_slug"
-                    },
-                    {
-                        data: "section",
-                        nama: "section"
-                    },
-                    {
                         data: "language",
                         nama: "language"
-                    },
-                    {
-                        data: "title",
-                        render: function(data, type, row, meta) {
-                            var result = data == null ? '-' : data;
-                            return result;
-                        }
                     },
                     {
                         data: "content",
@@ -204,7 +152,7 @@
                         }
                     },
                     {
-                        data: "content_about_id",
+                        data: "id",
                         render: function(data, type, row, meta) {
                             let html = "<button class='btn btn-success btn-edit' data-id='" +
                                 data +
@@ -221,17 +169,13 @@
 
             $('#btn-add-modal').click(function(e) {
                 $('#addLang').val("");
-                $('#addSection').val("");
-                $('#addTitle').val("");
                 $('#addContent').val("");
             });
 
             $('#btn-save-add').click(function(e) {
                 var lang = $('#addLang').val();
-                var section = $('#addSection').val();
-                var title = $('#addTitle').val();
                 var content = $('#addContent').val();
-                if (lang == "" || section == "" || content == "") {
+                if (lang == "" || content == "") {
                     $('#createModal').modal('hide');
                     Swal.fire({
                         icon: "error",
@@ -242,11 +186,9 @@
                 } else {
                     $.ajax({
                         type: "POST",
-                        url: "{{ route('backend.about.content.store') }}",
+                        url: "{{ route('backend.product.content.store') }}",
                         data: {
                             'lang_id': lang,
-                            'about_page_id': section,
-                            'title': title,
                             'content': content,
                             '_token': "{{ csrf_token() }}"
                         },
@@ -301,7 +243,7 @@
                 var id = $(this).data("id");
                 $.ajax({
                     type: "GET",
-                    url: "{{ route('backend.about.content.index') }}",
+                    url: "{{ route('backend.product.content.index') }}",
                     data: {
                         "id": id
                     },
@@ -309,8 +251,6 @@
                         $('#editModal').modal('show');
                         $('#editId').val(resp.data.id);
                         $('#editLang').val(resp.data.lang_id);
-                        $('#editSection').val(resp.data.about_page_id);
-                        $('#editTitle').val(resp.data.title);
                         $('#editContent').val(resp.data.content);
                     }
                 });
@@ -319,10 +259,8 @@
             $('#btn-save-edit').click(function(e) {
                 var id = $('#editId').val();
                 var lang = $('#editLang').val();
-                var section = $('#editSection').val();
-                var title = $('#editTitle').val();
                 var content = $('#editContent').val();
-                if (lang == "" || section == "" || content == "") {
+                if (lang == "" || content == "") {
                     $('#editModal').modal('hide');
                     Swal.fire({
                         icon: "error",
@@ -333,12 +271,10 @@
                 } else {
                     $.ajax({
                         type: "POST",
-                        url: "{{ route('backend.about.content.update') }}",
+                        url: "{{ route('backend.product.content.update') }}",
                         data: {
                             "id": id,
                             'lang_id': lang,
-                            'about_page_id': section,
-                            'title': title,
                             'content': content,
                             "_token": "{{ csrf_token() }}"
                         },

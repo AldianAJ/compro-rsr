@@ -41,53 +41,17 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="navbar-examples">
+                        <a class="nav-link" href="#navbar-abouts" data-toggle="collapse" role="button"
+                            aria-expanded="false" aria-controls="navbar-abouts">
                             <i class="ni ni-ungroup text-orange"></i>
-                            <span class="nav-link-text">Examples</span>
+                            <span class="nav-link-text">Abouts</span>
                         </a>
-                        <div class="collapse" id="navbar-examples">
+                        <div class="collapse" id="navbar-abouts">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="../examples/pricing.html" class="nav-link">
-                                        <span class="sidenav-mini-icon"> P </span>
-                                        <span class="sidenav-normal"> Pricing </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/login.html" class="nav-link">
-                                        <span class="sidenav-mini-icon"> L </span>
-                                        <span class="sidenav-normal"> Login </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/register.html" class="nav-link">
-                                        <span class="sidenav-mini-icon"> R </span>
-                                        <span class="sidenav-normal"> Register </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/lock.html" class="nav-link">
-                                        <span class="sidenav-mini-icon"> L </span>
-                                        <span class="sidenav-normal"> Lock </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/timeline.html" class="nav-link">
-                                        <span class="sidenav-mini-icon"> T </span>
-                                        <span class="sidenav-normal"> Timeline </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/profile.html" class="nav-link">
-                                        <span class="sidenav-mini-icon"> P </span>
-                                        <span class="sidenav-normal"> Profile </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/rtl-support.html" class="nav-link">
-                                        <span class="sidenav-mini-icon"> RP </span>
-                                        <span class="sidenav-normal"> RTL Support </span>
+                                    <a href="{{ route('backend.about.content.index') }}" class="nav-link">
+                                        <span class="sidenav-mini-icon"> C </span>
+                                        <span class="sidenav-normal"> Content Abouts </span>
                                     </a>
                                 </li>
                             </ul>

@@ -5,6 +5,7 @@ use App\Http\Controllers\backend\AdminPagesController;
 use App\Http\Controllers\backend\ContentAboutPageController;
 use App\Http\Controllers\backend\ContentController;
 use App\Http\Controllers\backend\LangController;
+use App\Http\Controllers\backend\ProductPageController;
 use App\Http\Controllers\backend\SectionController;
 use App\Http\Controllers\frontend\PagesController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,12 @@ Route::controller(PagesController::class)->name('frontend.')->group(function () 
 Route::prefix('/admin')->name('backend.')->group(function () {
 
     Route::controller(ContentAboutPageController::class)->prefix('/about/content/')->name('about.content.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::post('/update', 'update')->name('update');
+    });
+
+    Route::controller(ProductPageController::class)->prefix('/product/content/')->name('product.content.')->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
         Route::post('/update', 'update')->name('update');
