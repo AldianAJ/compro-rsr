@@ -84,9 +84,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../components/cards.html" class="nav-link">
-                                        <span class="sidenav-mini-icon"> C </span>
-                                        <span class="sidenav-normal"> Cards </span>
+                                    <a href="{{ route('backend.product.index') }}" class="nav-link">
+                                        <span class="sidenav-mini-icon"> M </span>
+                                        <span class="sidenav-normal"> Masters </span>
                                     </a>
                                 </li>
                             </ul>

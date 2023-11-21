@@ -3,6 +3,7 @@
 use App\Http\Controllers\backend\BrandController;
 use App\Http\Controllers\backend\ContentAboutPageController;
 use App\Http\Controllers\backend\LangController;
+use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\ProductPageController;
 use App\Http\Controllers\frontend\PagesController;
 use Illuminate\Support\Facades\Route;
@@ -35,10 +36,18 @@ Route::prefix('/admin')->name('backend.')->group(function () {
         Route::post('/update', 'update')->name('update');
     });
 
-    Route::controller(ProductPageController::class)->prefix('/product/content/')->name('product.content.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::post('/store', 'store')->name('store');
-        Route::post('/update', 'update')->name('update');
+    Route::prefix('/product')->name('product.')->group(function () {
+        Route::controller(ProductPageController::class)->prefix('/content')->name('content.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/store', 'store')->name('store');
+            Route::post('/update', 'update')->name('update');
+        });
+
+        Route::controller(ProductController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/store', 'store')->name('store');
+            Route::post('/update', 'update')->name('update');
+        });
     });
 
     Route::controller(LangController::class)->prefix('/lang')->name('lang.')->group(function () {
