@@ -152,17 +152,12 @@
 <section>
   <div class="content" style="background-image: url('{{asset('assets/media/uploads/images/banner-kretek-m.jpg')}}')">
     <div class="visi_misi">
-      <h1>VISI</h1>
+      @foreach ($section_visi_misi_content as $item)
+      <h1>{!! $item->title !!}</h1>
       <p style="margin-bottom: 1rem;">
-        Menjadi salah satu perusahaan rokok terkemuka di Indonesia dan dapat menembus pasar internasional
-        dengan memanfaatkan potensi sumber daya manusia (SDM) dan sumber daya alam (SDA) local yang terbaik.
+        {!! $item->content_value !!}
       </p>
-      <h1>MISI</h1>
-      <p>
-        Meningkatkan produktifitas SDM agar memiliki daya saing dan integritas yang tinggi.
-        Mengembangkan konsep pengelolaan bahan dasar yang berkualitas.
-        Meningkatkan efektifitas pemasaran serta penjualan secara optimal.
-      </p>
+      @endforeach
     </div>
     <div class="content-wrapper">
       <div class="header">

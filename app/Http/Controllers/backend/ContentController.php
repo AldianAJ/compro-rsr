@@ -46,9 +46,9 @@ class ContentController extends Controller
 
         $check = Content::where(['section_id' => $section_id, 'lang_id' => $lang_id])->first();
 
-        if ($check) {
-            return response()->json(["message" => "Content with that language already exist in that content", "code" => 409], 200);
-        }
+        // if ($check) {
+        //     return response()->json(["message" => "Content with that language already exist in that content", "code" => 409], 200);
+        // }
 
         DB::beginTransaction();
         try {
