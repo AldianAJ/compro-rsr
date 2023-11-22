@@ -14,6 +14,7 @@ use App\Models\Lang;
 use App\Models\News;
 use App\Models\Page;
 use App\Models\Product;
+use App\Models\ProductPage;
 use App\Models\Section;
 use Illuminate\Http\Request;
 
@@ -53,9 +54,19 @@ class PagesController extends Controller
         ]);
     }
 
-    public function products()
+    public function products(Request $request)
     {
-        return view('frontend.pages.products.index');
+        $current_lang = Lang::where('code', $request->lang)->first();
+        $brands = Brand::get();
+        $products = Product::get();
+
+        $product_section = ProductPage::where('lang_id', $current_lang->id)->first();
+
+        return view('frontend.pages.products.index', [
+            'brands' => $brands,
+            'products' => $products,
+            'product_section' => $product_section
+        ]);
     }
 
     public function media()

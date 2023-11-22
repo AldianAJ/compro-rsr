@@ -47,7 +47,7 @@ class ProductController extends Controller
             $data->brand_id = $brand_id;
             $data->product_name = $product_name;
             $data->slug = Str::slug($product_name, '-') . '-' . Str::random(5);
-            $data->image_url = $request->file('addImage')->store('product/images');
+            $data->image_url = $request->file('addImage')->store('product/images', ['disk' => 'public']);
             $data->save();
             DB::commit();
             return response()->json(["message" => "Product successfully added", "code" => 200], 200);
