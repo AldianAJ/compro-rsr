@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\backend\AuthController;
 use App\Http\Controllers\backend\BrandController;
 use App\Http\Controllers\backend\ContentAboutPageController;
 use App\Http\Controllers\backend\LangController;
@@ -30,40 +31,49 @@ Route::controller(PagesController::class)->name('frontend.')->group(function () 
 
 Route::prefix('/admin')->name('backend.')->group(function () {
 
-    Route::controller(ContentAboutPageController::class)->prefix('/about/content/')->name('about.content.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::post('/store', 'store')->name('store');
-        Route::post('/update', 'update')->name('update');
-    });
-
-    Route::prefix('/product')->name('product.')->group(function () {
-        Route::controller(ProductPageController::class)->prefix('/content')->name('content.')->group(function () {
+    Route::middleware('auth')->group(function () {
+        Route::controller(ContentAboutPageController::class)->prefix('/about/content/')->name('about.content.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/store', 'store')->name('store');
             Route::post('/update', 'update')->name('update');
         });
 
-        Route::controller(ProductController::class)->group(function () {
+        Route::prefix('/product')->name('product.')->group(function () {
+            Route::controller(ProductPageController::class)->prefix('/content')->name('content.')->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::post('/store', 'store')->name('store');
+                Route::post('/update', 'update')->name('update');
+            });
+
+            Route::controller(ProductController::class)->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::post('/store', 'store')->name('store');
+                Route::post('/update', 'update')->name('update');
+                Route::get('/destroy', 'destroy')->name('destroy');
+            });
+        });
+
+        Route::controller(LangController::class)->prefix('/lang')->name('lang.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/store', 'store')->name('store');
-            Route::post('/update', 'update')->name('update');
             Route::get('/destroy', 'destroy')->name('destroy');
+            Route::get('/edit', 'edit')->name('edit');
+            Route::post('/update', 'update')->name('update');
+        });
+
+        Route::controller(BrandController::class)->prefix('/brand')->name('brand.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/destroy', 'destroy')->name('destroy');
+            Route::get('/edit', 'edit')->name('edit');
+            Route::post('/update', 'update')->name('update');
         });
     });
 
-    Route::controller(LangController::class)->prefix('/lang')->name('lang.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::post('/store', 'store')->name('store');
-        Route::get('/destroy', 'destroy')->name('destroy');
-        Route::get('/edit', 'edit')->name('edit');
-        Route::post('/update', 'update')->name('update');
-    });
 
-    Route::controller(BrandController::class)->prefix('/brand')->name('brand.')->group(function () {
+    Route::controller(AuthController::class)->prefix('/auth')->name('auth.')->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::post('/store', 'store')->name('store');
-        Route::get('/destroy', 'destroy')->name('destroy');
-        Route::get('/edit', 'edit')->name('edit');
-        Route::post('/update', 'update')->name('update');
+        Route::post('/login', 'login')->name('login');
+        Route::get('/logout', 'logout')->name('logout')->middleware('auth');
     });
 });
