@@ -99,4 +99,12 @@ class ProductController extends Controller
             return response()->json(["message" => $ex->getMessage(), "code" => 500], 200);
         }
     }
+
+    public function destroy(Request $request)
+    {
+        $product = Product::where('id', $request->id)->first();
+        $product->delete();
+
+        return response()->json(["message" => "Data Products successfully deleted", "code" => 200], 200);
+    }
 }
