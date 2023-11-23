@@ -4,14 +4,17 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\About;
+use App\Models\AboutPage;
 use App\Models\Brand;
 use App\Models\Content;
+use App\Models\ContentAboutPage;
 use App\Models\History;
 use App\Models\Home;
 use App\Models\Lang;
 use App\Models\News;
 use App\Models\Page;
 use App\Models\Product;
+use App\Models\ProductPage;
 use App\Models\Section;
 use Illuminate\Http\Request;
 
@@ -24,24 +27,46 @@ class PagesController extends Controller
 
     public function about(Request $request)
     {
-        // $page_about_us = Page::find(1);
-        // $current_lang = Lang::where('code', $request->lang)->first();
+        $current_lang = Lang::where('code', $request->lang)->first();
 
-        // $section_visi_misi = Section::where([
-        //     'page_id' => $page_about_us->id,
-        //     'section' => 'Visi Misi'
-        // ])->first();
-        // $section_visi_misi_content = Content::where([
-        //     'section_id' => $section_visi_misi->id,
-        //     'lang_id' => $current_lang->id
-        // ])->get();
+        $about_section_about = AboutPage::where('section', 'About')->first();
+        $about_section_vision = AboutPage::where('section', 'Vision')->first();
+        $about_section_mission = AboutPage::where('section', 'Mission')->first();
+        $about_section_history = AboutPage::where('section', 'History')->first();
 
-        return view('frontend.pages.about.index');
+        $about_section_about_content = ContentAboutPage::where([
+            'about_page_id' => $about_section_about->id,
+            'lang_id'       => $current_lang->id
+        ])->first();
+        $about_section_vision_content = ContentAboutPage::where([
+            'about_page_id' => $about_section_vision->id,
+            'lang_id'       => $current_lang->id
+        ])->first();
+        $about_section_mission_content = ContentAboutPage::where([
+            'about_page_id' => $about_section_mission->id,
+            'lang_id'       => $current_lang->id
+        ])->first();
+
+        return view('frontend.pages.about.index', [
+            'about_section_about_content' => $about_section_about_content,
+            'about_section_vision_content' => $about_section_vision_content,
+            'about_section_mission_content' => $about_section_mission_content,
+        ]);
     }
 
-    public function products()
+    public function products(Request $request)
     {
-        return view('frontend.pages.products.index');
+        $current_lang = Lang::where('code', $request->lang)->first();
+        $brands = Brand::get();
+        $products = Product::get();
+
+        $product_section = ProductPage::where('lang_id', $current_lang->id)->first();
+
+        return view('frontend.pages.products.index', [
+            'brands' => $brands,
+            'products' => $products,
+            'product_section' => $product_section
+        ]);
     }
 
     public function media()

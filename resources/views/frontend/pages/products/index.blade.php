@@ -85,7 +85,8 @@
     }
 
     .media-choose {
-      gap: 0;
+      gap: 0.5rem;
+      overflow-x: scroll;
     }
 
     .media-choose .box h1 {
@@ -109,18 +110,16 @@
 <section class="container-fluid products_container" style="background-color: #edeaea;">
   <div class="row">
     <div class="col-wrapper title">
-      <p style="text-align: center;">
-        <strong>PT. Putera Jaya Sakti Perkasa</strong> menggunakan tembakau pilihan dengan kualitas terbaik untuk
-        menghasilkan produk
-        yang
-        berkualitas.
-        Menciptakan produk berupa Sigaret Kretek Tangan (SKT) dan Sigaret Kretek Mesin (SKM) bermutu dan berkualitas
-        tinggi.
-      </p>
+      <p style="text-align: center;">{{$product_section->content}}</p>
     </div>
-    <div class="col-lg col-wrapper" x-data="{ open: 'twizz_family' }">
+    <div class="col-lg col-wrapper" x-data="{ open: '{{$brands[0]->slug}}' }">
       <div class="media-choose">
-        <div class="box" @click="open = 'twizz_family'" x-bind:class="open == 'twizz_family' ? 'active' : ''">
+        @foreach ($brands as $item)
+        <div class="box" @click="open = '{{$item->slug}}'" x-bind:class="open == '{{$item->slug}}' ? 'active' : ''">
+          <h1>{{$item->brand_name}}</h1>
+        </div>
+        @endforeach
+        {{-- <div class="box" @click="open = 'twizz_family'" x-bind:class="open == 'twizz_family' ? 'active' : ''">
           <h1>TWIZZ FAMILY</h1>
         </div>
         <div class="box" @click="open = 'duff'" x-bind:class="open == 'duff' ? 'active' : ''">
@@ -134,10 +133,18 @@
         </div>
         <div class="box" @click="open = '363'" x-bind:class="open == '363' ? 'active' : ''">
           <h1>363</h1>
-        </div>
+        </div> --}}
       </div>
-      <div class="content-wrapper" x-show="open == 'twizz_family'">
-        <div class="card">
+      <div class="content-wrapper">
+        @foreach ($products as $item)
+        <div class="card" x-show="open == '{{$item->brand->slug}}'">
+          <a href="{{asset('storage/' . $item->image_url)}}" data-lightbox="{{$item->product_name}}"
+            data-title="{{$item->product_name}}">
+            <img src="{{asset('storage/' . $item->image_url)}}" alt="{{$item->product_name}}">
+          </a>
+        </div>
+        @endforeach
+        {{-- <div class="card">
           <a href="{{asset('assets/images/products/1.png')}}" data-lightbox="products 1" data-title="products 1">
             <img src="{{asset('assets/images/products/1.png')}}" alt="products 1">
           </a>
@@ -151,7 +158,7 @@
           <a href="{{asset('assets/images/products/3.png')}}" data-lightbox="products 3" data-title="products 3">
             <img src="{{asset('assets/images/products/3.png')}}" alt="products 3">
           </a>
-        </div>
+        </div> --}}
       </div>
     </div>
   </div>
