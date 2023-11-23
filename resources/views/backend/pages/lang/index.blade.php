@@ -25,7 +25,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h3 class="mb-0">Master Language</h3>
-                <button type="button" class="btn btn-primary" id="btn-add-modal" data-toggle="modal"
+                <button type="button" class="btn btn-warning" id="btn-add-modal" data-toggle="modal"
                     data-target="#createModal">Add
                     Language</button>
             </div>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="btn-save-add">Save changes</button>
+                    <button type="button" class="btn btn-warning" id="btn-save-add">Save changes</button>
                 </div>
             </div>
         </div>
@@ -104,7 +104,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="btn-save-edit">Save changes</button>
+                    <button type="button" class="btn btn-warning" id="btn-save-edit">Save changes</button>
                 </div>
             </div>
         </div>

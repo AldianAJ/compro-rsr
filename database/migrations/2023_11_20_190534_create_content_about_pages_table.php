@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('about_page_id');
             $table->unsignedBigInteger('lang_id');
             $table->string('slug')->unique();
+            $table->string('year')->nullable();
             $table->string('title')->nullable();
             $table->text('content');
             $table->timestamps();

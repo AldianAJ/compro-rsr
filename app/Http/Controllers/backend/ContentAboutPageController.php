@@ -28,7 +28,7 @@ class ContentAboutPageController extends Controller
             $data = DB::table('about_pages as a')
                 ->join('content_about_pages as b', 'a.id', '=', 'b.about_page_id')
                 ->join('langs as c', 'b.lang_id', '=', 'c.id')
-                ->select('a.id as about_page_id', 'a.slug as slug_about_page', 'a.image', 'a.section', 'c.code', 'c.language', 'b.id as content_about_id', 'b.slug as content_about_slug', 'b.title', 'b.content')
+                ->select('a.id as about_page_id', 'a.slug as slug_about_page', 'b.year', 'a.image', 'a.section', 'c.code', 'c.language', 'b.id as content_about_id', 'b.slug as content_about_slug', 'b.title', 'b.content')
                 ->get();
             return DataTables::of($data)->make(true);
         }
@@ -41,6 +41,7 @@ class ContentAboutPageController extends Controller
         $lang_id = $request->lang_id;
         $about_page_id = $request->about_page_id;
         $title = empty($request->title) ? null : $request->title;
+        $year = empty($request->year) ? null : $request->year;
         $content = $request->content;
 
         $check = ContentAboutPage::where([
@@ -59,6 +60,7 @@ class ContentAboutPageController extends Controller
             $data->lang_id = $lang_id;
             $data->slug = empty($title) ? Str::random(16) : Str::slug($title, '-') . '-' . Str::random(5);
             $data->title = $title;
+            $data->year = $year;
             $data->content = $content;
             $data->save();
             DB::commit();
@@ -77,6 +79,7 @@ class ContentAboutPageController extends Controller
         $about_page_id = $request->about_page_id;
         $title = empty($request->title) ? null : $request->title;
         $content = $request->content;
+        $year = empty($request->year) ? null : $request->year;
 
         $data = ContentAboutPage::where('id', $id)->first();
 
@@ -98,6 +101,7 @@ class ContentAboutPageController extends Controller
             $data->lang_id = $lang_id;
             $data->slug = empty($title) ? Str::random(16) : Str::slug($title, '-') . '-' . Str::random(5);
             $data->title = $title;
+            $data->year = $year;
             $data->content = $content;
             $data->save();
             DB::commit();

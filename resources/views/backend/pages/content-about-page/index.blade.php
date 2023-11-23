@@ -25,7 +25,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h3 class="mb-0">About Pages Content</h3>
-                <button type="button" class="btn btn-primary" id="btn-add-modal" data-toggle="modal"
+                <button type="button" class="btn btn-warning" id="btn-add-modal" data-toggle="modal"
                     data-target="#createModal">Add
                     Content</button>
             </div>
@@ -39,6 +39,7 @@
                             <th>Section</th>
                             <th>Language</th>
                             <th>Title</th>
+                            <th>Year</th>
                             <th>Content</th>
                             <th>Action</th>
                         </tr>
@@ -83,6 +84,12 @@
                     </div>
                     <div class="form-group">
                         <label for="" class="form-control-label">
+                            Year
+                        </label>
+                        <input type="text" class="form-control text-dark" name="addYear" id="addYear">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
                             Title
                         </label>
                         <input type="text" class="form-control text-dark" name="addTitle" id="addTitle">
@@ -96,7 +103,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="btn-save-add">Save changes</button>
+                    <button type="button" class="btn btn-warning" id="btn-save-add">Save changes</button>
                 </div>
             </div>
         </div>
@@ -138,6 +145,12 @@
                     </div>
                     <div class="form-group">
                         <label for="" class="form-control-label">
+                            Year
+                        </label>
+                        <input type="text" class="form-control text-dark" name="editYear" id="editYear">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
                             Title
                         </label>
                         <input type="text" class="form-control text-dark" name="editTitle" id="editTitle">
@@ -151,7 +164,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="btn-save-edit">Save changes</button>
+                    <button type="button" class="btn btn-warning" id="btn-save-edit">Save changes</button>
                 </div>
             </div>
         </div>
@@ -167,6 +180,7 @@
     <script src="{{ asset('argon/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
     <script src="{{ asset('argon/assets/vendor/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('argon/assets/vendor/datatables.net-select/js/dataTables.select.min.js') }}"></script>
+    <script src="{{ asset('argon/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
 
     <script>
         $(document).ready(function() {
@@ -189,6 +203,13 @@
                     {
                         data: "language",
                         nama: "language"
+                    },
+                    {
+                        data: "year",
+                        render: function(data, type, row, meta) {
+                            var result = data == null ? '-' : data;
+                            return result;
+                        }
                     },
                     {
                         data: "title",
@@ -215,10 +236,23 @@
                 ]
             });
 
+            $('#addYear').datepicker({
+                format: " yyyy", // Notice the Extra space at the beginning
+                viewMode: "years",
+                minViewMode: "years"
+            });
+
+            $('#editYear').datepicker({
+                format: " yyyy", // Notice the Extra space at the beginning
+                viewMode: "years",
+                minViewMode: "years"
+            });
+
             $('#btn-add-modal').click(function(e) {
                 $('#addLang').val("");
                 $('#addSection').val("");
                 $('#addTitle').val("");
+                $('#addYear').val("");
                 $('#addContent').val("");
             });
 
@@ -226,6 +260,7 @@
                 var lang = $('#addLang').val();
                 var section = $('#addSection').val();
                 var title = $('#addTitle').val();
+                var year = $('#addYear').val();
                 var content = $('#addContent').val();
                 if (lang == "" || section == "" || content == "") {
                     $('#createModal').modal('hide');
@@ -244,6 +279,7 @@
                             'about_page_id': section,
                             'title': title,
                             'content': content,
+                            'year': year,
                             '_token': "{{ csrf_token() }}"
                         },
                         dataType: "json",
@@ -287,6 +323,7 @@
                         $('#editLang').val(resp.data.lang_id);
                         $('#editSection').val(resp.data.about_page_id);
                         $('#editTitle').val(resp.data.title);
+                        $('#editYear').val(resp.data.year);
                         $('#editContent').val(resp.data.content);
                     }
                 });
@@ -297,6 +334,7 @@
                 var lang = $('#editLang').val();
                 var section = $('#editSection').val();
                 var title = $('#editTitle').val();
+                var year = $('#editYear').val();
                 var content = $('#editContent').val();
                 if (lang == "" || section == "" || content == "") {
                     $('#editModal').modal('hide');
@@ -314,6 +352,7 @@
                             "id": id,
                             'lang_id': lang,
                             'about_page_id': section,
+                            'year': year,
                             'title': title,
                             'content': content,
                             "_token": "{{ csrf_token() }}"

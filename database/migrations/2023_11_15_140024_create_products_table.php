@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("slug")->unique();
             $table->unsignedBigInteger("brand_id");
-            $table->string("product_name")->unique();
+            $table->string("product_name");
             $table->text("image_url");
             $table->text("product_description")->nullable();
             $table->timestamps();

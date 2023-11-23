@@ -17,7 +17,7 @@
     <div class="main-content" id="panel">
         @include('backend.includes.navbar')
 
-        <div class="header bg-primary pb-6">
+        <div class="header bg-gradient-warning pb-6">
             <div class="container-fluid">
                 <div class="header-body">
                     <div class="row align-items-center py-4">
