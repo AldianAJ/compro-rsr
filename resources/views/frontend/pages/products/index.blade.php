@@ -110,7 +110,7 @@
 <section class="container-fluid products_container" style="background-color: #edeaea;">
   <div class="row">
     <div class="col-wrapper title">
-      <p style="text-align: center;">{{$product_section->content}}</p>
+      <p style="text-align: center;">{{$product_section?->content}}</p>
     </div>
     <div class="col-lg col-wrapper" x-data="{ open: '{{$brands[0]->slug}}' }">
       <div class="media-choose">

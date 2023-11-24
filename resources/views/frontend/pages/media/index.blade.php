@@ -2,10 +2,23 @@
 @section('title', 'Media')
 
 @push('styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css"
+  integrity="sha512-ZKX+BvQihRJPA8CROKBhDNvoc2aDMOdAlcm7TUQY+35XYtrd3yh95QOOhsPDQY9QnKE0Wqag9y38OIgEvb88cA=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
+  html,
+  body,
+  main,
+  #home,
+  #home .row {
+    height: unset !important;
+    min-height: 100vh !important
+  }
+
   .col-wrapper {
     margin-left: 3.25rem !important;
     margin-top: 4rem !important;
+    margin-bottom: 1rem;
   }
 
   .media-choose {
@@ -35,12 +48,15 @@
 
   .content-wrapper {
     margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
   }
 
   .content-wrapper .card {
     display: flex;
     gap: 1rem;
-    margin-bottom: 1rem;
   }
 
   .content-wrapper .card h1 {
@@ -81,11 +97,6 @@
     .content-wrapper .card {
       flex-direction: column;
     }
-
-    .content-wrapper .card img {
-      height: 15rem !important;
-      object-fit: cover !important;
-    }
   }
 </style>
 @endpush
@@ -106,36 +117,24 @@
       </div>
       <div class="content-wrapper" x-show="open == 'news'">
         <div class="card">
-          <img src="{{asset('assets/images/media/media-test.png')}}" alt="media-test">
-          <div>
-            <h1>Berbakti kasih bersama GKJTU Teuku Umar</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, culpa, fuga esse blanditiis voluptatum
-              in quisquam enim voluptatibus atque voluptates cupiditate repellendus dicta dolor quod iste, ipsum sequi
-              velit similique....</p>
-            <a href="#">baca artikel selengkapnya</a>
-          </div>
+          <iframe src="https://www.youtube.com/embed/U7XimzUARgU" width="400" height="300"></iframe>
         </div>
         <div class="card">
-          <img src="{{asset('assets/images/media/media-test.png')}}" alt="media-test">
-          <div>
-            <h1>Berbakti kasih bersama GKJTU Teuku Umar</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, culpa, fuga esse blanditiis voluptatum
-              in quisquam enim voluptatibus atque voluptates cupiditate repellendus dicta dolor quod iste, ipsum sequi
-              velit similique....</p>
-            <a href="#">baca artikel selengkapnya</a>
-          </div>
+          <iframe src="https://www.youtube.com/embed/U7XimzUARgU" width="400" height="300"></iframe>
+        </div>
+        <div class="card">
+          <iframe src="https://www.youtube.com/embed/U7XimzUARgU" width="400" height="300"></iframe>
+        </div>
+        <div class="card">
+          <iframe src="https://www.youtube.com/embed/U7XimzUARgU" width="400" height="300"></iframe>
         </div>
       </div>
       <div class="content-wrapper" x-show="open == 'tvc'">
         <div class="card">
-          <img src="{{asset('assets/images/media/media-test.png')}}" alt="media-test">
-          <div>
-            <h1>Berbakti kasih bersama GKJTU Teuku Umar</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, culpa, fuga esse blanditiis voluptatum
-              in quisquam enim voluptatibus atque voluptates cupiditate repellendus dicta dolor quod iste, ipsum sequi
-              velit similique....</p>
-            <a href="#">baca artikel selengkapnya</a>
-          </div>
+          <iframe src="https://www.youtube.com/embed/U7XimzUARgU" width="400" height="300"></iframe>
+        </div>
+        <div class="card">
+          <iframe src="https://www.youtube.com/embed/U7XimzUARgU" width="400" height="300"></iframe>
         </div>
       </div>
     </div>
@@ -144,4 +143,13 @@
 @endsection
 
 @push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"
+  integrity="sha512-Ixzuzfxv1EqafeQlTCufWfaC6ful6WFqIz4G+dWvK0beHw0NVJwvCKSgafpy5gwNqKmgUfIBraVwkKI+Cz0SEQ=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+  lightbox.option({
+      'resizeDuration': 200,
+      'wrapAround': true
+    })
+</script>
 @endpush

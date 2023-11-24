@@ -138,7 +138,7 @@
     mobile="{{ asset('assets/media/uploads/images/banner-tentang-kami-m.jpg') }}">
     <div class="row row-wrapper">
         <div class="col-lg-6">
-            <p>{{$about_section_about_content->content}}</p>
+            <p>{{$about_section_about_content?->content}}</p>
         </div>
     </div>
 </section>
@@ -146,13 +146,13 @@
     <div class="content"
         style="background-image: url('{{ asset('assets/media/uploads/images/banner-kretek-m.jpg') }}')">
         <div class="visi_misi">
-            <h1>{{$about_section_vision_content->title}}</h1>
+            <h1>{{$about_section_vision_content?->title}}</h1>
             <p style="margin-bottom: 1rem;">
-                {{$about_section_vision_content->content}}
+                {{$about_section_vision_content?->content}}
             </p>
-            <h1>{{$about_section_mission_content->title}}</h1>
+            <h1>{{$about_section_mission_content?->title}}</h1>
             <p style="margin-bottom: 1rem;">
-                {{$about_section_mission_content->content}}
+                {{$about_section_mission_content?->content}}
             </p>
         </div>
         <div class="content-wrapper">
