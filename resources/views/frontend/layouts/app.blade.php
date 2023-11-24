@@ -238,7 +238,7 @@ $cuurent_lang = $_GET['lang'] ?? $langs[0]->code;
   <footer>
     <p>
       Office : Jl. Baureno - Bojonegoro No.567, Pasinan, Bojonegoro - Jawa Timur | Contact : (0353) 881783 /
-      081333987170 | Email : pt.pjsp.bojonegoro@gmail.com
+      081333987170 | Email : info@ptpjsp.com
     </p>
     <p style="margin-top: 0.2rem;">
       &copy; Copyright PT Putera Jaya Sakti Perkasa
