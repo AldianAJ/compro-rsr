@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\AuthController;
 use App\Http\Controllers\backend\BrandController;
 use App\Http\Controllers\backend\ContentAboutPageController;
 use App\Http\Controllers\backend\LangController;
+use App\Http\Controllers\backend\MediaController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\ProductPageController;
 use App\Http\Controllers\frontend\PagesController;
@@ -54,6 +55,14 @@ Route::prefix('/admin')->name('backend.')->group(function () {
         });
 
         Route::controller(LangController::class)->prefix('/lang')->name('lang.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/destroy', 'destroy')->name('destroy');
+            Route::get('/edit', 'edit')->name('edit');
+            Route::post('/update', 'update')->name('update');
+        });
+
+        Route::controller(MediaController::class)->prefix('/media')->name('media.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/store', 'store')->name('store');
             Route::get('/destroy', 'destroy')->name('destroy');

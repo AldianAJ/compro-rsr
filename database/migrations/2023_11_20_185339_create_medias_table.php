@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('slug')->unique();
             $table->string('category');
-            $table->unsignedBigInteger('lang_id');
+            $table->string('title');
             $table->text('url');
             $table->timestamps();
         });
