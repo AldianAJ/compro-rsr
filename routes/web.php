@@ -33,6 +33,9 @@ Route::controller(PagesController::class)->name('frontend.')->group(function () 
 Route::prefix('/admin')->name('backend.')->group(function () {
 
     Route::middleware('auth')->group(function () {
+        Route::controller(ContentAboutPageController::class)->group(function () {
+            Route::get('/', 'index');
+        });
         Route::controller(ContentAboutPageController::class)->prefix('/about/content/')->name('about.content.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/store', 'store')->name('store');
