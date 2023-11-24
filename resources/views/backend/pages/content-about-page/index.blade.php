@@ -230,6 +230,9 @@
                             let html = "<button class='btn btn-success btn-edit' data-id='" +
                                 data +
                                 "'>Edit</button>";
+                            html += "<button class='btn btn-danger btn-delete' data-id='" +
+                                data +
+                                "'>Delete</button>";
                             return html;
                         }
                     }
@@ -378,6 +381,26 @@
                         }
                     });
                 }
+            });
+
+            DTbody.on('click', '.btn-delete', function() {
+                var id = $(this).data("id");
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('backend.about.content.destroy') }}",
+                    data: {
+                        "id": id
+                    },
+                    success: function(resp) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success",
+                            text: resp.message,
+                            timer: 3000
+                        });
+                        table.ajax.reload();
+                    }
+                });
             });
         });
     </script>

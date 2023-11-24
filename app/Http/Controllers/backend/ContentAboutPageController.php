@@ -107,4 +107,12 @@ class ContentAboutPageController extends Controller
             return response()->json(["message" => $ex->getMessage(), "code" => 500], 200);
         }
     }
+
+    public function destroy(Request $request)
+    {
+        $cap = ContentAboutPage::where('id', $request->id)->first();
+        $cap->delete();
+
+        return response()->json(["message" => "Data Content Abouts successfully deleted", "code" => 200], 200);
+    }
 }

@@ -40,6 +40,7 @@ Route::prefix('/admin')->name('backend.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/store', 'store')->name('store');
             Route::post('/update', 'update')->name('update');
+            Route::get('/destroy', 'destroy')->name('destroy');
         });
 
         Route::prefix('/product')->name('product.')->group(function () {
