@@ -1,11 +1,11 @@
 @extends('backend.layouts.app')
 
 @section('title')
-    Product
+    Media
 @endsection
 
 @section('page-breadcumb')
-    Master
+    Media
 @endsection
 
 @section('page-section')
@@ -24,9 +24,10 @@
     <div class="col">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
-                <h3 class="mb-0">Product</h3>
+                <h3 class="mb-0">Master Media</h3>
                 <button type="button" class="btn btn-warning" id="btn-add-modal" data-toggle="modal"
-                    data-target="#createModal">Add Product</button>
+                    data-target="#createModal">Add
+                    Media</button>
             </div>
 
             <div class="table-responsive py-4">
@@ -34,9 +35,9 @@
                     <thead class="thead-light">
                         <tr>
                             <th>No</th>
-                            <th>Brand</th>
-                            <th>Product</th>
-                            <th>Image</th>
+                            <th>Category</th>
+                            <th>Title</th>
+                            <th>url</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -50,43 +51,39 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Productt</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Data Media</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="addForm" method="post" enctype="multipart/form-data">
-                    <div class="modal-body">
-
-                        <div class="form-group">
-                            <label for="" class="form-control-label">
-                                Brand
-                            </label>
-                            <select name="addBrand" id="addBrand" class="form-control text-dark">
-                                <option value="">-- Select Brands --</option>
-                                @foreach ($brands as $brand)
-                                    <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="form-control-label">
-                                Product
-                            </label>
-                            <input type="text" class="form-control text-dark" name="addProduct" id="addProduct">
-                        </div>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="addImage" name="addImage" lang="en">
-                            <label class="custom-file-label" for="image">Select file</label>
-                        </div>
-
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
+                            Category
+                        </label>
+                        <select name="addCategory" id="addCategory" class="form-control text-dark">
+                            <option value="">-- Select Category --</option>
+                            <option value="TVC">TVC</option>
+                            <option value="NEWS">NEWS</option>
+                        </select>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button class="btn btn-warning" type="submit" id="btn-save-add">Save
-                            changes</button>
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
+                            Title
+                        </label>
+                        <input type="text" class="form-control text-dark" name="addTitle" id="addTitle">
                     </div>
-                </form>
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
+                            Url
+                        </label>
+                        <input type="text" class="form-control text-dark" name="addUrl" id="addUrl">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" id="btn-save-add">Save changes</button>
+                </div>
             </div>
         </div>
     </div>
@@ -96,42 +93,40 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Content About</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Language</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="" method="post" id="editForm" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="" class="form-control-label">
-                                Brand
-                            </label>
-                            <input type="hidden" name="editId" id="editId">
-                            <select name="editBrand" id="editBrand" class="form-control text-dark">
-                                <option value="">-- Select Brand --</option>
-                                @foreach ($brands as $brand)
-                                    <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="form-control-label">
-                                Product
-                            </label>
-                            <input type="text" class="form-control text-dark" name="editProduct" id="editProduct">
-                        </div>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="editImage" name="editImage"
-                                lang="en">
-                            <label class="custom-file-label" for="image">Select file</label>
-                        </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
+                            Category
+                        </label>
+                        <input type="hidden" id="editId">
+                        <select name="editCategory" id="editCategory" class="form-control text-dark">
+                            <option value="">-- Select Category --</option>
+                            <option value="TVC">TVC</option>
+                            <option value="NEWS">NEWS</option>
+                        </select>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-warning" id="btn-save-edit">Save changes</button>
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
+                            Title
+                        </label>
+                        <input type="text" class="form-control text-dark" name="editTitle" id="editTitle">
                     </div>
-                </form>
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
+                            Url
+                        </label>
+                        <input type="text" class="form-control text-dark" name="editUrl" id="editUrl">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" id="btn-save-edit">Save changes</button>
+                </div>
             </div>
         </div>
     </div>
@@ -150,24 +145,24 @@
     <script>
         $(document).ready(function() {
             var table = $('#datatable').DataTable({
-                ajax: "{{ route('backend.product.index') }}",
+                ajax: "{{ route('backend.media.index') }}",
                 columns: [{
-                        data: null,
+                        data: "id",
                         render: function(data, type, row, meta) {
                             return meta.row + 1
                         }
                     },
                     {
-                        data: "brand_name",
-                        name: "brand_name"
+                        data: "category",
+                        name: "category"
                     },
                     {
-                        data: "product_name",
-                        nama: "product_name"
+                        data: "title",
+                        name: "title"
                     },
                     {
-                        data: "image_url",
-                        nama: "image_url"
+                        data: "url",
+                        name: "url"
                     },
                     {
                         data: "id",
@@ -186,41 +181,37 @@
             });
 
             $('#btn-add-modal').click(function(e) {
-                $('#addBrand').val("");
-                $('#addProduct').val("");
-                $('#addImage').val("");
+                $('#addCategory').val("");
+                $('#addTitle').val("");
+                $('#addUrl').val("");
             });
 
-            $("form#addForm").submit(function(e) {
-                e.preventDefault();
-
-                var brand = $('#addBrand').val();
-                var product = $('#addProduct').val();
-                var image = $('#addImage')[0].files;
-
-                var formData = new FormData(this);
-                formData.append("_token", "{{ csrf_token() }}");
-
-                if (brand == "" || product == "" || image.length == 0) {
+            $('#btn-save-add').click(function(e) {
+                var category = $('#addCategory').val();
+                var title = $('#addTitle').val();
+                var url = $('#addUrl').val();
+                if (url == "" || title == "" || category == "") {
                     $('#createModal').modal('hide');
                     Swal.fire({
                         icon: "error",
                         title: "Warning",
-                        text: "Please fill the field and image",
+                        text: "Please fill the field",
                         timer: 3000
                     });
                 } else {
                     $.ajax({
                         type: "POST",
-                        url: "{{ route('backend.product.store') }}",
-                        data: formData,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
+                        url: "{{ route('backend.media.store') }}",
+                        data: {
+                            'category': category,
+                            'title': title,
+                            'url': url,
+                            '_token': "{{ csrf_token() }}"
+                        },
+                        dataType: "json",
                         success: function(resp) {
                             $('#createModal').modal('hide');
                             if (resp.code == 200) {
-                                table.ajax.reload();
                                 Swal.fire({
                                     icon: "success",
                                     title: "Success",
@@ -235,7 +226,7 @@
                                     timer: 3000
                                 });
                             }
-
+                            table.ajax.reload();
                         }
                     });
                 }
@@ -243,76 +234,11 @@
 
             var DTbody = $('#datatable tbody');
 
-            DTbody.on('click', '.btn-edit', function() {
-                var id = $(this).data("id");
-                $.ajax({
-                    type: "GET",
-                    url: "{{ route('backend.product.index') }}",
-                    data: {
-                        "id": id
-                    },
-                    success: function(resp) {
-                        $('#editModal').modal('show');
-                        $('#editId').val(resp.data.id);
-                        $('#editBrand').val(resp.data.brand_id);
-                        $('#editProduct').val(resp.data.product_name);
-                        $('#editImage').val("");
-                    }
-                });
-            });
-
-            $('form#editForm').submit(function(e) {
-                e.preventDefault();
-                var brand = $('#editBrand').val();
-                var product = $('#editProduct').val();
-                var formData = new FormData(this);
-                formData.append("_token", "{{ csrf_token() }}");
-
-                if (brand == "" || product == "") {
-                    $('#editModal').modal('hide');
-                    Swal.fire({
-                        icon: "error",
-                        title: "Warning",
-                        text: "Please fill the field and image",
-                        timer: 3000
-                    });
-                } else {
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ route('backend.product.update') }}",
-                        data: formData,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        success: function(resp) {
-                            $('#editModal').modal('hide');
-                            if (resp.code == 200) {
-                                table.ajax.reload();
-                                Swal.fire({
-                                    icon: "success",
-                                    title: "Success",
-                                    text: resp.message,
-                                    timer: 3000
-                                });
-                            } else {
-                                Swal.fire({
-                                    icon: "error",
-                                    title: "Warning",
-                                    text: resp.message,
-                                    timer: 3000
-                                });
-                            }
-
-                        }
-                    });
-                }
-            });
-
             DTbody.on('click', '.btn-delete', function() {
                 var id = $(this).data("id");
                 $.ajax({
                     type: "GET",
-                    url: "{{ route('backend.product.destroy') }}",
+                    url: "{{ route('backend.media.destroy') }}",
                     data: {
                         "id": id
                     },
@@ -326,6 +252,71 @@
                         table.ajax.reload();
                     }
                 });
+            });
+
+            DTbody.on('click', '.btn-edit', function() {
+                var id = $(this).data("id");
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('backend.media.edit') }}",
+                    data: {
+                        "id": id
+                    },
+                    success: function(resp) {
+                        $('#editModal').modal('show');
+                        $('#editId').val(resp.data.id);
+                        $('#editCategory').val(resp.data.category);
+                        $('#editTitle').val(resp.data.title);
+                        $('#editUrl').val(resp.data.url);
+                    }
+                });
+            });
+
+            $('#btn-save-edit').click(function(e) {
+                var id = $('#editId').val();
+                var category = $('#editCategory').val();
+                var title = $('#editTitle').val();
+                var url = $('#editUrl').val();
+                if (url == "" || title == "" || category == "") {
+                    $('#editModal').modal('hide');
+                    Swal.fire({
+                        icon: "error",
+                        title: "Warning",
+                        text: "Please fill the field",
+                        timer: 3000
+                    });
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('backend.media.update') }}",
+                        data: {
+                            "id": id,
+                            'category': category,
+                            'title': title,
+                            'url': url,
+                            "_token": "{{ csrf_token() }}"
+                        },
+                        success: function(resp) {
+                            $('#editModal').modal('hide');
+                            if (resp.code == 200) {
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Success",
+                                    text: resp.message,
+                                    timer: 3000
+                                });
+                                table.ajax.reload();
+                            } else {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Warning",
+                                    text: resp.message,
+                                    timer: 3000
+                                });
+                            }
+                        }
+                    });
+                }
             });
         });
     </script>

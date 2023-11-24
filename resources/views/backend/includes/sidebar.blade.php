@@ -93,6 +93,12 @@
                         </div>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('backend.media.index') }}">
+                            <i class="ni ni-archive-2 text-green"></i>
+                            <span class="nav-link-text">Media</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#navbar-forms" data-toggle="collapse" role="button"
                             aria-expanded="false" aria-controls="navbar-forms">
                             <i class="ni ni-single-copy-04 text-pink"></i>

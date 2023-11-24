@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LangSeeder::class,
             AboutPageSeeder::class,
-            BrandSeeder::class
+            BrandSeeder::class,
+            UserSeeder::class
         ]);
     }
 }
