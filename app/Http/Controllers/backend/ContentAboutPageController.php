@@ -44,14 +44,14 @@ class ContentAboutPageController extends Controller
         $year = empty($request->year) ? null : $request->year;
         $content = $request->content;
 
-        // $check = ContentAboutPage::where([
-        //     "lang_id" => $lang_id,
-        //     "about_page_id" => $about_page_id
-        // ])->first();
+        $check = ContentAboutPage::where([
+            "lang_id" => $lang_id,
+            "about_page_id" => $about_page_id
+        ])->first();
 
-        // if ($check) {
-        //     return response()->json(["message" => "Content with section and language input already exist", "code" => 409], 200);
-        // }
+        if ($check && $check->about_page_id != 4) {
+            return response()->json(["message" => "Content with section and language input already exist", "code" => 409], 200);
+        }
 
         DB::beginTransaction();
         try {
@@ -83,17 +83,12 @@ class ContentAboutPageController extends Controller
 
         $data = ContentAboutPage::where('id', $id)->first();
 
-        // $check = ContentAboutPage::where(function ($q) use ($lang_id, $about_page_id) {
-        //     $q->where('lang_id', $lang_id)
-        //         ->orWhere('about_page_id', $about_page_id);
-        // })->where(function ($q) use ($data) {
-        //     $q->where('lang_id', '<>', $data->lang_id)
-        //         ->orWhere('about_page_id', '<>', $data->about_page_id);
-        // })->first();
+        $check = ContentAboutPage::whereRaw("(lang_id = $lang_id AND about_page_id = $about_page_id) 
+        AND NOT (lang_id = $data->lang_id AND about_page_id = $data->about_page_id)")->first();
 
-        // if ($check) {
-        //     return response()->json(["message" => "Content with section and language input already exist", "code" => 409], 200);
-        // }
+        if ($check && $check->about_page_id != 4) {
+            return response()->json(["message" => "Content with section and language input already exist", "code" => 409], 200);
+        }
 
         DB::beginTransaction();
         try {
