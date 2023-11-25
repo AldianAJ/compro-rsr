@@ -15,7 +15,7 @@ class BrandSeeder extends Seeder
      */
     public function run(): void
     {
-        $datas = file_get_contents('database/seeders/json/Brand.json');
+        $datas = file_get_contents('database/seeders/json/brand.json');
         $datas = json_decode($datas);
         foreach ($datas as $data) {
             DB::beginTransaction();

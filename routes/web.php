@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\backend\AuthController;
 use App\Http\Controllers\backend\BrandController;
+use App\Http\Controllers\backend\CareerController;
 use App\Http\Controllers\backend\ContentAboutPageController;
 use App\Http\Controllers\backend\LangController;
 use App\Http\Controllers\backend\MediaController;
@@ -59,6 +60,14 @@ Route::prefix('/admin')->name('backend.')->group(function () {
         });
 
         Route::controller(LangController::class)->prefix('/lang')->name('lang.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/destroy', 'destroy')->name('destroy');
+            Route::get('/edit', 'edit')->name('edit');
+            Route::post('/update', 'update')->name('update');
+        });
+
+        Route::controller(CareerController::class)->prefix('/career')->name('career.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/store', 'store')->name('store');
             Route::get('/destroy', 'destroy')->name('destroy');
