@@ -94,17 +94,23 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Code
-                        </label>
+
                         <input type="hidden" name="editId" id="editId">
-                        <input type="text" class="form-control text-dark" name="editCode" id="editCode">
-                    </div>
-                    <div class="form-group">
                         <label for="" class="form-control-label">
                             Language
                         </label>
-                        <input type="text" class="form-control text-dark" name="editLanguage" id="editLanguage">
+                        <select name="editLang" id="editLang" class="form-control text-dark">
+                            <option value="">-- Select Languages --</option>
+                            @foreach ($langs as $lang)
+                                <option value="{{ $lang->id }}">{{ $lang->language }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
+                            Content
+                        </label>
+                        <textarea name="editContent" id="editContent" cols="30" rows="10" class="form-control"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -166,7 +172,7 @@
             });
 
             $('#btn-save-add').click(function(e) {
-                var content = $('#addcontent').val();
+                var content = $('#addContent').val();
                 var language = $('#addLang').val();
                 if (content == "" || language == "") {
                     $('#createModal').modal('hide');
@@ -215,7 +221,7 @@
                 var id = $(this).data("id");
                 $.ajax({
                     type: "GET",
-                    url: "{{ route('backend.lang.destroy') }}",
+                    url: "{{ route('backend.career.destroy') }}",
                     data: {
                         "id": id
                     },
@@ -235,24 +241,24 @@
                 var id = $(this).data("id");
                 $.ajax({
                     type: "GET",
-                    url: "{{ route('backend.lang.edit') }}",
+                    url: "{{ route('backend.career.edit') }}",
                     data: {
                         "id": id
                     },
                     success: function(resp) {
                         $('#editModal').modal('show');
                         $('#editId').val(resp.data.id);
-                        $('#editCode').val(resp.data.code);
-                        $('#editLanguage').val(resp.data.language);
+                        $('#editContent').val(resp.data.content);
+                        $('#editLang').val(resp.data.lang_id);
                     }
                 });
             });
 
             $('#btn-save-edit').click(function(e) {
                 var id = $('#editId').val();
-                var code = $('#editCode').val();
-                var language = $('#editLanguage').val();
-                if (code == "" || language == "") {
+                var content = $('#editContent').val();
+                var language = $('#editLang').val();
+                if (content == "" || language == "") {
                     $('#editModal').modal('hide');
                     Swal.fire({
                         icon: "error",
@@ -263,11 +269,11 @@
                 } else {
                     $.ajax({
                         type: "POST",
-                        url: "{{ route('backend.lang.update') }}",
+                        url: "{{ route('backend.career.update') }}",
                         data: {
                             "id": id,
-                            "code": code,
-                            "language": language,
+                            "content": content,
+                            "lang_id": language,
                             "_token": "{{ csrf_token() }}"
                         },
                         success: function(resp) {

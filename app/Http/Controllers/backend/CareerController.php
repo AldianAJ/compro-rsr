@@ -71,29 +71,24 @@ class CareerController extends Controller
 
     public function update(Request $request)
     {
-        $code = $request->code;
-        $language = $request->language;
-        $data = Lang::where('id', $request->id)->first();
-        $check = Lang::where(function ($q) use ($code, $language) {
-            $q->where('code', $code)
-                ->orWhere('language', $language);
-        })
-            ->where(function ($q) use ($data) {
-                $q->where('code', '<>', $data->code)
-                    ->orWhere('language', '<>', $data->language);
-            })
+        $content = $request->content;
+        $lang_id = $request->lang_id;
+        $data = Career::where('id', $request->id)->first();
+        $check = Career::where('lang_id', $lang_id)
+            ->where('lang_id', '<>', $data->lang_id)
             ->first();
         if ($check) {
-            return response()->json(["message" => "Language or Code already exit, please use different", "code" => 409], 200);
+            return response()->json(["message" => "Content with that language already exist, please use different", "code" => 409], 200);
         }
 
         DB::beginTransaction();
         try {
-            $data->code = $code;
-            $data->language = $language;
+            $data->lang_id = $lang_id;
+            $data->slug = Str::random(16);
+            $data->content = $content;
             $data->save();
             DB::commit();
-            return response()->json(["message" => "Success updated data languages", "code" => 200], 200);
+            return response()->json(["message" => "Success updated data careers", "code" => 200], 200);
         } catch (\Exception $ex) {
             DB::rollBack();
             return response()->json(["message" => $ex->getMessage(), "code" => 500], 200);
