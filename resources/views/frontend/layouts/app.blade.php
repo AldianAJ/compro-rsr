@@ -12,12 +12,15 @@ $cuurent_lang = $_GET['lang'] ?? $langs[0]->code;
 
 <head>
   <meta charset="utf-8">
-  <meta name="author" content="PT. Gurang Garam Tbk">
-  <meta name="title" content="tentang kami | Gudang Garam">
-  <meta name="description"
-    content="Perusahaan rokok Gudang Garam adalah salah satu industri rokok terkemuka di tanah air yang telah berdiri sejak tahun 1958 di kota Kediri, Jawa Timur.">
-  <meta name="keywords"
-    content="GGRM.JK:((), AMPHTML, HTML, gudanggaram,manajemen,tatakelola,perusahaan,overview,struktur,organisasi,caturdharma,suryamadistrindo,dewan,komisaris,direksi">
+  <meta name="author" content="PT Putera Jaya Sakti Perkasa">
+  <meta name="title" content="PT Putera Jaya Sakti Perkasa">
+  <meta name="description" content="PT Putera Jaya Sakti Perkasa menjalankan bisnisnya
+    dengan profesionalitas dan didukung oleh tenaga produksi
+    dan manajerial yang handal. Seiring perkembangan zaman
+    dan sesuai visi misi perusahaan, maka kami bertekad untuk
+    terus melakukan perubahan dan inovasi demi menjadi perusahaan
+    yang handal dan mampu mencakup pasar nasional.
+    ">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -52,13 +55,10 @@ $cuurent_lang = $_GET['lang'] ?? $langs[0]->code;
   </script>
 
   <style>
-    #sidebar .top {
-      text-align: center;
-      position: absolute;
-      top: 0.5rem;
-      left: 0;
-      right: 0;
-      margin: 0 auto;
+    @media (min-width: 992px) {
+      #topbar {
+        margin-left: 0 !important;
+      }
     }
 
     .navbar-brand {
@@ -226,14 +226,7 @@ $cuurent_lang = $_GET['lang'] ?? $langs[0]->code;
     </nav>
   </header>
   <main>
-    <div id="sidebar" class="visible-md visible-lg" role="navigation">
-      <div class="top">
-        <img alt="gg-bar" src="{{asset('assets/images/ggbar.png')}}">
-      </div>
-    </div>
-
     @yield('content')
-
   </main>
   <footer>
     <p>

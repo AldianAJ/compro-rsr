@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\About;
 use App\Models\AboutPage;
 use App\Models\Brand;
+use App\Models\Career;
 use App\Models\Content;
 use App\Models\ContentAboutPage;
 use App\Models\History;
 use App\Models\Home;
 use App\Models\Lang;
+use App\Models\Media;
 use App\Models\News;
 use App\Models\Page;
 use App\Models\Product;
@@ -71,11 +73,19 @@ class PagesController extends Controller
 
     public function media()
     {
-        return view('frontend.pages.media.index');
+        $medias = Media::get();
+        return view('frontend.pages.media.index', [
+            'medias' => $medias
+        ]);
     }
 
-    public function career()
+    public function career(Request $request)
     {
-        return view('frontend.pages.career.index');
+        $current_lang = Lang::where('code', $request->lang)->first();
+
+        $career_section = Career::where('lang_id', $current_lang->id)->first();
+        return view('frontend.pages.career.index', [
+            'career_section' => $career_section
+        ]);
     }
 }

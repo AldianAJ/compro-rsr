@@ -106,36 +106,21 @@
   tablet="{{asset('assets/media/uploads/images/banner-tentang-kami-m.jpg')}}"
   mobile="{{asset('assets/media/uploads/images/banner-tentang-kami-m.jpg')}}">
   <div class="row">
-    <div class="col-lg-8 col-wrapper" x-data="{ open: 'news' }">
+    <div class="col-lg-8 col-wrapper" x-data="{ open: 'NEWS' }">
       <div class="media-choose">
-        <div class="box" @click="open = 'news'" x-bind:class="open == 'news' ? 'active' : ''">
+        <div class="box" @click="open = 'NEWS'" x-bind:class="open == 'NEWS' ? 'active' : ''">
           <h1>NEWS</h1>
         </div>
-        <div class="box" @click="open = 'tvc'" x-bind:class="open == 'tvc' ? 'active' : ''">
+        <div class="box" @click="open = 'TVC'" x-bind:class="open == 'TVC' ? 'active' : ''">
           <h1>TVC</h1>
         </div>
       </div>
-      <div class="content-wrapper" x-show="open == 'news'">
-        <div class="card">
-          <iframe src="https://www.youtube.com/embed/U7XimzUARgU" width="400" height="300"></iframe>
+      <div class="content-wrapper">
+        @foreach ($medias as $item)
+        <div class="card" x-show="open == '{{$item->category}}'">
+          <iframe src="https://www.youtube.com/embed/{{$item->url}}" width="400" height="300"></iframe>
         </div>
-        <div class="card">
-          <iframe src="https://www.youtube.com/embed/U7XimzUARgU" width="400" height="300"></iframe>
-        </div>
-        <div class="card">
-          <iframe src="https://www.youtube.com/embed/U7XimzUARgU" width="400" height="300"></iframe>
-        </div>
-        <div class="card">
-          <iframe src="https://www.youtube.com/embed/U7XimzUARgU" width="400" height="300"></iframe>
-        </div>
-      </div>
-      <div class="content-wrapper" x-show="open == 'tvc'">
-        <div class="card">
-          <iframe src="https://www.youtube.com/embed/U7XimzUARgU" width="400" height="300"></iframe>
-        </div>
-        <div class="card">
-          <iframe src="https://www.youtube.com/embed/U7XimzUARgU" width="400" height="300"></iframe>
-        </div>
+        @endforeach
       </div>
     </div>
   </div>
