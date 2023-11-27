@@ -48,11 +48,16 @@ class PagesController extends Controller
             'about_page_id' => $about_section_mission->id,
             'lang_id'       => $current_lang->id
         ])->first();
+        $about_section_history_content = ContentAboutPage::where([
+            'about_page_id' => $about_section_history->id,
+            'lang_id'       => $current_lang->id
+        ])->get();
 
         return view('frontend.pages.about.index', [
             'about_section_about_content' => $about_section_about_content,
             'about_section_vision_content' => $about_section_vision_content,
             'about_section_mission_content' => $about_section_mission_content,
+            'about_section_history_content' => $about_section_history_content,
         ]);
     }
 
