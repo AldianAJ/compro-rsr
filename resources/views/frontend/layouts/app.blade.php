@@ -158,7 +158,7 @@ $cuurent_lang = $_GET['lang'] ?? $langs[0]->code;
     }
 
     .navbar-header .dropdown .menu {
-      background-color: #000;
+      background-color: #b92025;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
@@ -171,7 +171,7 @@ $cuurent_lang = $_GET['lang'] ?? $langs[0]->code;
 
     footer {
       padding: 0.5rem 0;
-      background-color: #000;
+      background-color: #b92025;
     }
 
     footer p {

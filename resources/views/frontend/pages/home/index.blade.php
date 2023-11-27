@@ -20,7 +20,7 @@
   footer {
     padding: 1rem 0;
     margin-top: -0.4rem;
-    background-color: #000;
+    background-color: #b92025;
   }
 
   @media (max-width: 575.98px) {
