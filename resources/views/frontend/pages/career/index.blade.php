@@ -3,6 +3,12 @@
 
 @push('styles')
 <style>
+  p {
+    color: #fff;
+    background-color: rgb(0 0 0 / 70%);
+    padding: 0.5rem 1rem;
+  }
+
   @media (max-width: 575.98px) {
     #home img {
       height: 6rem !important;
@@ -11,6 +17,11 @@
     #home p {
       text-align: justify !important;
       padding: 0 1rem;
+    }
+
+    .row {
+      padding-left: 1rem !important;
+      padding-right: 1rem !important;
     }
   }
 </style>

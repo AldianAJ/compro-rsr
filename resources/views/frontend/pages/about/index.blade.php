@@ -81,13 +81,18 @@
         margin-bottom: 0;
     }
 
-
     .content .content-wrapper h1,
     .content .content-wrapper h2 {
         font-size: 1.5rem;
         color: #d64c42;
         margin: 0;
         font-weight: 700;
+    }
+
+    .about_content {
+        color: #fff;
+        background-color: rgb(0 0 0 / 70%);
+        padding: 0.5rem 1rem;
     }
 
     .content .content-wrapper h2 {
@@ -148,7 +153,7 @@
     mobile="{{ asset('assets/media/uploads/images/banner-tentang-kami-m.jpg') }}">
     <div class="row row-wrapper">
         <div class="col-lg-6">
-            <p>{{$about_section_about_content?->content}}</p>
+            <p class="about_content">{{$about_section_about_content?->content}}</p>
         </div>
     </div>
 </section>
