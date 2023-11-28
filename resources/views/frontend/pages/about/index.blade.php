@@ -66,7 +66,7 @@
     .content .content-wrapper {
         background-color: #fff;
         width: 50%;
-        padding: 1rem;
+        padding: 1rem 2rem;
     }
 
     .content .content-wrapper .header {
@@ -98,7 +98,17 @@
         padding-right: 0.5rem;
         padding-left: 2rem;
         margin-bottom: 1.5rem;
-        margin-left: -1rem;
+        margin-left: -2rem;
+    }
+
+    .history-content {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .history-content i {
+        cursor: pointer;
     }
 
     @media (max-width: 575.98px) {
@@ -155,26 +165,22 @@
                 {{$about_section_mission_content?->content}}
             </p>
         </div>
-        <div class="content-wrapper">
+        <div class="content-wrapper" x-data="{ open: 0 }">
             <div class="header">
                 <h1>History of PJSP</h1>
-                <p>1/10</p>
+                <p><span x-text="(open + 1)"></span>/{{count($about_section_history_content)}}</p>
             </div>
-            <h2>2014</h2>
-            <p>
-                Pada Tahun 1960 telah berdiri CV. Podo Tresno yang bergerak di bidang Trading
-                Tembakau yang dijalankan oleh orang tua dari Bapak Santjoko dan
-                Bapak Fx. Iswanto. Pada Tahun 1982 terjadi perubahan manajemen dan pergantian
-                nama perusahaan menjadi CV. Putra Bakti Utama dengan di pimpin Bapak Fx. Iswanto
-                dan Bapak Santjoko, hingga saat ini masih tetap berjalan di bidang Trading Tembakau.
-                Pada tahun 2014, CV. Putra Bakti Utama mengembangkan bisnis usahanya
-                di bidang rokok dengan nama PT Putra Jaya Sakti Perkasa yang saat itu hanya
-                memproduksi rokok SKT (Sigarete Kretek Tangan). Pabrik rokok ini berada
-                di kawasan Bojonegoro dan dipimpin oleh Bapak Fx. Iswanto selaku Direktur,
-                Bapak Juli Utama dan Bapak Santjoko selaku Komisaris. Bapak Fx. Iswanto
-                terus bekerja sama membangun dan mengembangkan perusahaan rokok
-                di daerah ini untuk terus tumbuh agar bisa masuk di skala nasional.
-            </p>
+            @foreach ($about_section_history_content as $item)
+            <h2 x-show="open == '{{$loop->index}}'">{{$item->year}}</h2>
+            @endforeach
+            <div class="history-content">
+                <i class="fa-solid fa-chevron-left" @click="open--" x-show="open != 0"></i>
+                @foreach ($about_section_history_content as $item)
+                <p x-show="open == '{{$loop->index}}'">{{$item->content}}</p>
+                @endforeach
+                <i class="fa-solid fa-chevron-right" @click="open++"
+                    x-show="open < '{{count($about_section_history_content) - 1}}'"></i>
+            </div>
         </div>
     </div>
 </section>

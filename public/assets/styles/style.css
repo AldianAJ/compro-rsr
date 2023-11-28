@@ -1389,7 +1389,7 @@ table {
 
 @media (min-width: 992px) {
     #topbar {
-        background-color: black;
+        background-color: #b92025;
         margin-left: 3.25rem;
         padding-left: 0;
     }
@@ -1401,7 +1401,7 @@ table {
         padding: 0;
         display: inline-table;
         vertical-align: middle;
-        background: #b92025;
+        background: #000;
         height: 4.45em;
         font-size: 16px;
     }
@@ -1547,7 +1547,7 @@ table {
         padding: 0;
     }
     #topbar {
-        background-color: black;
+        background-color: #b92025;
         height: 4.5em;
         padding-left: 0;
     }
