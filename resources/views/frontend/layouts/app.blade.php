@@ -179,7 +179,7 @@
 
         footer {
             padding: 0.5rem 0;
-            background-color: #000;
+            background-color: #b92025;
         }
 
         footer p {
