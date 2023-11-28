@@ -316,14 +316,14 @@
       if (itemMenu.attr('data-sub') == 'sub') $(linkItemMenu).addClass('in'); //add target link class be 'collapsed in'
     });
 
-    document.getElementById('home').style.backgroundImage = 'url("{{asset('assets/media/uploads/images/banner_tentangkami.jpg')}}")';
-    if (wSize <= 768) document.getElementById('home').style.backgroundImage = 'url("{{asset('assets/media/uploads/images/banner-tentang-kami-m.jpg')}}")';
-    if (wSize <= 640) document.getElementById('home').style.backgroundImage = 'url("{{asset('assets/media/uploads/images/banner-tentang-kami-m.jpg')}}")';
+    document.getElementById('home').style.backgroundImage = 'url("{{asset('assets/images/bg-pasinan-coridor.jpg')}}")';
+    if (wSize <= 768) document.getElementById('home').style.backgroundImage = 'url("{{asset('assets/images/bg-pasinan-coridor.jpg')}}")';
+    if (wSize <= 640) document.getElementById('home').style.backgroundImage = 'url("{{asset('assets/images/bg-pasinan-coridor.jpg')}}")';
 
     function bgChange(img) {
-      image = 'url("{{asset('assets/media/uploads/images/banner_tentangkami.jpg')}}")';
-      if (wSize <= 768) { image = 'url("{{asset('assets/media/uploads/images/banner-tentang-kami-m.jpg')}}")'; }
-      if (wSize <= 640) { image = 'url("{{asset('assets/media/uploads/images/banner-tentang-kami-m.jpg')}}")'; }
+      image = 'url("{{asset('assets/images/bg-pasinan-coridor.jpg')}}")';
+      if (wSize <= 768) { image = 'url("{{asset('assets/images/bg-pasinan-coridor.jpg')}}")'; }
+      if (wSize <= 640) { image = 'url("{{asset('assets/images/bg-pasinan-coridor.jpg')}}")'; }
       quote_text = "Perusahaan rokok Gudang Garam adalah salah satu industri rokok terkemuka di tanah air yang telah berdiri sejak tahun 1958 di kota Kediri, Jawa Timur.";
       image_title = "Gudang Garam Tower";
 
