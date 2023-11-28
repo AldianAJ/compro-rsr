@@ -3,7 +3,16 @@
 
 @push('styles')
 <style>
-  p {
+  html,
+  body,
+  main,
+  #home,
+  #home .row {
+    height: unset !important;
+    min-height: 100vh !important
+  }
+
+  .career_content {
     color: #fff;
     background-color: rgb(0 0 0 / 70%);
     padding: 0.5rem 1rem;
@@ -36,7 +45,8 @@
       <div style="display: flex; justify-content: center;">
         <img alt="Gudang Garam" src="{{asset('assets/images/pjsp-logo.png')}}" style="height: 10rem;">
       </div>
-      <p style="margin-top: 1rem; text-align: center; font-weight: 500;">{{$career_section?->content}}</p>
+      <p class="career_content" style="margin-top: 1rem; text-align: center; font-weight: 500;">
+        {{$career_section?->content}}</p>
     </div>
   </div>
 </section>
