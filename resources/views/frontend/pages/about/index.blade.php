@@ -186,6 +186,12 @@
 
     .content-container .content-detail h1 {
         text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .content-container .content-detail img {
+        height: 20rem;
+        border-radius: 5px;
         margin-bottom: 1rem;
     }
 
@@ -297,6 +303,11 @@
             @foreach ($about_section_history_content as $item)
             <div class="content-detail" x-show="open == '{{$item->year}}'">
                 <h1>{{$item->year}}</h1>
+                @if(!empty($item->image))
+                <div style="display: flex; justify-content: center;">
+                    <img src="{{asset('storage/' . $item->image)}}" alt="{{$item->year}}">
+                </div>
+                @endif
                 <p>{{$item->content}}</p>
             </div>
             @endforeach
