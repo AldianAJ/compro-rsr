@@ -30,7 +30,9 @@
         position: relative;
         display: flex;
         justify-content: end;
-        padding-left: 4.25rem !important;
+        /* padding-left: 4.25rem !important; */
+        padding-left: 10rem !important;
+        padding-right: 10rem !important;
         padding-top: 10rem !important;
         padding-bottom: 4rem !important;
         background-repeat: no-repeat;
@@ -116,6 +118,81 @@
         cursor: pointer;
     }
 
+    .content-container {
+        display: grid;
+        grid-template-columns: 1fr 6fr;
+        gap: 1rem;
+    }
+
+    .content-container .content-year,
+    .content-container .content-detail {
+        background-color: #fff;
+        border-radius: 0.5rem;
+        padding: 1rem;
+    }
+
+    .content-container .content-year {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content-container .content-year ul {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-left: 0;
+        list-style: none;
+        margin-bottom: 0;
+    }
+
+    .content-container .content-year select {
+        display: none
+    }
+
+    .content-container .content-year ul li {
+        border: 1px solid #545b62;
+        padding: 0.8rem 2.5rem;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: 300ms;
+    }
+
+    .content-container .content-year ul li:hover {
+        background-color: #545b62;
+    }
+
+    .content-container .content-year ul li:hover a {
+        color: #fff;
+    }
+
+    .content-container .content-year ul li.active {
+        background-color: #545b62;
+    }
+
+    .content-container .content-year ul li.active a {
+        color: #fff;
+    }
+
+    .content-container .content-year ul li a {
+        color: #545b62;
+        text-decoration: none;
+    }
+
+    .content-container .content-detail h1,
+    .content-container .content-detail p {
+        margin: 0;
+    }
+
+    .content-container .content-detail h1 {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .content-container .content-detail p {
+        text-align: justify;
+    }
+
     @media (max-width: 575.98px) {
         .row-wrapper {
             padding-left: 1rem !important;
@@ -142,6 +219,21 @@
 
         .content .content-wrapper {
             width: 100%;
+        }
+
+        .content-container {
+            grid-template-columns: 1fr;
+        }
+
+        .content-container .content-year ul {
+            display: none;
+        }
+
+        .content-container .content-year select {
+            display: block;
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
         }
     }
 </style>
@@ -170,7 +262,7 @@
                 {{$about_section_mission_content?->content}}
             </p>
         </div>
-        <div class="content-wrapper" x-data="{ open: 0 }">
+        {{-- <div class="content-wrapper" x-data="{ open: 0 }">
             <div class="header">
                 <h1>History of PJSP</h1>
                 <p><span x-text="(open + 1)"></span>/{{count($about_section_history_content)}}</p>
@@ -186,6 +278,28 @@
                 <i class="fa-solid fa-chevron-right" @click="open++"
                     x-show="open < '{{count($about_section_history_content) - 1}}'"></i>
             </div>
+        </div> --}}
+        <div class="content-container" x-data="{ open: '{{$about_section_history_content[0]->year}}' }">
+            <div class="content-year">
+                <ul>
+                    @foreach ($about_section_history_content as $item)
+                    <li @click="open = '{{$item->year}}'" x-bind:class="open == '{{$item->year}}' ? 'active' : ''">
+                        <a href="#">{{$item->year}}</a>
+                    </li>
+                    @endforeach
+                </ul>
+                <select x-model="open">
+                    @foreach ($about_section_history_content as $item)
+                    <option>{{$item->year}}</option>
+                    @endforeach
+                </select>
+            </div>
+            @foreach ($about_section_history_content as $item)
+            <div class="content-detail" x-show="open == '{{$item->year}}'">
+                <h1>{{$item->year}}</h1>
+                <p>{{$item->content}}</p>
+            </div>
+            @endforeach
         </div>
     </div>
     <div style="display: flex; justify-content: center;">
