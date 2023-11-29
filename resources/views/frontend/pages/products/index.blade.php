@@ -138,7 +138,7 @@
       <div class="content-wrapper">
         @foreach ($products as $item)
         <div class="card" x-show="open == '{{$item->brand->slug}}'">
-          <a href="{{asset('storage/' . $item->image_url)}}" data-lightbox="{{$item->product_name}}"
+          <a href="{{asset('storage/' . $item->image_url_detail)}}" data-lightbox="{{$item->product_name}}"
             data-title="{{$item->product_name}}">
             <img src="{{asset('storage/' . $item->image_url)}}" alt="{{$item->product_name}}">
           </a>
