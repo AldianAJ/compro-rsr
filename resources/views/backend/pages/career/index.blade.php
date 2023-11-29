@@ -35,8 +35,8 @@
                     <thead class="thead-light">
                         <tr>
                             <th>No</th>
-                            <th>Language</th>
-                            <th>Content</th>
+                            <th>Section</th>
+                            <th>Image</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -55,29 +55,30 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Language
-                        </label>
-                        <select name="addLang" id="addLang" class="form-control text-dark">
-                            <option value="">-- Select Languages --</option>
-                            @foreach ($langs as $lang)
-                                <option value="{{ $lang->id }}">{{ $lang->language }}</option>
-                            @endforeach
-                        </select>
+                <form id="addForm">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="" class="form-control-label">
+                                Section
+                            </label>
+                            <input name="addSection" id="addSection" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-control-label">
+                                Image
+                            </label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="addImage" name="addImage"
+                                    lang="en">
+                                <label class="custom-file-label" for="image">Select file</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Content
-                        </label>
-                        <textarea name="addContent" id="addContent" cols="30" rows="10" class="form-control"></textarea>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-warning" id="btn-save-add">Save changes</button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-warning" id="btn-save-add">Save changes</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -92,31 +93,31 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="form-group">
-
+                <form id="editForm">
+                    <div class="modal-body">
                         <input type="hidden" name="editId" id="editId">
-                        <label for="" class="form-control-label">
-                            Language
-                        </label>
-                        <select name="editLang" id="editLang" class="form-control text-dark">
-                            <option value="">-- Select Languages --</option>
-                            @foreach ($langs as $lang)
-                                <option value="{{ $lang->id }}">{{ $lang->language }}</option>
-                            @endforeach
-                        </select>
+                        <div class="form-group">
+                            <label for="" class="form-control-label">
+                                Section
+                            </label>
+                            <textarea name="editSection" id="editSection" cols="30" rows="10" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-control-label">
+                                Image
+                            </label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="editImage" name="editImage"
+                                    lang="en">
+                                <label class="custom-file-label" for="image">Select file</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Content
-                        </label>
-                        <textarea name="editContent" id="editContent" cols="30" rows="10" class="form-control"></textarea>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-warning" id="btn-save-edit">Save changes</button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-warning" id="btn-save-edit">Save changes</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -143,12 +144,16 @@
                         }
                     },
                     {
-                        data: "language",
-                        name: "language"
+                        data: "section",
+                        name: "section"
                     },
                     {
-                        data: "content",
-                        name: "content"
+                        data: "image",
+                        render: function(data, type, row, meta) {
+                            let html =
+                                `<img src="{{ asset('storage/${data}') }}" alt="" style="width:5rem;">`;
+                            return html;
+                        }
                     },
                     {
                         data: "id",
@@ -167,14 +172,56 @@
             });
 
             $('#btn-add-modal').click(function(e) {
-                $('#addContent').val("")
-                $('#addLang').val("")
+                $('#addSection').val("");
+                $('#addImage').val("");
             });
 
-            $('#btn-save-add').click(function(e) {
-                var content = $('#addContent').val();
-                var language = $('#addLang').val();
-                if (content == "" || language == "") {
+            // $('#btn-save-add').click(function(e) {
+            //     var section = $('#addSection').val();
+            //     if (section == "") {
+            //         $('#createModal').modal('hide');
+            //         Swal.fire({
+            //             icon: "error",
+            //             title: "Warning",
+            //             text: "Please fill the field",
+            //             timer: 3000
+            //         });
+            //     } else {
+            //         $.ajax({
+            //             type: "POST",
+            //             url: "{{ route('backend.career.store') }}",
+            //             data: {
+            //                 'section': section,
+            //                 '_token': "{{ csrf_token() }}"
+            //             },
+            //             dataType: "json",
+            //             success: function(resp) {
+            //                 $('#createModal').modal('hide');
+            //                 if (resp.code == 200) {
+            //                     Swal.fire({
+            //                         icon: "success",
+            //                         title: "Success",
+            //                         text: resp.message,
+            //                         timer: 3000
+            //                     });
+            //                 } else {
+            //                     Swal.fire({
+            //                         icon: "error",
+            //                         title: "Warning",
+            //                         text: resp.message,
+            //                         timer: 3000
+            //                     });
+            //                 }
+            //                 table.ajax.reload();
+            //             }
+            //         });
+            //     }
+            // });
+            $('form#addForm').submit(function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                formData.append("_token", "{{ csrf_token() }}");
+                if (formData.get('addSection') == "" || formData.get("addImage").name == "") {
                     $('#createModal').modal('hide');
                     Swal.fire({
                         icon: "error",
@@ -186,14 +233,53 @@
                     $.ajax({
                         type: "POST",
                         url: "{{ route('backend.career.store') }}",
-                        data: {
-                            'content': content,
-                            'lang_id': language,
-                            '_token': "{{ csrf_token() }}"
-                        },
-                        dataType: "json",
+                        data: formData,
+                        contentType: false,
+                        processData: false,
                         success: function(resp) {
                             $('#createModal').modal('hide');
+                            if (resp.code == 200) {
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Success",
+                                    text: resp.message,
+                                    timer: 3000
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Warning",
+                                    text: resp.message,
+                                    timer: 3000
+                                });
+                            }
+                            table.ajax.reload();
+                        }
+                    });
+                }
+            });
+
+            $('form#editForm').submit(function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                formData.append("_token", "{{ csrf_token() }}");
+                if (formData.get('editSection') == "") {
+                    $('#editModal').modal('hide');
+                    Swal.fire({
+                        icon: "error",
+                        title: "Warning",
+                        text: "Please fill the field",
+                        timer: 3000
+                    });
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('backend.career.update') }}",
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        success: function(resp) {
+                            $('#editModal').modal('hide');
                             if (resp.code == 200) {
                                 Swal.fire({
                                     icon: "success",
@@ -248,56 +334,56 @@
                     success: function(resp) {
                         $('#editModal').modal('show');
                         $('#editId').val(resp.data.id);
-                        $('#editContent').val(resp.data.content);
-                        $('#editLang').val(resp.data.lang_id);
+                        $('#editSection').val(resp.data.section);
+                        $('#editImage').val("");
                     }
                 });
             });
 
-            $('#btn-save-edit').click(function(e) {
-                var id = $('#editId').val();
-                var content = $('#editContent').val();
-                var language = $('#editLang').val();
-                if (content == "" || language == "") {
-                    $('#editModal').modal('hide');
-                    Swal.fire({
-                        icon: "error",
-                        title: "Warning",
-                        text: "Please fill the field",
-                        timer: 3000
-                    });
-                } else {
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ route('backend.career.update') }}",
-                        data: {
-                            "id": id,
-                            "content": content,
-                            "lang_id": language,
-                            "_token": "{{ csrf_token() }}"
-                        },
-                        success: function(resp) {
-                            $('#editModal').modal('hide');
-                            if (resp.code == 200) {
-                                Swal.fire({
-                                    icon: "success",
-                                    title: "Success",
-                                    text: resp.message,
-                                    timer: 3000
-                                });
-                                table.ajax.reload();
-                            } else {
-                                Swal.fire({
-                                    icon: "error",
-                                    title: "Warning",
-                                    text: resp.message,
-                                    timer: 3000
-                                });
-                            }
-                        }
-                    });
-                }
-            });
+            // $('#btn-save-edit').click(function(e) {
+            //     var id = $('#editId').val();
+            //     var content = $('#editContent').val();
+            //     var language = $('#editLang').val();
+            //     if (content == "" || language == "") {
+            //         $('#editModal').modal('hide');
+            //         Swal.fire({
+            //             icon: "error",
+            //             title: "Warning",
+            //             text: "Please fill the field",
+            //             timer: 3000
+            //         });
+            //     } else {
+            //         $.ajax({
+            //             type: "POST",
+            //             url: "{{ route('backend.career.update') }}",
+            //             data: {
+            //                 "id": id,
+            //                 "content": content,
+            //                 "lang_id": language,
+            //                 "_token": "{{ csrf_token() }}"
+            //             },
+            //             success: function(resp) {
+            //                 $('#editModal').modal('hide');
+            //                 if (resp.code == 200) {
+            //                     Swal.fire({
+            //                         icon: "success",
+            //                         title: "Success",
+            //                         text: resp.message,
+            //                         timer: 3000
+            //                     });
+            //                     table.ajax.reload();
+            //                 } else {
+            //                     Swal.fire({
+            //                         icon: "error",
+            //                         title: "Warning",
+            //                         text: resp.message,
+            //                         timer: 3000
+            //                     });
+            //                 }
+            //             }
+            //         });
+            //     }
+            // });
         });
     </script>
 @endsection

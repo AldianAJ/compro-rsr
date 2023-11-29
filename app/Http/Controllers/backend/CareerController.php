@@ -14,37 +14,34 @@ class CareerController extends Controller
 {
     public function index(Request $request)
     {
-        $data['langs'] = Lang::all();
+
         if ($request->ajax()) {
             $data = DB::table('careers as a')
-                ->join('langs as b', 'a.lang_id', '=', 'b.id')
-                ->select('a.*', 'b.language')
                 ->get();
 
             return DataTables::of($data)->make(true);
         }
-        return view('backend.pages.career.index', $data);
+        return view('backend.pages.career.index');
     }
 
     public function store(Request $request)
     {
-        $content = $request->content;
-        $lang_id = $request->lang_id;
+        $section = $request->addSection;
 
         $check = Career::where(
-            "lang_id",
-            $lang_id
+            "section",
+            $section
         )->first();
         if ($check) {
-            return response()->json(["message" => "Content with that language already exist", "code" => 409], 200);
+            return response()->json(["message" => "Section already exist", "code" => 409], 200);
         }
 
         DB::beginTransaction();
         try {
             $career = new Career;
-            $career->lang_id = $lang_id;
             $career->slug = Str::random(16);
-            $career->content = $content;
+            $career->section = $section;
+            $career->image = $request->file('addImage')->store('career/images');
             $career->save();
             DB::commit();
             return response()->json(["message" => "Success add new data careers", "code" => 200], 200);
@@ -71,21 +68,22 @@ class CareerController extends Controller
 
     public function update(Request $request)
     {
-        $content = $request->content;
-        $lang_id = $request->lang_id;
-        $data = Career::where('id', $request->id)->first();
-        $check = Career::where('lang_id', $lang_id)
-            ->where('lang_id', '<>', $data->lang_id)
+        $section = $request->editSection;
+        $data = Career::where('id', $request->editId)->first();
+        $check = Career::where('section', $section)
+            ->where('section', '<>', $data->section)
             ->first();
         if ($check) {
-            return response()->json(["message" => "Content with that language already exist, please use different", "code" => 409], 200);
+            return response()->json(["message" => "Section already exist, please use different", "code" => 409], 200);
         }
 
         DB::beginTransaction();
         try {
-            $data->lang_id = $lang_id;
+            $data->section = $section;
             $data->slug = Str::random(16);
-            $data->content = $content;
+            if ($request->file('editImage')) {
+                $data->image = $request->file('editImage')->store('career/images');
+            }
             $data->save();
             DB::commit();
             return response()->json(["message" => "Success updated data careers", "code" => 200], 200);
