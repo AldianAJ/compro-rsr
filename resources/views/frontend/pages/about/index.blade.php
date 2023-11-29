@@ -188,6 +188,12 @@
             </div>
         </div>
     </div>
+    <div style="display: flex; justify-content: center;">
+        <iframe height="500"
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7917.663090344349!2d111.888176!3d-7.145469!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e778226bc8e8697%3A0xb3ce907f355d77!2sPT.%20Putera%20Jaya%20Sakti%20Perkasa!5e0!3m2!1sid!2sid!4v1693062109681!5m2!1sid!2sid"
+            style="border:0; width: 100%;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
 </section>
 @endsection
 

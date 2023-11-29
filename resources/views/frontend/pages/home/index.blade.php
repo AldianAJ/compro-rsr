@@ -27,6 +27,7 @@
     video {
       width: unset !important;
       height: 100vh;
+      margin-left: -10rem;
     }
   }
 </style>
