@@ -19,6 +19,7 @@ use App\Models\Product;
 use App\Models\ProductPage;
 use App\Models\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
 {
@@ -88,7 +89,13 @@ class PagesController extends Controller
     {
         $current_lang = Lang::where('code', $request->lang)->first();
 
-        $career_section = Career::where('lang_id', $current_lang->id)->first();
+        $career_section = DB::table('desc_careers as a')
+            ->join('careers as b', 'a.career_id', '=', 'b.id')
+            ->join('langs as c', 'a.lang_id', '=', 'c.id')
+            ->select('a.*', 'b.section', 'b.image', 'c.language')
+            ->where('a.lang_id', $current_lang->id)
+            ->get();
+
         return view('frontend.pages.career.index', [
             'career_section' => $career_section
         ]);

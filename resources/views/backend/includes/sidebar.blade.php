@@ -77,46 +77,32 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('backend.career.index') }}">
+                        <a class="nav-link" href="#navbar-careers" data-toggle="collapse" role="button"
+                            aria-expanded="false" aria-controls="navbar-careers">
                             <i class="ni ni-calendar-grid-58 text-red"></i>
-                            <span class="nav-link-text">Career</span>
+                            <span class="nav-link-text">Careers</span>
                         </a>
+                        <div class="collapse" id="navbar-careers">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="{{ route('backend.career.index') }}" class="nav-link">
+                                        <span class="sidenav-mini-icon"> M </span>
+                                        <span class="sidenav-normal"> Masters </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('backend.desccareer.index') }}" class="nav-link">
+                                        <span class="sidenav-mini-icon"> D</span>
+                                        <span class="sidenav-normal"> Descriptions </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
 
                 <hr class="my-3" />
 
-                {{-- <h6 class="navbar-heading p-0 text-muted">
-                    <span class="docs-normal">Documentation</span>
-                    <span class="docs-mini">D</span>
-                </h6>
-
-                <ul class="navbar-nav mb-md-3">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../../docs/getting-started/overview.html" target="_blank">
-                            <i class="ni ni-spaceship"></i>
-                            <span class="nav-link-text">Getting started</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../../docs/foundation/colors.html" target="_blank">
-                            <i class="ni ni-palette"></i>
-                            <span class="nav-link-text">Foundation</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../../docs/components/alerts.html" target="_blank">
-                            <i class="ni ni-ui-04"></i>
-                            <span class="nav-link-text">Components</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../../docs/plugins/charts.html" target="_blank">
-                            <i class="ni ni-chart-pie-35"></i>
-                            <span class="nav-link-text">Plugins</span>
-                        </a>
-                    </li>
-                </ul> --}}
             </div>
         </div>
     </div>
