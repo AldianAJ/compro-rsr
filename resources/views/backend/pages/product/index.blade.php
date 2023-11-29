@@ -36,7 +36,8 @@
                             <th>No</th>
                             <th>Brand</th>
                             <th>Product</th>
-                            <th>Image</th>
+                            <th>Thumbnail Image</th>
+                            <th>Detail Image</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -55,7 +56,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="addForm" method="post" enctype="multipart/form-data">
+                <form id="addForm" enctype="multipart/form-data">
                     <div class="modal-body">
 
                         <div class="form-group">
@@ -75,11 +76,26 @@
                             </label>
                             <input type="text" class="form-control text-dark" name="addProduct" id="addProduct">
                         </div>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="addImage" name="addImage" lang="en">
-                            <label class="custom-file-label" for="image">Select file</label>
+                        <div class="form-group">
+                            <label for="" class="form-control-label">
+                                Thumbnail Image
+                            </label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="addImage" name="addImage"
+                                    lang="en">
+                                <label class="custom-file-label" for="image">Select file</label>
+                            </div>
                         </div>
-
+                        <div class="form-group">
+                            <label for="" class="form-control-label">
+                                Image Detail
+                            </label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="addImageDetail" name="addImageDetail"
+                                    lang="en">
+                                <label class="custom-file-label" for="image">Select file</label>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -121,11 +137,27 @@
                             </label>
                             <input type="text" class="form-control text-dark" name="editProduct" id="editProduct">
                         </div>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="editImage" name="editImage"
-                                lang="en">
-                            <label class="custom-file-label" for="image">Select file</label>
+                        <div class="form-group">
+                            <label for="" class="form-control-label">
+                                Thumbnail Image
+                            </label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="editImage" name="editImage"
+                                    lang="en">
+                                <label class="custom-file-label" for="image">Select file</label>
+                            </div>
                         </div>
+                        <div class="form-group">
+                            <label for="" class="form-control-label">
+                                Detail Image
+                            </label>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="editImageDetail"
+                                    name="editImageDetail" lang="en">
+                                <label class="custom-file-label" for="image">Select file</label>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -167,7 +199,19 @@
                     },
                     {
                         data: "image_url",
-                        nama: "image_url"
+                        render: function(data, type, row, meta) {
+                            let html =
+                                `<img src="{{ asset('storage/${data}') }}" alt="" style="width:5rem;">`;
+                            return html;
+                        }
+                    },
+                    {
+                        data: "image_url_detail",
+                        render: function(data, type, row, meta) {
+                            let html =
+                                `<img src="{{ asset('storage/${data}') }}" alt="" style="width:5rem;">`;
+                            return html;
+                        }
                     },
                     {
                         data: "id",
@@ -189,6 +233,7 @@
                 $('#addBrand').val("");
                 $('#addProduct').val("");
                 $('#addImage').val("");
+                $('#addImageDetail').val("");
             });
 
             $("form#addForm").submit(function(e) {
@@ -197,11 +242,12 @@
                 var brand = $('#addBrand').val();
                 var product = $('#addProduct').val();
                 var image = $('#addImage')[0].files;
+                var imageDetail = $('#addImageDetail')[0].files;
 
                 var formData = new FormData(this);
                 formData.append("_token", "{{ csrf_token() }}");
 
-                if (brand == "" || product == "" || image.length == 0) {
+                if (brand == "" || product == "" || image.length == 0 || imageDetail.length == 0) {
                     $('#createModal').modal('hide');
                     Swal.fire({
                         icon: "error",

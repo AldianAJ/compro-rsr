@@ -397,57 +397,6 @@
                 });
             });
 
-            // $('#btn-save-edit').click(function(e) {
-            //     var id = $('#editId').val();
-            //     var lang = $('#editLang').val();
-            //     var section = $('#editSection').val();
-            //     var title = $('#editTitle').val();
-            //     var year = $('#editYear').val();
-            //     var content = $('#editContent').val();
-            //     if (lang == "" || section == "" || content == "") {
-            //         $('#editModal').modal('hide');
-            //         Swal.fire({
-            //             icon: "error",
-            //             title: "Warning",
-            //             text: "Please fill the field",
-            //             timer: 3000
-            //         });
-            //     } else {
-            //         $.ajax({
-            //             type: "POST",
-            //             url: "{{ route('backend.about.content.update') }}",
-            //             data: {
-            //                 "id": id,
-            //                 'lang_id': lang,
-            //                 'about_page_id': section,
-            //                 'year': year,
-            //                 'title': title,
-            //                 'content': content,
-            //                 "_token": "{{ csrf_token() }}"
-            //             },
-            //             success: function(resp) {
-            //                 $('#editModal').modal('hide');
-            //                 if (resp.code == 200) {
-            //                     Swal.fire({
-            //                         icon: "success",
-            //                         title: "Success",
-            //                         text: resp.message,
-            //                         timer: 3000
-            //                     });
-            //                     table.ajax.reload();
-            //                 } else {
-            //                     Swal.fire({
-            //                         icon: "error",
-            //                         title: "Warning",
-            //                         text: resp.message,
-            //                         timer: 3000
-            //                     });
-            //                 }
-            //             }
-            //         });
-            //     }
-            // });
-
             DTbody.on('click', '.btn-delete', function() {
                 var id = $(this).data("id");
                 $.ajax({

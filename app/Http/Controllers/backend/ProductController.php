@@ -52,7 +52,8 @@ class ProductController extends Controller
             $data->brand_id = $brand_id;
             $data->product_name = $product_name;
             $data->slug = Str::slug($product_name, '-') . '-' . Str::random(5);
-            $data->image_url = $request->file('addImage')->store('product/images', ['disk' => 'public']);
+            $data->image_url = $request->file('addImage')->store('product/images');
+            $data->image_url_detail = $request->file('addImageDetail')->store('product/images');
             $data->save();
             DB::commit();
             return response()->json(["message" => "Product successfully added", "code" => 200], 200);
@@ -70,13 +71,8 @@ class ProductController extends Controller
         $product_name = $request->editProduct;
 
         $data = Product::where('id', $id)->first();
-        $check = Product::where([
-            "brand_id" => $brand_id,
-            "product_name" => $product_name
-        ], [
-            ['brand_id', '<>', $data->brand_id],
-            ['product_name', '<>', $data->product_name]
-        ])->first();
+        $check = Product::whereRaw("(brand_id = $brand_id AND product_name = '$product_name') 
+            AND NOT (brand_id = $data->brand_id AND product_name = '$data->product_name')")->first();
 
         if ($check) {
             return response()->json(["message" => "Product with that brand and name input already exist", "code" => 409], 200);
@@ -89,6 +85,9 @@ class ProductController extends Controller
             $data->slug = Str::slug($product_name, '-') . '-' . Str::random(5);
             if ($request->file('editImage')) {
                 $data->image_url = $request->file('editImage')->store('product/images');
+            }
+            if ($request->file('editImageDetail')) {
+                $data->image_url_detail = $request->file('editImageDetail')->store('product/images');
             }
             $data->save();
             DB::commit();
