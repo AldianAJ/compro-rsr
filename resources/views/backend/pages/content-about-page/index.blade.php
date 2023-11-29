@@ -41,6 +41,7 @@
                             <th>Title</th>
                             <th>Year</th>
                             <th>Content</th>
+                            <th>Image</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -59,52 +60,59 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Section
-                        </label>
-                        <select name="addSection" id="addSection" class="form-control text-dark">
-                            <option value="">-- Select Sections --</option>
-                            @foreach ($about_pages as $about_page)
-                                <option value="{{ $about_page->id }}">{{ $about_page->section }}</option>
-                            @endforeach
-                        </select>
+                <form id="addForm">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="" class="form-control-label">
+                                Section
+                            </label>
+                            <select name="addSection" id="addSection" class="form-control text-dark">
+                                <option value="">-- Select Sections --</option>
+                                @foreach ($about_pages as $about_page)
+                                    <option value="{{ $about_page->id }}">{{ $about_page->section }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-control-label">
+                                Language
+                            </label>
+                            <select name="addLang" id="addLang" class="form-control text-dark">
+                                <option value="">-- Select Languages --</option>
+                                @foreach ($langs as $lang)
+                                    <option value="{{ $lang->id }}">{{ $lang->language }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-control-label">
+                                Year
+                            </label>
+                            <input type="text" class="form-control text-dark" name="addYear" id="addYear">
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-control-label">
+                                Title
+                            </label>
+                            <input type="text" class="form-control text-dark" name="addTitle" id="addTitle">
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-control-label">
+                                Content
+                            </label>
+                            <textarea name="addContent" id="addContent" cols="30" rows="10" class="form-control"></textarea>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="addImage" name="addImage" lang="en">
+                            <label class="custom-file-label" for="image">Select Image</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Language
-                        </label>
-                        <select name="addLang" id="addLang" class="form-control text-dark">
-                            <option value="">-- Select Languages --</option>
-                            @foreach ($langs as $lang)
-                                <option value="{{ $lang->id }}">{{ $lang->language }}</option>
-                            @endforeach
-                        </select>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-warning" id="btn-save-add">Save changes</button>
                     </div>
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Year
-                        </label>
-                        <input type="text" class="form-control text-dark" name="addYear" id="addYear">
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Title
-                        </label>
-                        <input type="text" class="form-control text-dark" name="addTitle" id="addTitle">
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Content
-                        </label>
-                        <textarea name="addContent" id="addContent" cols="30" rows="10" class="form-control"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-warning" id="btn-save-add">Save changes</button>
-                </div>
+
+                </form>
             </div>
         </div>
     </div>
@@ -119,53 +127,60 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Section
-                        </label>
-                        <input type="hidden" name="editId" id="editId">
-                        <select name="editSection" id="editSection" class="form-control text-dark">
-                            <option value="">-- Select Sections --</option>
-                            @foreach ($about_pages as $about_page)
-                                <option value="{{ $about_page->id }}">{{ $about_page->section }}</option>
-                            @endforeach
-                        </select>
+                <form id="editForm">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="" class="form-control-label">
+                                Section
+                            </label>
+                            <input type="hidden" name="editId" id="editId">
+                            <select name="editSection" id="editSection" class="form-control text-dark">
+                                <option value="">-- Select Sections --</option>
+                                @foreach ($about_pages as $about_page)
+                                    <option value="{{ $about_page->id }}">{{ $about_page->section }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-control-label">
+                                Language
+                            </label>
+                            <select name="editLang" id="editLang" class="form-control text-dark">
+                                <option value="">-- Select Languages --</option>
+                                @foreach ($langs as $lang)
+                                    <option value="{{ $lang->id }}">{{ $lang->language }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-control-label">
+                                Year
+                            </label>
+                            <input type="text" class="form-control text-dark" name="editYear" id="editYear">
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-control-label">
+                                Title
+                            </label>
+                            <input type="text" class="form-control text-dark" name="editTitle" id="editTitle">
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-control-label">
+                                Content
+                            </label>
+                            <textarea name="editContent" id="editContent" cols="30" rows="10" class="form-control"></textarea>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="editImage" name="editImage"
+                                lang="en">
+                            <label class="custom-file-label" for="image">Select Image</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Language
-                        </label>
-                        <select name="editLang" id="editLang" class="form-control text-dark">
-                            <option value="">-- Select Languages --</option>
-                            @foreach ($langs as $lang)
-                                <option value="{{ $lang->id }}">{{ $lang->language }}</option>
-                            @endforeach
-                        </select>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-warning" id="btn-save-edit">Save changes</button>
                     </div>
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Year
-                        </label>
-                        <input type="text" class="form-control text-dark" name="editYear" id="editYear">
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Title
-                        </label>
-                        <input type="text" class="form-control text-dark" name="editTitle" id="editTitle">
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="form-control-label">
-                            Content
-                        </label>
-                        <textarea name="editContent" id="editContent" cols="30" rows="10" class="form-control"></textarea>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-warning" id="btn-save-edit">Save changes</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -225,6 +240,19 @@
                         }
                     },
                     {
+                        data: "image",
+                        render: function(data, type, row, meta) {
+                            if (data != null) {
+                                let html =
+                                    `<img src="{{ asset('storage/${data}') }}" alt="" style="width:5rem;">`;
+                                return html;
+                            } else {
+                                return "No Image";
+                            }
+
+                        }
+                    },
+                    {
                         data: "content_about_id",
                         render: function(data, type, row, meta) {
                             let html = "<button class='btn btn-success btn-edit' data-id='" +
@@ -257,15 +285,59 @@
                 $('#addTitle').val("");
                 $('#addYear').val("");
                 $('#addContent').val("");
+                $('#addImage').val("");
             });
 
-            $('#btn-save-add').click(function(e) {
-                var lang = $('#addLang').val();
-                var section = $('#addSection').val();
-                var title = $('#addTitle').val();
-                var year = $('#addYear').val();
-                var content = $('#addContent').val();
-                if (lang == "" || section == "" || content == "") {
+            $('form#editForm').submit(function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                formData.append("_token", "{{ csrf_token() }}");
+
+                if (formData.get("editLang") == "" || formData.get("editSection") == "" || formData.get(
+                        "editContent") == "") {
+                    $('#editModal').modal('hide');
+                    Swal.fire({
+                        icon: "error",
+                        title: "Warning",
+                        text: "Please fill the field",
+                        timer: 3000
+                    });
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ route('backend.about.content.update') }}",
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                    }).done(function(resp) {
+                        $('#editModal').modal('hide');
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success",
+                            text: resp.message,
+                            timer: 3000
+                        });
+                        table.ajax.reload();
+                    }).fail(function(resp) {
+                        $('#editModal').modal('hide');
+                        console.log(resp);
+                        Swal.fire({
+                            icon: "error",
+                            title: resp.statusText,
+                            text: resp.responseJSON.message,
+                            timer: 3000
+                        });
+                    });
+                }
+            });
+
+            $('form#addForm').submit(function(e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                formData.append("_token", "{{ csrf_token() }}");
+
+                if (formData.get("addLang") == "" || formData.get("addSection") == "" || formData.get(
+                        "addContent") == "") {
                     $('#createModal').modal('hide');
                     Swal.fire({
                         icon: "error",
@@ -277,35 +349,27 @@
                     $.ajax({
                         type: "POST",
                         url: "{{ route('backend.about.content.store') }}",
-                        data: {
-                            'lang_id': lang,
-                            'about_page_id': section,
-                            'title': title,
-                            'content': content,
-                            'year': year,
-                            '_token': "{{ csrf_token() }}"
-                        },
-                        dataType: "json",
-                        success: function(resp) {
-                            $('#createModal').modal('hide');
-                            if (resp.code == 200) {
-                                table.ajax.reload();
-                                Swal.fire({
-                                    icon: "success",
-                                    title: "Success",
-                                    text: resp.message,
-                                    timer: 3000
-                                });
-                            } else {
-                                Swal.fire({
-                                    icon: "error",
-                                    title: "Warning",
-                                    text: resp.message,
-                                    timer: 3000
-                                });
-                            }
-
-                        }
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                    }).done(function(resp) {
+                        $('#createModal').modal('hide');
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success",
+                            text: resp.message,
+                            timer: 3000
+                        });
+                        table.ajax.reload();
+                    }).fail(function(resp) {
+                        $('#createModal').modal('hide');
+                        console.log(resp);
+                        Swal.fire({
+                            icon: "error",
+                            title: resp.statusText,
+                            text: resp.responseJSON.message,
+                            timer: 3000
+                        });
                     });
                 }
             });
@@ -328,60 +392,61 @@
                         $('#editTitle').val(resp.data.title);
                         $('#editYear').val(resp.data.year);
                         $('#editContent').val(resp.data.content);
+                        $('#addImage').val("");
                     }
                 });
             });
 
-            $('#btn-save-edit').click(function(e) {
-                var id = $('#editId').val();
-                var lang = $('#editLang').val();
-                var section = $('#editSection').val();
-                var title = $('#editTitle').val();
-                var year = $('#editYear').val();
-                var content = $('#editContent').val();
-                if (lang == "" || section == "" || content == "") {
-                    $('#editModal').modal('hide');
-                    Swal.fire({
-                        icon: "error",
-                        title: "Warning",
-                        text: "Please fill the field",
-                        timer: 3000
-                    });
-                } else {
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ route('backend.about.content.update') }}",
-                        data: {
-                            "id": id,
-                            'lang_id': lang,
-                            'about_page_id': section,
-                            'year': year,
-                            'title': title,
-                            'content': content,
-                            "_token": "{{ csrf_token() }}"
-                        },
-                        success: function(resp) {
-                            $('#editModal').modal('hide');
-                            if (resp.code == 200) {
-                                Swal.fire({
-                                    icon: "success",
-                                    title: "Success",
-                                    text: resp.message,
-                                    timer: 3000
-                                });
-                                table.ajax.reload();
-                            } else {
-                                Swal.fire({
-                                    icon: "error",
-                                    title: "Warning",
-                                    text: resp.message,
-                                    timer: 3000
-                                });
-                            }
-                        }
-                    });
-                }
-            });
+            // $('#btn-save-edit').click(function(e) {
+            //     var id = $('#editId').val();
+            //     var lang = $('#editLang').val();
+            //     var section = $('#editSection').val();
+            //     var title = $('#editTitle').val();
+            //     var year = $('#editYear').val();
+            //     var content = $('#editContent').val();
+            //     if (lang == "" || section == "" || content == "") {
+            //         $('#editModal').modal('hide');
+            //         Swal.fire({
+            //             icon: "error",
+            //             title: "Warning",
+            //             text: "Please fill the field",
+            //             timer: 3000
+            //         });
+            //     } else {
+            //         $.ajax({
+            //             type: "POST",
+            //             url: "{{ route('backend.about.content.update') }}",
+            //             data: {
+            //                 "id": id,
+            //                 'lang_id': lang,
+            //                 'about_page_id': section,
+            //                 'year': year,
+            //                 'title': title,
+            //                 'content': content,
+            //                 "_token": "{{ csrf_token() }}"
+            //             },
+            //             success: function(resp) {
+            //                 $('#editModal').modal('hide');
+            //                 if (resp.code == 200) {
+            //                     Swal.fire({
+            //                         icon: "success",
+            //                         title: "Success",
+            //                         text: resp.message,
+            //                         timer: 3000
+            //                     });
+            //                     table.ajax.reload();
+            //                 } else {
+            //                     Swal.fire({
+            //                         icon: "error",
+            //                         title: "Warning",
+            //                         text: resp.message,
+            //                         timer: 3000
+            //                     });
+            //                 }
+            //             }
+            //         });
+            //     }
+            // });
 
             DTbody.on('click', '.btn-delete', function() {
                 var id = $(this).data("id");

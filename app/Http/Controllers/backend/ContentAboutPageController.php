@@ -28,7 +28,7 @@ class ContentAboutPageController extends Controller
             $data = DB::table('about_pages as a')
                 ->join('content_about_pages as b', 'a.id', '=', 'b.about_page_id')
                 ->join('langs as c', 'b.lang_id', '=', 'c.id')
-                ->select('a.id as about_page_id', 'a.slug as slug_about_page', 'b.year', 'a.image', 'a.section', 'c.code', 'c.language', 'b.id as content_about_id', 'b.slug as content_about_slug', 'b.title', 'b.content')
+                ->select('a.id as about_page_id', 'a.slug as slug_about_page', 'b.year', 'a.image', 'a.section', 'c.code', 'c.language', 'b.id as content_about_id', 'b.slug as content_about_slug', 'b.title', 'b.content', 'b.image')
                 ->get();
             return DataTables::of($data)->make(true);
         }
@@ -38,11 +38,11 @@ class ContentAboutPageController extends Controller
 
     public function store(Request $request)
     {
-        $lang_id = $request->lang_id;
-        $about_page_id = $request->about_page_id;
-        $title = empty($request->title) ? null : $request->title;
-        $year = empty($request->year) ? null : $request->year;
-        $content = $request->content;
+        $lang_id = $request->addLang;
+        $about_page_id = $request->addSection;
+        $title = empty($request->addTitle) ? null : $request->addTitle;
+        $year = empty($request->addYear) ? null : $request->addYear;
+        $content = $request->addContent;
 
         $check = ContentAboutPage::where([
             "lang_id" => $lang_id,
@@ -50,7 +50,7 @@ class ContentAboutPageController extends Controller
         ])->first();
 
         if ($check && $check->about_page_id != 4) {
-            return response()->json(["message" => "Content with section and language input already exist", "code" => 409], 200);
+            return response()->json(["message" => "Content with section and language input already exist", "code" => 409], 409);
         }
 
         DB::beginTransaction();
@@ -62,24 +62,27 @@ class ContentAboutPageController extends Controller
             $data->title = $title;
             $data->year = $year;
             $data->content = $content;
+            if ($request->file('addImage')) {
+                $data->image = $request->file('addImage')->store('about/images');
+            }
             $data->save();
             DB::commit();
             return response()->json(["message" => "Content about successfully added", "code" => 200], 200);
         } catch (\Exception $ex) {
             //throw $th;
             Db::rollBack();
-            return response()->json(["message" => $ex->getMessage(), "code" => 500], 200);
+            return response()->json(["message" => $ex->getMessage(), "code" => 500], 500);
         }
     }
 
     public function update(Request $request)
     {
-        $id = $request->id;
-        $lang_id = $request->lang_id;
-        $about_page_id = $request->about_page_id;
-        $title = empty($request->title) ? null : $request->title;
-        $content = $request->content;
-        $year = empty($request->year) ? null : $request->year;
+        $id = $request->editId;
+        $lang_id = $request->editLang;
+        $about_page_id = $request->editSection;
+        $title = empty($request->editTitle) ? null : $request->editTitle;
+        $year = empty($request->editYear) ? null : $request->editYear;
+        $content = $request->editContent;
 
         $data = ContentAboutPage::where('id', $id)->first();
 
@@ -98,6 +101,9 @@ class ContentAboutPageController extends Controller
             $data->title = $title;
             $data->year = $year;
             $data->content = $content;
+            if ($request->file('editImage')) {
+                $data->image = $request->file('editImage')->store('about/images');
+            }
             $data->save();
             DB::commit();
             return response()->json(["message" => "Content about successfully updated", "code" => 200], 200);
