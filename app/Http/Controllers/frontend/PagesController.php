@@ -65,7 +65,7 @@ class PagesController extends Controller
     public function products(Request $request)
     {
         $current_lang = Lang::where('code', $request->lang)->first();
-        $brands = Brand::get();
+        $brands = Brand::with('products')->get();
         $products = Product::get();
 
         $product_section = ProductPage::where('lang_id', $current_lang->id)->first();

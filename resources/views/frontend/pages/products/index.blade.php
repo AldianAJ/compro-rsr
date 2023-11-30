@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css"
   integrity="sha512-ZKX+BvQihRJPA8CROKBhDNvoc2aDMOdAlcm7TUQY+35XYtrd3yh95QOOhsPDQY9QnKE0Wqag9y38OIgEvb88cA=="
   crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <style>
   section.products_container,
   html,
@@ -59,14 +60,16 @@
   }
 
   .content-wrapper {
-    display: flex;
-    justify-content: center;
     margin-top: 2rem;
   }
 
   .content-wrapper .card img {
     width: 20rem;
     height: 20rem;
+  }
+
+  select {
+    display: none;
   }
 
   @media (max-width: 575.98px) {
@@ -85,22 +88,35 @@
     }
 
     .media-choose {
-      gap: 0.5rem;
-      overflow-x: scroll;
+      display: none;
+      /* gap: 1rem;
+      overflow-x: scroll; */
+    }
+
+    /* .media-choose .box {
+      padding: 0.5rem 4rem;
     }
 
     .media-choose .box h1 {
+      text-wrap: nowrap;
       font-size: 1.2rem;
-    }
+    } */
 
-    .content-wrapper {
+    /* .content-wrapper {
       display: grid;
       grid-template-columns: 1fr 1fr;
-    }
+    } */
 
     .content-wrapper .card img {
       width: 100%;
       height: 100%;
+    }
+
+    select {
+      display: block;
+      width: 100%;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
     }
   }
 </style>
@@ -135,7 +151,12 @@
           <h1>363</h1>
         </div> --}}
       </div>
-      <div class="content-wrapper">
+      <select x-model="open">
+        @foreach ($brands as $item)
+        <option value="{{$item->slug}}">{{$item->brand_name}}</option>
+        @endforeach
+      </select>
+      {{-- <div class="content-wrapper">
         @foreach ($products as $item)
         <div class="card" x-show="open == '{{$item->brand->slug}}'">
           <a href="{{asset('storage/' . $item->image_url_detail)}}" data-lightbox="{{$item->product_name}}"
@@ -144,22 +165,19 @@
           </a>
         </div>
         @endforeach
-        {{-- <div class="card">
-          <a href="{{asset('assets/images/products/1.png')}}" data-lightbox="products 1" data-title="products 1">
-            <img src="{{asset('assets/images/products/1.png')}}" alt="products 1">
+      </div> --}}
+      @foreach ($brands as $loopBrand)
+      <div class="content-wrapper" x-show="open == '{{$loopBrand->slug}}'">
+        @foreach ($loopBrand->products as $loopProduct)
+        <div class="card">
+          <a href="{{asset('storage/' . $loopProduct->image_url_detail)}}"
+            data-lightbox="{{$loopProduct->product_name}}" data-title="{{$loopProduct->product_name}}">
+            <img src="{{asset('storage/' . $loopProduct->image_url)}}" alt="{{$loopProduct->product_name}}">
           </a>
         </div>
-        <div class="card">
-          <a href="{{asset('assets/images/products/2.png')}}" data-lightbox="products 2" data-title="products 2">
-            <img src="{{asset('assets/images/products/2.png')}}" alt="products 2">
-          </a>
-        </div>
-        <div class="card">
-          <a href="{{asset('assets/images/products/3.png')}}" data-lightbox="products 3" data-title="products 3">
-            <img src="{{asset('assets/images/products/3.png')}}" alt="products 3">
-          </a>
-        </div> --}}
+        @endforeach
       </div>
+      @endforeach
     </div>
   </div>
 </section>
@@ -169,10 +187,39 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"
   integrity="sha512-Ixzuzfxv1EqafeQlTCufWfaC6ful6WFqIz4G+dWvK0beHw0NVJwvCKSgafpy5gwNqKmgUfIBraVwkKI+Cz0SEQ=="
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script>
   lightbox.option({
       'resizeDuration': 200,
       'wrapAround': true
-    })
+    });
+
+    $(document).ready(function(){
+      $('.content-wrapper').slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        centerMode: true,
+        arrows: false,
+        responsive: [
+          {
+            breakpoint: 768,
+            settings: {
+              arrows: false,
+              centerMode: true,
+              slidesToShow: 1
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              arrows: false,
+              centerMode: true,
+              slidesToShow: 1
+            }
+          }
+        ]
+      });
+    });
 </script>
 @endpush
