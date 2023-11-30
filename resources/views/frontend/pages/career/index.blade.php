@@ -30,11 +30,12 @@
 
   .career_content .card img {
     width: 15rem;
-    height: 15rem;
+    /* height: 15rem; */
     object-fit: cover;
   }
 
   .career_content .card div {
+    width: 100%;
     background-color: #fff;
     padding: 1rem;
   }
