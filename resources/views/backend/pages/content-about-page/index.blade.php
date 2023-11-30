@@ -392,7 +392,7 @@
                         $('#editTitle').val(resp.data.title);
                         $('#editYear').val(resp.data.year);
                         $('#editContent').val(resp.data.content);
-                        $('#addImage').val("");
+                        $('#editImage').val("");
                     }
                 });
             });
