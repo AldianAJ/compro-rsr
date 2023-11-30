@@ -191,6 +191,7 @@
 
     .content-container .content-detail img {
         height: 20rem;
+        object-fit: cover;
         border-radius: 5px;
         margin-bottom: 1rem;
     }
@@ -233,6 +234,12 @@
 
         .content-container .content-year ul {
             display: none;
+        }
+
+        .content-container .content-detail img {
+            width: 100%;
+            height: 10rem;
+            object-fit: cover;
         }
 
         .content-container .content-year select {
