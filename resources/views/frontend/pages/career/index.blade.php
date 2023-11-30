@@ -2,35 +2,72 @@
 @section('title', 'Career')
 
 @push('styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <style>
   html,
   body,
   main,
   #home,
-  #home .row {
+  #home .career_content {
     height: unset !important;
     min-height: 100vh !important
   }
 
   .career_content {
-    color: #fff;
-    background-color: rgb(0 0 0 / 70%);
-    padding: 0.5rem 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    padding-top: 6rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  .career_content .card {
+    height: fit-content;
+    display: flex;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .career_content .card img {
+    width: 15rem;
+    height: 15rem;
+    object-fit: cover;
+  }
+
+  .career_content .card div {
+    background-color: #fff;
+    padding: 1rem;
+  }
+
+  .career_content .card h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .career_content .card p {
+    font-size: 0.8rem;
+  }
+
+  .modal img {
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 1rem;
   }
 
   @media (max-width: 575.98px) {
-    #home img {
-      height: 6rem !important;
+    .career_content {
+      grid-template-columns: 1fr;
     }
 
-    #home p {
-      text-align: justify !important;
-      padding: 0 1rem;
+    .career_content .card {
+      flex-direction: column;
     }
 
-    .row {
-      padding-left: 1rem !important;
-      padding-right: 1rem !important;
+    .career_content .card img {
+      width: 100%;
     }
   }
 </style>
@@ -40,14 +77,27 @@
 <section id="home" class="container-fluid" desktop="{{asset('assets/media/uploads/images/banner_tentangkami.jpg')}}"
   tablet="{{asset('assets/media/uploads/images/banner-tentang-kami-m.jpg')}}"
   mobile="{{asset('assets/media/uploads/images/banner-tentang-kami-m.jpg')}}">
-  <div class="row" style="display: flex; justify-content: center; align-items: center;">
-    <div class="col-lg-8">
-      <div style="display: flex; justify-content: center;">
-        <img alt="Gudang Garam" src="{{asset('assets/images/pjsp-logo.png')}}" style="height: 10rem;">
+  <div class="career_content">
+    @foreach ($career_section as $item)
+    <div class="card">
+      <img src="{{asset('storage/' . $item->image)}}" alt="{{$item->section}}">
+      <div>
+        <h1>{{{$item->section}}}</h1>
+        <p>{{{$item->content}}}</p>
+        <a href="#modal-{{$item->id}}" rel="modal:open">{{$current_lang->code == 'ID' ? 'selengkapnya' : 'detail'}}</a>
       </div>
-      <p class="career_content" style="margin-top: 1rem; text-align: center; font-weight: 500;">
-        {{$career_section?->content}}</p>
     </div>
+    <div id="modal-{{$item->id}}" class="modal">
+      <img src="{{asset('storage/' . $item->image)}}" alt="{{$item->section}}">
+      <p>{{{$item->content}}}</p>
+      <a href="#" rel="modal:close">Close</a>
+    </div>
+    @endforeach
   </div>
 </section>
 @endsection
+
+@push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+@endpush

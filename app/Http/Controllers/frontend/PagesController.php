@@ -3,21 +3,13 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\About;
 use App\Models\AboutPage;
 use App\Models\Brand;
-use App\Models\Career;
-use App\Models\Content;
 use App\Models\ContentAboutPage;
-use App\Models\History;
-use App\Models\Home;
 use App\Models\Lang;
 use App\Models\Media;
-use App\Models\News;
-use App\Models\Page;
 use App\Models\Product;
 use App\Models\ProductPage;
-use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -97,6 +89,7 @@ class PagesController extends Controller
             ->get();
 
         return view('frontend.pages.career.index', [
+            'current_lang' => $current_lang,
             'career_section' => $career_section
         ]);
     }

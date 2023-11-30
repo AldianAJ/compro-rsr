@@ -11,11 +11,12 @@
   html,
   body,
   main {
-    min-height: 100% !important;
+    height: unset !important;
+    min-height: 100vh !important;
   }
 
   .col-wrapper {
-    margin-left: 3.25rem !important;
+    /* margin-left: 3.25rem !important; */
     margin-top: 4rem !important;
   }
 
@@ -60,16 +61,24 @@
   }
 
   .content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
     margin-top: 2rem;
   }
 
   .content-wrapper .card img {
-    width: 20rem;
+    /* width: 20rem; */
+    width: 100%;
     height: 20rem;
   }
 
   select {
     display: none;
+  }
+
+  body>main>section>div>div.col-lg.col-wrapper>div:nth-child(3)>div>div {
+    transform: none !important;
   }
 
   @media (max-width: 575.98px) {
@@ -102,10 +111,9 @@
       font-size: 1.2rem;
     } */
 
-    /* .content-wrapper {
-      display: grid;
+    .content-wrapper {
       grid-template-columns: 1fr 1fr;
-    } */
+    }
 
     .content-wrapper .card img {
       width: 100%;
@@ -156,7 +164,7 @@
         <option value="{{$item->slug}}">{{$item->brand_name}}</option>
         @endforeach
       </select>
-      {{-- <div class="content-wrapper">
+      <div class="content-wrapper">
         @foreach ($products as $item)
         <div class="card" x-show="open == '{{$item->brand->slug}}'">
           <a href="{{asset('storage/' . $item->image_url_detail)}}" data-lightbox="{{$item->product_name}}"
@@ -165,8 +173,8 @@
           </a>
         </div>
         @endforeach
-      </div> --}}
-      @foreach ($brands as $loopBrand)
+      </div>
+      {{-- @foreach ($brands as $loopBrand)
       <div class="content-wrapper" x-show="open == '{{$loopBrand->slug}}'">
         @foreach ($loopBrand->products as $loopProduct)
         <div class="card">
@@ -177,7 +185,7 @@
         </div>
         @endforeach
       </div>
-      @endforeach
+      @endforeach --}}
     </div>
   </div>
 </section>
@@ -194,32 +202,32 @@
       'wrapAround': true
     });
 
-    $(document).ready(function(){
-      $('.content-wrapper').slick({
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        centerMode: true,
-        arrows: false,
-        responsive: [
-          {
-            breakpoint: 768,
-            settings: {
-              arrows: false,
-              centerMode: true,
-              slidesToShow: 1
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              arrows: false,
-              centerMode: true,
-              slidesToShow: 1
-            }
-          }
-        ]
-      });
-    });
+    // $(document).ready(function(){
+    //   $('.content-wrapper').slick({
+    //     infinite: true,
+    //     slidesToShow: 3,
+    //     slidesToScroll: 3,
+    //     centerMode: true,
+    //     arrows: true,
+    //     responsive: [
+    //       {
+    //         breakpoint: 768,
+    //         settings: {
+    //           arrows: false,
+    //           centerMode: true,
+    //           slidesToShow: 1
+    //         }
+    //       },
+    //       {
+    //         breakpoint: 480,
+    //         settings: {
+    //           arrows: false,
+    //           centerMode: true,
+    //           slidesToShow: 1
+    //         }
+    //       }
+    //     ]
+    //   });
+    // });
 </script>
 @endpush
