@@ -35,6 +35,7 @@
   }
 
   .career_content .card div {
+    width: 100%;
     background-color: #fff;
     padding: 1rem;
   }
