@@ -202,7 +202,7 @@
         text-align: justify;
     }
 
-    body>main>section:nth-child(2)>div.content>div.content-container>div:nth-child(2)>h1:nth-child(1) {
+    .content-container .content-detail .header {
         background-color: #fff;
         padding: 0.5rem 0;
         position: absolute;
@@ -324,7 +324,7 @@
             </div>
             @foreach ($about_section_history_content as $item)
             <div class="content-detail" x-show="open == '{{$item->year}}'">
-                <h1 style="margin-bottom: 0.5rem;">{{$item->title}}</h1>
+                <h1 class="header" style="margin-bottom: 0.5rem;">{{$item->title}}</h1>
                 <h1>{{$item->year}}</h1>
                 @if(!empty($item->image))
                 <div style="display: flex; justify-content: center;">
