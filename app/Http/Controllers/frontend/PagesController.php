@@ -47,6 +47,7 @@ class PagesController extends Controller
         ])->get();
 
         return view('frontend.pages.about.index', [
+            'current_lang' => $current_lang,
             'about_section_about_content' => $about_section_about_content,
             'about_section_vision_content' => $about_section_vision_content,
             'about_section_mission_content' => $about_section_mission_content,

@@ -16,9 +16,11 @@
     }
 
     .row-wrapper {
-        padding-left: 3.25rem !important;
+        display: flex;
+        justify-content: center;
+        /* padding-left: 3.25rem !important; */
         padding-top: 6rem !important;
-        padding-bottom: 3rem;
+        padding-bottom: 8rem;
     }
 
     .row-wrapper p {
@@ -40,10 +42,12 @@
     }
 
     .content .visi_misi {
-        width: 40%;
+        width: 48%;
         background-color: rgb(0 0 0 / 70%);
         position: absolute;
-        right: 2rem;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
         top: -7rem;
         padding: 0.5rem 1rem;
     }
@@ -119,6 +123,7 @@
     }
 
     .content-container {
+        position: relative;
         display: grid;
         grid-template-columns: 1fr 6fr;
         gap: 1rem;
@@ -197,10 +202,22 @@
         text-align: justify;
     }
 
+    body>main>section:nth-child(2)>div.content>div.content-container>div:nth-child(2)>h1:nth-child(1) {
+        background-color: #fff;
+        padding: 0.5rem 0;
+        position: absolute;
+        border-radius: 5px;
+        top: -4rem;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+    }
+
     @media (max-width: 575.98px) {
         .row-wrapper {
             padding-left: 1rem !important;
             padding-right: 1rem !important;
+            padding-bottom: 3rem;
         }
 
         .row-wrapper p {
@@ -226,6 +243,7 @@
         }
 
         .content-container {
+            margin-top: 5rem;
             grid-template-columns: 1fr;
         }
 
@@ -306,6 +324,7 @@
             </div>
             @foreach ($about_section_history_content as $item)
             <div class="content-detail" x-show="open == '{{$item->year}}'">
+                <h1 style="margin-bottom: 0.5rem;">{{$item->title}}</h1>
                 <h1>{{$item->year}}</h1>
                 @if(!empty($item->image))
                 <div style="display: flex; justify-content: center;">
