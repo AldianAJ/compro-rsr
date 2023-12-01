@@ -38,8 +38,8 @@
                             <th>Slug</th>
                             <th>Section</th>
                             <th>Language</th>
-                            <th>Title</th>
                             <th>Year</th>
+                            <th>Title</th>
                             <th>Content</th>
                             <th>Image</th>
                             <th>Action</th>
