@@ -162,16 +162,13 @@
         background-color: #545b62;
     }
 
-    .content-container .content-year ul li:hover a {
+    .content-container .content-year ul li:hover {
         color: #fff;
     }
 
     .content-container .content-year ul li.active {
-        background-color: #545b62;
-    }
-
-    .content-container .content-year ul li.active a {
         color: #fff;
+        background-color: #545b62;
     }
 
     .content-container .content-year ul li a {
@@ -297,7 +294,7 @@
                 <ul>
                     @foreach ($about_section_history_content as $item)
                     <li @click="open = '{{$item->year}}'" x-bind:class="open == '{{$item->year}}' ? 'active' : ''">
-                        <a href="#">{{$item->year}}</a>
+                        {{$item->year}}
                     </li>
                     @endforeach
                 </ul>
