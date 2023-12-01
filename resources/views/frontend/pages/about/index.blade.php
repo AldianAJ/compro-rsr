@@ -35,7 +35,7 @@
         /* padding-left: 4.25rem !important; */
         padding-left: 10rem !important;
         padding-right: 10rem !important;
-        padding-top: 10rem !important;
+        padding-top: 12rem !important;
         padding-bottom: 4rem !important;
         background-repeat: no-repeat;
         background-size: cover;
