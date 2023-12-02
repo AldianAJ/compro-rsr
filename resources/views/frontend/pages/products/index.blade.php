@@ -99,17 +99,17 @@
             .media-choose {
                 display: none;
                 /* gap: 1rem;
-                                                                              overflow-x: scroll; */
+                                                                                  overflow-x: scroll; */
             }
 
             /* .media-choose .box {
-                                                                              padding: 0.5rem 4rem;
-                                                                            }
+                                                                                  padding: 0.5rem 4rem;
+                                                                                }
 
-                                                                            .media-choose .box h1 {
-                                                                              text-wrap: nowrap;
-                                                                              font-size: 1.2rem;
-                                                                            } */
+                                                                                .media-choose .box h1 {
+                                                                                  text-wrap: nowrap;
+                                                                                  font-size: 1.2rem;
+                                                                                } */
 
             .content-wrapper {
                 grid-template-columns: 1fr 1fr;
@@ -163,7 +163,7 @@
                     </div>
                 </div>
             @else
-                <h1 class="text-center">Brand with category export is empty</h1>
+                <h1 class="text-center">Brand with this category is empty</h1>
             @endif
 
         </div>
