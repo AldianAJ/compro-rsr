@@ -69,6 +69,16 @@
                     </div>
                     <div class="form-group">
                         <label for="" class="form-control-label">
+                            Category
+                        </label>
+                        <select name="addCategory" id="addCategory" class="form-control text-dark">
+                            <option value="">-- Select Category -- </option>
+                            <option value="Export">Export</option>
+                            <option value="Cigarette">Cigarette</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
                             Content
                         </label>
                         <textarea name="addContent" id="addContent" cols="30" rows="10" class="form-control"></textarea>
@@ -103,6 +113,16 @@
                             @foreach ($langs as $lang)
                                 <option value="{{ $lang->id }}">{{ $lang->language }}</option>
                             @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
+                            Category
+                        </label>
+                        <select name="editCategory" id="editCategory" class="form-control text-dark">
+                            <option value="">-- Select Category -- </option>
+                            <option value="Export">Export</option>
+                            <option value="Cigarette">Cigarette</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -175,7 +195,8 @@
             $('#btn-save-add').click(function(e) {
                 var lang = $('#addLang').val();
                 var content = $('#addContent').val();
-                if (lang == "" || content == "") {
+                var category = $('#addCategory').val();
+                if (lang == "" || content == "" || category == "") {
                     $('#createModal').modal('hide');
                     Swal.fire({
                         icon: "error",
@@ -190,6 +211,7 @@
                         data: {
                             'lang_id': lang,
                             'content': content,
+                            'category': category,
                             '_token': "{{ csrf_token() }}"
                         },
                         dataType: "json",
@@ -232,6 +254,7 @@
                         $('#editId').val(resp.data.id);
                         $('#editLang').val(resp.data.lang_id);
                         $('#editContent').val(resp.data.content);
+                        $('#editCategory').val(resp.data.category);
                     }
                 });
             });
@@ -240,7 +263,8 @@
                 var id = $('#editId').val();
                 var lang = $('#editLang').val();
                 var content = $('#editContent').val();
-                if (lang == "" || content == "") {
+                var category = $('#editCategory').val();
+                if (lang == "" || content == "" || category == "") {
                     $('#editModal').modal('hide');
                     Swal.fire({
                         icon: "error",
@@ -256,6 +280,7 @@
                             "id": id,
                             'lang_id': lang,
                             'content': content,
+                            'category': category,
                             "_token": "{{ csrf_token() }}"
                         },
                         success: function(resp) {

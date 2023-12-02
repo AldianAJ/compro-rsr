@@ -64,7 +64,7 @@ class PagesController extends Controller
             ->select('a.*', 'b.category', 'b.brand_name', 'b.slug as brand_slug')
             ->get();
 
-        $product_section = ProductPage::where('lang_id', $current_lang->id)->first();
+        $product_section = ProductPage::where(['lang_id' => $current_lang->id, 'category' => $request->category ? $request->category : 'Cigarette'])->first();
 
         return view('frontend.pages.products.index', [
             'brands' => $brands,

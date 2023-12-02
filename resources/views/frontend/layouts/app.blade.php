@@ -213,7 +213,6 @@
                             <a href="{{ route('frontend.about', ['lang' => $cuurent_lang]) }}">About Us</a>
                         </li>
                         <li>
-                            {{-- <a href="{{ route('frontend.products', ['lang' => $cuurent_lang]) }}">Products</a> --}}
                             <div class="dropdown">
                                 <a href="#" @click="productOpen = !productOpen">
                                     Product

@@ -38,11 +38,12 @@ class ProductPageController extends Controller
     {
         $lang_id = $request->lang_id;
         $content = $request->content;
+        $category = $request->category;
 
-        $check = ProductPage::where("lang_id", $lang_id,)->first();
+        $check = ProductPage::where(["lang_id" => $lang_id, 'category' => $category])->first();
 
         if ($check) {
-            return response()->json(["message" => "Content with language input already exist", "code" => 409], 200);
+            return response()->json(["message" => "Content with language and category input already exist", "code" => 409], 200);
         }
 
         DB::beginTransaction();
@@ -51,6 +52,7 @@ class ProductPageController extends Controller
             $data->slug = Str::random(16);
             $data->lang_id = $lang_id;
             $data->content = $content;
+            $data->category = $category;
             $data->save();
             DB::commit();
             return response()->json(["message" => "Content product successfully added", "code" => 200], 200);
@@ -66,15 +68,15 @@ class ProductPageController extends Controller
         $id = $request->id;
         $lang_id = $request->lang_id;
         $content = $request->content;
+        $category = $request->category;
 
         $data = ProductPage::where('id', $id)->first();
 
-        $check = ProductPage::where('lang_id', $lang_id)
-            ->where('lang_id', '<>', $data->lang_id)
-            ->first();
+        $check = ProductPage::whereRaw("(lang_id = $lang_id AND category = '$category') 
+        AND NOT (lang_id = $data->lang_id AND category = '$data->category')")->first();
 
         if ($check) {
-            return response()->json(["message" => "Product with language input already exist", "code" => 409], 200);
+            return response()->json(["message" => "Product with language and category input already exist", "code" => 409], 200);
         }
 
         DB::beginTransaction();
@@ -82,6 +84,7 @@ class ProductPageController extends Controller
             $data->slug = Str::random(16);
             $data->lang_id = $lang_id;
             $data->content = $content;
+            $data->category = $category;
             $data->save();
             DB::commit();
             return response()->json(["message" => "Content product successfully updated", "code" => 200], 200);
