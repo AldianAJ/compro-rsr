@@ -1,8 +1,8 @@
 @php
-use App\Models\Lang;
+    use App\Models\Lang;
 
-$langs = Lang::get();
-$cuurent_lang = $_GET['lang'] ?? $langs[0]->code;
+    $langs = Lang::get();
+    $cuurent_lang = $_GET['lang'] ?? $langs[0]->code;
 @endphp
 
 <!DOCTYPE html>
@@ -14,7 +14,8 @@ $cuurent_lang = $_GET['lang'] ?? $langs[0]->code;
     <meta charset="utf-8">
     <meta name="author" content="PT Putera Jaya Sakti Perkasa">
     <meta name="title" content="PT Putera Jaya Sakti Perkasa">
-    <meta name="description" content="PT Putera Jaya Sakti Perkasa menjalankan bisnisnya
+    <meta name="description"
+        content="PT Putera Jaya Sakti Perkasa menjalankan bisnisnya
     dengan profesionalitas dan didukung oleh tenaga produksi
     dan manajerial yang handal. Seiring perkembangan zaman
     dan sesuai visi misi perusahaan, maka kami bertekad untuk
@@ -33,13 +34,11 @@ $cuurent_lang = $_GET['lang'] ?? $langs[0]->code;
     <!--[if lt IE 10]> <link rel="stylesheet" href="/static/ggtbk/styles/ie.css"> <![endif]-->
     <script src="{{ asset('assets/javascripts/main.js') }}"></script>
     <script src="{{ asset('assets/javascripts/customffaf.js?v=1.4') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/node_modules/jquery.scrollto/jquery.scrollTo.min.js') }}">
-    </script>
+    <script type="text/javascript" src="{{ asset('assets/node_modules/jquery.scrollto/jquery.scrollTo.min.js') }}"></script>
     <script src="{{ asset('assets/javascripts/jquery.parallax-1.1.3.js') }}"></script>
     <script src="{{ asset('assets/javascripts/jquery.localscroll-1.2.7-min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/node_modules/jquery-lazy/jquery.lazy.min.js') }}"></script>
-    <script type="text/javascript"
-        src="{{ asset('assets/node_modules/jquery-fancybox/source/js/jquery.fancybox.js') }}">
+    <script type="text/javascript" src="{{ asset('assets/node_modules/jquery-fancybox/source/js/jquery.fancybox.js') }}">
     </script>
     <script type="text/javascript" src="{{ asset('assets/node_modules/masonry-layout/dist/masonry.pkgd.min.js') }}">
     </script>
@@ -201,7 +200,7 @@ $cuurent_lang = $_GET['lang'] ?? $langs[0]->code;
 <body>
     <header>
         <nav class="navbar navbar-trans navbar-fixed-top" role="navigation">
-            <div id="topbar" class="container-fluid" x-data="{ open: false, langOpen: false }">
+            <div id="topbar" class="container-fluid" x-data="{ open: false, langOpen: false, productOpen: false }">
                 <div class="navbar-header" x-bind:class="open ? 'active' : ''">
                     <a class="navbar-brand" href="{{ route('frontend.home', ['lang' => $cuurent_lang]) }}">
                         <img alt="Gudang Garam" src="{{ asset('assets/images/pjsp-logo.png') }}">
@@ -214,7 +213,23 @@ $cuurent_lang = $_GET['lang'] ?? $langs[0]->code;
                             <a href="{{ route('frontend.about', ['lang' => $cuurent_lang]) }}">About Us</a>
                         </li>
                         <li>
-                            <a href="{{ route('frontend.products', ['lang' => $cuurent_lang]) }}">Products</a>
+                            {{-- <a href="{{ route('frontend.products', ['lang' => $cuurent_lang]) }}">Products</a> --}}
+                            <div class="dropdown">
+                                <a href="#" @click="productOpen = !productOpen">
+                                    Product
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </a>
+                                <ul class="menu" x-show="productOpen">
+                                    <li>
+                                        <a class="item"
+                                            href="{{ route('frontend.products', ['lang' => $cuurent_lang, 'category' => 'Cigaratte']) }}">Cigaratte</a>
+                                    </li>
+                                    <li>
+                                        <a class="item"
+                                            href="{{ route('frontend.products', ['lang' => $cuurent_lang, 'category' => 'Export']) }}">Export</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li>
                             <a href="{{ route('frontend.media', ['lang' => $cuurent_lang]) }}">Media</a>
@@ -230,7 +245,8 @@ $cuurent_lang = $_GET['lang'] ?? $langs[0]->code;
                                 </a>
                                 <ul class="menu" x-show="langOpen">
                                     @foreach ($langs as $lang)
-                                    <li><a class="item" href="?lang={{ $lang->code }}">{{ $lang->language }}</a></li>
+                                        <li><a class="item"
+                                                href="?lang={{ $lang->code }}">{{ $lang->language }}</a></li>
                                     @endforeach
                                 </ul>
                             </div>
