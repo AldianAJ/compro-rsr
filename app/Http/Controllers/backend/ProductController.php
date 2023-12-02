@@ -24,7 +24,7 @@ class ProductController extends Controller
 
             $data = DB::table('products as a')
                 ->join('brands as b', 'a.brand_id', '=', 'b.id')
-                ->select('a.*', 'b.brand_name')
+                ->select('a.*', 'b.brand_name', 'b.category')
                 ->get();
             return DataTables::of($data)->make(true);
         }

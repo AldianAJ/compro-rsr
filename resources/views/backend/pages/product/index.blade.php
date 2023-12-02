@@ -193,7 +193,9 @@
                     },
                     {
                         data: "brand_name",
-                        name: "brand_name"
+                        render: function(data, type, row, meta) {
+                            return data + ' - ' + row.category;
+                        }
                     },
                     {
                         data: "product_name",
