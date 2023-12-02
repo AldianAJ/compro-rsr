@@ -66,7 +66,8 @@
                             <select name="addBrand" id="addBrand" class="form-control text-dark">
                                 <option value="">-- Select Brands --</option>
                                 @foreach ($brands as $brand)
-                                    <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
+                                    <option value="{{ $brand->id }}">{{ $brand->brand_name . ' - ' . $brand->category }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -127,7 +128,8 @@
                             <select name="editBrand" id="editBrand" class="form-control text-dark">
                                 <option value="">-- Select Brand --</option>
                                 @foreach ($brands as $brand)
-                                    <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
+                                    <option value="{{ $brand->id }}">{{ $brand->brand_name . ' - ' . $brand->category }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>

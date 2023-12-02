@@ -24,9 +24,9 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         $brand_name = $request->brand_name;
-        $language = $request->language;
+        $category = $request->category;
 
-        $check = Brand::where('brand_name', $brand_name)->first();
+        $check = Brand::where(['brand_name' => $brand_name, 'category' => $category])->first();
 
         if ($check) {
             return response()->json(["message" => "Brand Name already exist", "code" => 409], 200);
@@ -37,6 +37,7 @@ class BrandController extends Controller
             $brand = new Brand;
             $brand->slug = Str::slug($brand_name, '-') . '-' . Str::random(5);
             $brand->brand_name = $brand_name;
+            $brand->category = $category;
             $brand->save();
             DB::commit();
             return response()->json(["message" => "Success add new data brands", "code" => 200], 200);
@@ -64,9 +65,10 @@ class BrandController extends Controller
     public function update(Request $request)
     {
         $brand_name = $request->brand_name;
+        $category = $request->category;
         $data = Brand::where('id', $request->id)->first();
-        $check = Brand::where('brand_name', $brand_name)
-            ->where('brand_name', '<>', $data->brand_name)
+        $check = Brand::whereRaw("(brand_name = '$brand_name' AND category = '$category') 
+        AND NOT (brand_name = '$data->brand_name' AND category = '$data->category')")
             ->first();
         if ($check) {
             return response()->json(["message" => "Brand Name already exit, please use different", "code" => 409], 200);
@@ -76,6 +78,7 @@ class BrandController extends Controller
         try {
             $data->slug = Str::slug($brand_name, '-') . '-' . Str::random(5);
             $data->brand_name = $brand_name;
+            $data->category = $category;
             $data->save();
             DB::commit();
             return response()->json(["message" => "Success updated data brands", "code" => 200], 200);

@@ -36,6 +36,7 @@
                         <tr>
                             <th>No</th>
                             <th>Brand Name</th>
+                            <th>Category</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -60,6 +61,16 @@
                             Brand
                         </label>
                         <input type="text" class="form-control text-dark" name="addBrand" id="addBrand">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
+                            Category
+                        </label>
+                        <select name="addCategory" id="addCategory" class="form-control text-dark">
+                            <option value="">-- Select Category -- </option>
+                            <option value="Export">Export</option>
+                            <option value="Cigaratte">Cigaratte</option>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -87,6 +98,16 @@
                         </label>
                         <input type="hidden" name="editId" id="editId">
                         <input type="text" class="form-control text-dark" name="editBrand" id="editBrand">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-control-label">
+                            Category
+                        </label>
+                        <select name="editCategory" id="editCategory" class="form-control text-dark">
+                            <option value="">-- Select Category -- </option>
+                            <option value="Export">Export</option>
+                            <option value="Cigaratte">Cigaratte</option>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -123,6 +144,10 @@
                         name: "brand_name"
                     },
                     {
+                        data: "category",
+                        name: "category"
+                    },
+                    {
                         data: "id",
                         render: function(data, type, row, meta) {
                             let html = "<button class='btn btn-success btn-edit' data-id='" +
@@ -139,12 +164,14 @@
             });
 
             $('#btn-add-modal').click(function(e) {
-                $('#addBrand').val("")
+                $('#addBrand').val("");
+                $('#addCategory').val("");
             });
 
             $('#btn-save-add').click(function(e) {
                 var brand = $('#addBrand').val();
-                if (brand == "") {
+                var category = $('#addCategory').val();
+                if (brand == "" || category == "") {
                     $('#createModal').modal('hide');
                     Swal.fire({
                         icon: "error",
@@ -158,6 +185,7 @@
                         url: "{{ route('backend.brand.store') }}",
                         data: {
                             'brand_name': brand,
+                            'category': category,
                             '_token': "{{ csrf_token() }}"
                         },
                         dataType: "json",
@@ -218,6 +246,7 @@
                         $('#editModal').modal('show');
                         $('#editId').val(resp.data.id);
                         $('#editBrand').val(resp.data.brand_name);
+                        $('#editCategory').val(resp.data.category);
                     }
                 });
             });
@@ -225,7 +254,8 @@
             $('#btn-save-edit').click(function(e) {
                 var id = $('#editId').val();
                 var brand = $('#editBrand').val();
-                if (brand == "") {
+                var category = $('#editCategory').val();
+                if (brand == "" || category == "") {
                     $('#editModal').modal('hide');
                     Swal.fire({
                         icon: "error",
@@ -240,6 +270,7 @@
                         data: {
                             "id": id,
                             "brand_name": brand,
+                            "category": category,
                             "_token": "{{ csrf_token() }}"
                         },
                         success: function(resp) {
