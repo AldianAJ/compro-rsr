@@ -222,7 +222,7 @@
                                 <ul class="menu" x-show="productOpen">
                                     <li>
                                         <a class="item"
-                                            href="{{ route('frontend.products', ['lang' => $cuurent_lang, 'category' => 'Cigaratte']) }}">Cigaratte</a>
+                                            href="{{ route('frontend.products', ['lang' => $cuurent_lang, 'category' => 'Cigarette']) }}">Cigarette</a>
                                     </li>
                                     <li>
                                         <a class="item"

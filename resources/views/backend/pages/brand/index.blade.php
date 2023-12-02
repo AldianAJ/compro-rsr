@@ -69,7 +69,7 @@
                         <select name="addCategory" id="addCategory" class="form-control text-dark">
                             <option value="">-- Select Category -- </option>
                             <option value="Export">Export</option>
-                            <option value="Cigaratte">Cigaratte</option>
+                            <option value="Cigarette">Cigarette</option>
                         </select>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                         <select name="editCategory" id="editCategory" class="form-control text-dark">
                             <option value="">-- Select Category -- </option>
                             <option value="Export">Export</option>
-                            <option value="Cigaratte">Cigaratte</option>
+                            <option value="Cigarette">Cigarette</option>
                         </select>
                     </div>
                 </div>

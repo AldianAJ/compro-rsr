@@ -58,7 +58,7 @@ class PagesController extends Controller
     public function products(Request $request)
     {
         $current_lang = Lang::where('code', $request->lang)->first();
-        $brands = Brand::where('category', $request->category ? $request->category : 'Cigaratte')->get();
+        $brands = Brand::where('category', $request->category ? $request->category : 'Cigarette')->get();
         $products = DB::table('products as a')
             ->join('brands as b', 'a.brand_id', '=', 'b.id')
             ->select('a.*', 'b.category', 'b.brand_name', 'b.slug as brand_slug')
