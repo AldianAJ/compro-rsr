@@ -99,17 +99,17 @@
             .media-choose {
                 display: none;
                 /* gap: 1rem;
-                                      overflow-x: scroll; */
+                                                                              overflow-x: scroll; */
             }
 
             /* .media-choose .box {
-                                      padding: 0.5rem 4rem;
-                                    }
+                                                                              padding: 0.5rem 4rem;
+                                                                            }
 
-                                    .media-choose .box h1 {
-                                      text-wrap: nowrap;
-                                      font-size: 1.2rem;
-                                    } */
+                                                                            .media-choose .box h1 {
+                                                                              text-wrap: nowrap;
+                                                                              font-size: 1.2rem;
+                                                                            } */
 
             .content-wrapper {
                 grid-template-columns: 1fr 1fr;
@@ -140,7 +140,7 @@
                 <div class="col-lg col-wrapper" x-data="{ open: '{{ $brands[0]->slug }}' }">
                     <div class="media-choose">
                         @foreach ($brands as $item)
-                            <div class="box" @click="open = '{{ $item->slug }}'"
+                            <div class="box text-center" @click="open = '{{ $item->slug }}'"
                                 x-bind:class="open == '{{ $item->slug }}' ? 'active' : ''">
                                 <h1>{{ $item->brand_name }}</h1>
                             </div>
