@@ -99,17 +99,17 @@
             .media-choose {
                 display: none;
                 /* gap: 1rem;
-          overflow-x: scroll; */
+                                      overflow-x: scroll; */
             }
 
             /* .media-choose .box {
-          padding: 0.5rem 4rem;
-        }
+                                      padding: 0.5rem 4rem;
+                                    }
 
-        .media-choose .box h1 {
-          text-wrap: nowrap;
-          font-size: 1.2rem;
-        } */
+                                    .media-choose .box h1 {
+                                      text-wrap: nowrap;
+                                      font-size: 1.2rem;
+                                    } */
 
             .content-wrapper {
                 grid-template-columns: 1fr 1fr;
@@ -136,58 +136,36 @@
             <div class="col-wrapper title">
                 <p style="text-align: center;">{{ $product_section?->content }}</p>
             </div>
-            <div class="col-lg col-wrapper" x-data="{ open: '{{ $brands[0]->slug }}' }">
-                <div class="media-choose">
-                    @foreach ($brands as $item)
-                        <div class="box" @click="open = '{{ $item->slug }}'"
-                            x-bind:class="open == '{{ $item->slug }}' ? 'active' : ''">
-                            <h1>{{ $item->brand_name }}</h1>
-                        </div>
-                    @endforeach
-                    {{-- <div class="box" @click="open = 'twizz_family'" x-bind:class="open == 'twizz_family' ? 'active' : ''">
-          <h1>TWIZZ FAMILY</h1>
-        </div>
-        <div class="box" @click="open = 'duff'" x-bind:class="open == 'duff' ? 'active' : ''">
-          <h1>DUFF</h1>
-        </div>
-        <div class="box" @click="open = 'vortex'" x-bind:class="open == 'vortex' ? 'active' : ''">
-          <h1>VORTEX</h1>
-        </div>
-        <div class="box" @click="open = 'kito'" x-bind:class="open == 'kito' ? 'active' : ''">
-          <h1>KITO</h1>
-        </div>
-        <div class="box" @click="open = '363'" x-bind:class="open == '363' ? 'active' : ''">
-          <h1>363</h1>
-        </div> --}}
+            @if (isset($brands[0]))
+                <div class="col-lg col-wrapper" x-data="{ open: '{{ $brands[0]->slug }}' }">
+                    <div class="media-choose">
+                        @foreach ($brands as $item)
+                            <div class="box" @click="open = '{{ $item->slug }}'"
+                                x-bind:class="open == '{{ $item->slug }}' ? 'active' : ''">
+                                <h1>{{ $item->brand_name }}</h1>
+                            </div>
+                        @endforeach
+                    </div>
+                    <select x-model="open">
+                        @foreach ($brands as $item)
+                            <option value="{{ $item->slug }}">{{ $item->brand_name }}</option>
+                        @endforeach
+                    </select>
+                    <div class="content-wrapper">
+                        @foreach ($products as $item)
+                            <div class="card" x-show="open == '{{ $item->brand_slug }}'">
+                                <a href="{{ asset('storage/' . $item->image_url_detail) }}"
+                                    data-lightbox="{{ $item->product_name }}" data-title="{{ $item->product_name }}">
+                                    <img src="{{ asset('storage/' . $item->image_url) }}" alt="{{ $item->product_name }}">
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
-                <select x-model="open">
-                    @foreach ($brands as $item)
-                        <option value="{{ $item->slug }}">{{ $item->brand_name }}</option>
-                    @endforeach
-                </select>
-                <div class="content-wrapper">
-                    @foreach ($products as $item)
-                        <div class="card" x-show="open == '{{ $item->brand_slug }}'">
-                            <a href="{{ asset('storage/' . $item->image_url_detail) }}"
-                                data-lightbox="{{ $item->product_name }}" data-title="{{ $item->product_name }}">
-                                <img src="{{ asset('storage/' . $item->image_url) }}" alt="{{ $item->product_name }}">
-                            </a>
-                        </div>
-                    @endforeach
-                </div>
-                {{-- @foreach ($brands as $loopBrand)
-      <div class="content-wrapper" x-show="open == '{{$loopBrand->slug}}'">
-        @foreach ($loopBrand->products as $loopProduct)
-        <div class="card">
-          <a href="{{asset('storage/' . $loopProduct->image_url_detail)}}"
-            data-lightbox="{{$loopProduct->product_name}}" data-title="{{$loopProduct->product_name}}">
-            <img src="{{asset('storage/' . $loopProduct->image_url)}}" alt="{{$loopProduct->product_name}}">
-          </a>
-        </div>
-        @endforeach
-      </div>
-      @endforeach --}}
-            </div>
+            @else
+                <h1 class="text-center">Brand with category export is empty</h1>
+            @endif
+
         </div>
     </section>
 @endsection
