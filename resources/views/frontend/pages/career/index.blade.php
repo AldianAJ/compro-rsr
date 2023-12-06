@@ -52,7 +52,7 @@
 
   .modal img {
     width: 100%;
-    height: 15rem;
+    /* height: 15rem; */
     object-fit: cover;
     border-radius: 5px;
     margin-bottom: 1rem;
