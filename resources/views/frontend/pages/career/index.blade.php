@@ -1,6 +1,8 @@
 @extends('frontend.layouts.app')
 @section('title', 'Career')
 
+
+
 @push('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <style>
@@ -46,6 +48,10 @@
 
   .career_content .card .content {
     padding: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
   }
 
   .career_content .card h1 {
@@ -95,7 +101,8 @@
         <div class="content">
           {!!$item->content!!}
         </div>
-        <a href="#modal-{{$item->id}}" rel="modal:open">{{$current_lang->code == 'ID' ? 'selengkapnya' : 'detail'}}</a>
+        <a href="#modal-{{$item->id}}" rel="modal:open">{{$current_lang->code == 'ID' ? 'selengkapnya' :
+          'detail'}}</a>
       </div>
     </div>
     <div id="modal-{{$item->id}}" class="modal">
