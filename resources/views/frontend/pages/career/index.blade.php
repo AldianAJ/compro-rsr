@@ -13,6 +13,10 @@
     min-height: 100vh !important
   }
 
+  .navbar-fixed-top {
+    z-index: unset !important;
+  }
+
   .career_content {
     display: grid;
     grid-template-columns: 1fr 1fr;
