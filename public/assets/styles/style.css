@@ -145,7 +145,7 @@ table {
 }
 
 .navbar-fixed-top {
-    /* z-index: 999; */
+    z-index: 999;
 }
 
 .line-divider {
