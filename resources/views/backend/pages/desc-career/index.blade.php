@@ -18,6 +18,7 @@
         href="{{ asset('argon/assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" />
     <link rel="stylesheet"
         href="{{ asset('argon/assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('richtexteditor/rte_theme_default.css') }}">
 @endsection
 
 @section('content')
@@ -157,7 +158,8 @@
     <script src="{{ asset('argon/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
     <script src="{{ asset('argon/assets/vendor/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('argon/assets/vendor/datatables.net-select/js/dataTables.select.min.js') }}"></script>
-
+    <script src="{{ asset('richtexteditor/rte.js') }}"></script>
+    <script src="{{ asset('richtexteditor/plugins/all_plugins.js') }}"></script>
     <script>
         $(document).ready(function() {
             var table = $('#datatable').DataTable({
@@ -197,6 +199,14 @@
                     }
                 ]
             });
+
+            var editor1cfg = {}
+            editor1cfg.toolbar = "mytoolbar";
+            editor1cfg.toolbar_mytoolbar = "{bold,italic}|{fontname,fontsize}|{forecolor}|removeformat" +
+                "#{undo,redo,fullscreenenter,fullscreenexit}";
+
+            var addContent = new RichTextEditor("#addContent", editor1cfg);
+            var editContent = new RichTextEditor("#editContent", editor1cfg);
 
             $('#btn-add-modal').click(function(e) {
                 $('#addCareer').val("");
@@ -283,7 +293,7 @@
                         $('#editId').val(resp.data.id);
                         $('#editCareer').val(resp.data.career_id);
                         $('#editLang').val(resp.data.lang_id);
-                        $('#editContent').val(resp.data.content);
+                        editContent.setHTMLCode(resp.data.content);
                     }
                 });
             });

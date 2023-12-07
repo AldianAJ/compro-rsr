@@ -61,7 +61,7 @@
                             <label for="" class="form-control-label">
                                 Section
                             </label>
-                            <input name="addSection" id="addSection" class="form-control">
+                            <input name="addSection" id="addSection" class="form-control text-dark">
                         </div>
                         <div class="form-group">
                             <label for="" class="form-control-label">
@@ -100,7 +100,7 @@
                             <label for="" class="form-control-label">
                                 Section
                             </label>
-                            <textarea name="editSection" id="editSection" cols="30" rows="10" class="form-control"></textarea>
+                            <textarea name="editSection" id="editSection" cols="30" rows="10" class="form-control text-dark"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="" class="form-control-label">
