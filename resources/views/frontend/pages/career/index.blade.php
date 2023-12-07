@@ -34,7 +34,7 @@
 
   .career_content .card img {
     width: 15rem;
-    height: 15rem;
+    /* height: 15rem; */
     object-fit: cover;
   }
 
@@ -42,6 +42,10 @@
     width: 100%;
     background-color: #fff;
     padding: 1rem;
+  }
+
+  .career_content .card .content {
+    padding: 0;
   }
 
   .career_content .card h1 {
@@ -87,14 +91,18 @@
     <div class="card">
       <img src="{{asset('storage/' . $item->image)}}" alt="{{$item->section}}">
       <div>
-        <h1>{{{$item->section}}}</h1>
-        <p>{{{$item->content}}}</p>
+        <h1>{{$item->section}}</h1>
+        <div class="content">
+          {!!$item->content!!}
+        </div>
         <a href="#modal-{{$item->id}}" rel="modal:open">{{$current_lang->code == 'ID' ? 'selengkapnya' : 'detail'}}</a>
       </div>
     </div>
     <div id="modal-{{$item->id}}" class="modal">
       <img src="{{asset('storage/' . $item->image)}}" alt="{{$item->section}}">
-      <p>{{{$item->content}}}</p>
+      <div class="content">
+        {!!$item->content!!}
+      </div>
       <a href="#" rel="modal:close">Close</a>
     </div>
     @endforeach
