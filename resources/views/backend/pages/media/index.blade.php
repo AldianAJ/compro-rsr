@@ -65,6 +65,7 @@
                             <option value="">-- Select Category --</option>
                             <option value="TVC">TVC</option>
                             <option value="NEWS">NEWS</option>
+                            <option value="CRS">CRS</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -108,6 +109,7 @@
                             <option value="">-- Select Category --</option>
                             <option value="TVC">TVC</option>
                             <option value="NEWS">NEWS</option>
+                            <option value="CRS">CRS</option>
                         </select>
                     </div>
                     <div class="form-group">
