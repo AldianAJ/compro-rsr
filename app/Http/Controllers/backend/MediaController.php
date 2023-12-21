@@ -33,7 +33,7 @@ class MediaController extends Controller
             $media->category = $category;
             $media->title = $title;
             $media->slug = Str::slug($title, '-') . '-' . Str::random(5);
-            $media->url = substr($url, 17, 11);
+            $media->url = substr($url, 0, 66) . "preview";
             $media->save();
             DB::commit();
             return response()->json(["message" => "Success add new data Media", "code" => 200], 200);
@@ -70,7 +70,7 @@ class MediaController extends Controller
             $data->category = $category;
             $data->title = $title;
             $data->slug = Str::slug($title, '-') . '-' . Str::random(5);
-            $data->url = str_contains($url, "https://youtu.be/") ? substr($url, 17, 11) : $url;
+            $data->url = str_contains($url, "preview") ? $url : substr($url, 0, 66) . "preview";
             $data->save();
             DB::commit();
             return response()->json(["message" => "Success updated data medias", "code" => 200], 200);
