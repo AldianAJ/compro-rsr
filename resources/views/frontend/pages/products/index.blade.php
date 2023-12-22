@@ -71,6 +71,7 @@
         /* width: 20rem; */
         width: 100%;
         height: 20rem;
+        object-fit: contain;
     }
 
     select {
