@@ -131,9 +131,6 @@
                         <div class="card" x-show="open == '{{ $item->category }}'">
                             <iframe src="{{ $item->url }}" width="400" height="300"></iframe>
                         </div>
-                        {{-- <div class="card" x-show="open == '{{ $item->category }}'">
-                    <iframe src="https://www.youtube.com/embed/{{ $item->url }}" width="400" height="300"></iframe>
-                </div> --}}
                     @endforeach
                 </div>
             </div>

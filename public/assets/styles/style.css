@@ -39,9 +39,9 @@ main {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     height: 100%;
-    font-family: "futura-condensed-medium", arial, sans;
+    font-family:"Poppins", arial, sans;
     font-weight: 300;
-    font-size: 16px;
+    font-size: 12px;
 }
 
 .no-padding {
@@ -1383,13 +1383,13 @@ table {
     .tab-content
     .custom
     strong {
-    color: #b92025;
+    color: #000;
     font-family: "PTSansRegular", sans;
 }
 
 @media (min-width: 992px) {
     #topbar {
-        background-color: #b92025;
+        background-color: #000;
         margin-left: 3.25rem;
         padding-left: 0;
     }
@@ -1397,14 +1397,14 @@ table {
         float: none;
         height: 100%;
     }
-    #topbar .navbar-header .navbar-brand {
+    /* #topbar .navbar-header .navbar-brand {
         padding: 0;
         display: inline-table;
         vertical-align: middle;
         background: #000;
         height: 4.45em;
         font-size: 16px;
-    }
+    } */
     #topbar .navbar-header .navbar-brand img {
         max-width: 100%;
     }
@@ -1567,7 +1567,7 @@ table {
     }
     #topbar .navbar-header .navbar-brand {
         height: 4em;
-        background-color: #b92025;
+        background-color: #000;
         position: relative;
         left: -15px;
         margin-left: 0;
@@ -2760,7 +2760,7 @@ a:active {
 @media (min-width: 992px) {
     #footer {
         padding: 1.35em 0 1.36em;
-        background: black;
+        background: #b92025;
         font-family: "PTSansRegular", sans;
     }
     #footer small {
@@ -2774,7 +2774,7 @@ a:active {
 @media (max-width: 991px) {
     #footer {
         padding: 1em;
-        background: black;
+        background: #b92025;
         font-family: "PTSansRegular", sans;
         font-size: 14px;
     }

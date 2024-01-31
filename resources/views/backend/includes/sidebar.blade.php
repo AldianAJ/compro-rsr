@@ -2,7 +2,7 @@
     <div class="scrollbar-inner">
         <div class="sidenav-header d-flex align-items-center">
             <a class="navbar-brand" href="javascript:void(0)">
-                <img src="{{ asset('assets/images/pjsp-logo.png') }}" class="navbar-brand-img" alt="..." />
+                <img src="{{ asset('assets/images/logo-rsr.png') }}" class="navbar-brand-img" alt="..." />
             </a>
             <div class="ml-auto">
                 <div class="sidenav-toggler d-none d-xl-block" data-action="sidenav-unpin" data-target="#sidenav-main">

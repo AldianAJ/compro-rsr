@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>PJSP - @yield('title')</title>
+    <title>RSR - @yield('title')</title>
 
     @include('backend.includes.style')
     @yield('after-main-style')
@@ -44,7 +44,6 @@
             <div class="row">
                 @yield('content')
             </div>
-            {{-- @include('backend.includes.footer') --}}
         </div>
     </div>
 

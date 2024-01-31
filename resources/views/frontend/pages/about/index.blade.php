@@ -290,23 +290,6 @@
                 {{$about_section_mission_content?->content}}
             </p>
         </div>
-        {{-- <div class="content-wrapper" x-data="{ open: 0 }">
-            <div class="header">
-                <h1>History of PJSP</h1>
-                <p><span x-text="(open + 1)"></span>/{{count($about_section_history_content)}}</p>
-            </div>
-            @foreach ($about_section_history_content as $item)
-            <h2 x-show="open == '{{$loop->index}}'">{{$item->year}}</h2>
-            @endforeach
-            <div class="history-content">
-                <i class="fa-solid fa-chevron-left" @click="open--" x-show="open != 0"></i>
-                @foreach ($about_section_history_content as $item)
-                <p x-show="open == '{{$loop->index}}'">{{$item->content}}</p>
-                @endforeach
-                <i class="fa-solid fa-chevron-right" @click="open++"
-                    x-show="open < '{{count($about_section_history_content) - 1}}'"></i>
-            </div>
-        </div> --}}
         <div class="content-container" x-data="{ open: '{{$about_section_history_content[0]->year}}' }">
             <div class="content-year">
                 <ul>
@@ -338,7 +321,7 @@
     </div>
     <div style="display: flex; justify-content: center;">
         <iframe height="500"
-            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15835.745318593134!2d112.0922242!3d-7.1333616!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e778f1fd63978c9%3A0x603afb66901a36b9!2sPT.%20Putera%20Jaya%20Sakti%20Perkasa%20Plant%202!5e0!3m2!1sen!2sid!4v1701327956587!5m2!1sen!2sid"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.633790971997!2d112.51447667419576!3d-7.505617792506916!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e780dfb554f610d%3A0xbf3d54a634d2b1c8!2sPT.%20Rajawali%20Sumber%20Rejeki!5e0!3m2!1sid!2sid!4v1703502537618!5m2!1sid!2sid"
             style="border:0; width: 100%;" allowfullscreen="" loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>

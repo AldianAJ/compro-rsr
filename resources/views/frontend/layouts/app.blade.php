@@ -12,8 +12,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="author" content="PT Putera Jaya Sakti Perkasa">
-    <meta name="title" content="PT Putera Jaya Sakti Perkasa">
+    <meta name="author" content="PT. Rajawali Sumber Rejeki">
+    <meta name="title" content="PT. Rajawali Sumber Rejeki">
     <meta name="description"
         content="PT Putera Jaya Sakti Perkasa menjalankan bisnisnya
     dengan profesionalitas dan didukung oleh tenaga produksi
@@ -25,13 +25,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{ env('APP_NAME', 'PT. Putera Jaya Sakti Perkasa') }} | @yield('title')</title>
+    <title>{{ env('APP_NAME', 'PT. Rajawali Sumber Rejeki') }} | @yield('title')</title>
 
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/vnd.microsoft.icon" />
+    <link rel="shortcut icon" href="{{ asset('assets/images/rajawali.ico') }}" type="image/vnd.microsoft.icon" />
     <link rel="stylesheet" href="{{ asset('assets/styles/main.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/styles/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-    <!--[if lt IE 10]> <link rel="stylesheet" href="/static/ggtbk/styles/ie.css"> <![endif]-->
     <script src="{{ asset('assets/javascripts/main.js') }}"></script>
     <script src="{{ asset('assets/javascripts/customffaf.js?v=1.4') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/node_modules/jquery.scrollto/jquery.scrollTo.min.js') }}"></script>
@@ -72,18 +71,15 @@
             height: unset !important;
             display: flex !important;
             align-items: center;
-            margin-left: 0 !important;
+            margin-left: 1rem !important;
+            background-color: #000;
             color: #fff;
             padding: 0.4rem 1rem !important;
         }
 
-        .navbar-brand:hover {
-            color: #fff;
-        }
-
         .navbar-brand img {
-            height: 2rem;
-            margin-right: 0.5rem;
+            height: 2.5rem;
+            margin-right: 1rem;
         }
 
         .navbar-brand h1 {
@@ -94,7 +90,7 @@
         #topbar {
             height: unset !important;
             position: relative !important;
-            background-color: #b92025;
+            background-color: #000;
         }
 
         .navbar-header {
@@ -102,7 +98,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #b92025;
+            background-color: #000;
         }
 
         .navbar-header ul {
@@ -128,7 +124,7 @@
                 right: -1rem;
                 background-color: #000;
                 padding-left: 0;
-                padding: 1rem 4rem;
+                padding: 1rem 2.5rem;
                 flex-direction: column;
             }
 
@@ -139,7 +135,7 @@
 
         .navbar-header ul li a {
             color: #fff;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
 
         .navbar-header ul li a:hover {
@@ -166,9 +162,6 @@
             font-size: 0.8rem;
         }
 
-        #topbar .navbar-header .navbar-brand {
-            background: black !important;
-        }
 
         .navbar-header .dropdown .menu {
             background-color: #b92025;
@@ -193,7 +186,7 @@
             margin-bottom: 0;
             color: #fff;
         }
-    </style>
+    </style> --}}
     @stack('styles')
 </head>
 
@@ -203,8 +196,8 @@
             <div id="topbar" class="container-fluid" x-data="{ open: false, langOpen: false, productOpen: false }">
                 <div class="navbar-header" x-bind:class="open ? 'active' : ''">
                     <a class="navbar-brand" href="{{ route('frontend.home', ['lang' => $cuurent_lang]) }}">
-                        <img alt="Gudang Garam" src="{{ asset('assets/images/pjsp-logo.png') }}">
-                        <h1>PT PUTERA JAYA SAKTI PERKASA</h1>
+                        <img alt="Rajawali Sumber Rejeki" src="{{ asset('assets/images/logo-rajawali.png') }}">
+                        <h1><b>PT. RAJAWALI SUMBER REJEKI</b></h1>
                     </a>
                     <i class="fa-solid fa-bars" @click="open = !open"
                         style="font-size:1.5rem; color:#fff; cursor: pointer;"></i>
@@ -259,12 +252,8 @@
         @yield('content')
     </main>
     <footer>
-        <p>
-            Office : Jl. Baureno - Bojonegoro No.567, Pasinan, Bojonegoro - Jawa Timur | Contact : (0353) 881783 /
-            081333987170 | Email : info@ptpjsp.com
-        </p>
         <p style="margin-top: 0.2rem;">
-            &copy; Copyright PT Putera Jaya Sakti Perkasa
+            &copy; Copyright PT Rajawali Sumber Rejeki
         </p>
     </footer>
     <script>
