@@ -15,7 +15,7 @@
     <meta name="author" content="PT. Rajawali Sumber Rejeki">
     <meta name="title" content="PT. Rajawali Sumber Rejeki">
     <meta name="description"
-        content="PT Putera Jaya Sakti Perkasa menjalankan bisnisnya
+        content="PT Rajawali Sumber Rejeki menjalankan bisnisnya
     dengan profesionalitas dan didukung oleh tenaga produksi
     dan manajerial yang handal. Seiring perkembangan zaman
     dan sesuai visi misi perusahaan, maka kami bertekad untuk
@@ -186,7 +186,7 @@
             margin-bottom: 0;
             color: #fff;
         }
-    </style> --}}
+    </style>
     @stack('styles')
 </head>
 
@@ -252,7 +252,7 @@
         @yield('content')
     </main>
     <footer>
-        <p style="margin-top: 0.2rem;">
+        <p style="margin-top: 0.2rem; font-size: 14px;">
             &copy; Copyright PT Rajawali Sumber Rejeki
         </p>
     </footer>

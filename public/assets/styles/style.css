@@ -39,9 +39,9 @@ main {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     height: 100%;
-    font-family:"Poppins", arial, sans;
+    font-family: "Poppins", arial, sans;
     font-weight: 300;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .no-padding {

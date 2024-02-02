@@ -25,7 +25,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between">
                 <h3 class="mb-0">Master Career</h3>
-                <button type="button" class="btn btn-warning" id="btn-add-modal" data-toggle="modal"
+                <button type="button" class="btn btn-primary" id="btn-add-modal" data-toggle="modal"
                     data-target="#createModal">Add
                     Career</button>
             </div>
@@ -76,7 +76,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-warning" id="btn-save-add">Save changes</button>
+                        <button type="submit" class="btn btn-primary" id="btn-save-add">Save changes</button>
                     </div>
                 </form>
             </div>
@@ -115,7 +115,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-warning" id="btn-save-edit">Save changes</button>
+                        <button type="submit" class="btn btn-primary" id="btn-save-edit">Save changes</button>
                     </div>
                 </form>
             </div>
@@ -158,7 +158,7 @@
                     {
                         data: "id",
                         render: function(data, type, row, meta) {
-                            let html = "<button class='btn btn-success btn-edit' data-id='" +
+                            let html = "<button class='btn btn-primary btn-edit' data-id='" +
                                 data +
                                 "'>Edit</button>";
 
@@ -176,47 +176,6 @@
                 $('#addImage').val("");
             });
 
-            // $('#btn-save-add').click(function(e) {
-            //     var section = $('#addSection').val();
-            //     if (section == "") {
-            //         $('#createModal').modal('hide');
-            //         Swal.fire({
-            //             icon: "error",
-            //             title: "Warning",
-            //             text: "Please fill the field",
-            //             timer: 3000
-            //         });
-            //     } else {
-            //         $.ajax({
-            //             type: "POST",
-            //             url: "{{ route('backend.career.store') }}",
-            //             data: {
-            //                 'section': section,
-            //                 '_token': "{{ csrf_token() }}"
-            //             },
-            //             dataType: "json",
-            //             success: function(resp) {
-            //                 $('#createModal').modal('hide');
-            //                 if (resp.code == 200) {
-            //                     Swal.fire({
-            //                         icon: "success",
-            //                         title: "Success",
-            //                         text: resp.message,
-            //                         timer: 3000
-            //                     });
-            //                 } else {
-            //                     Swal.fire({
-            //                         icon: "error",
-            //                         title: "Warning",
-            //                         text: resp.message,
-            //                         timer: 3000
-            //                     });
-            //                 }
-            //                 table.ajax.reload();
-            //             }
-            //         });
-            //     }
-            // });
             $('form#addForm').submit(function(e) {
                 e.preventDefault();
                 var formData = new FormData(this);
@@ -340,50 +299,6 @@
                 });
             });
 
-            // $('#btn-save-edit').click(function(e) {
-            //     var id = $('#editId').val();
-            //     var content = $('#editContent').val();
-            //     var language = $('#editLang').val();
-            //     if (content == "" || language == "") {
-            //         $('#editModal').modal('hide');
-            //         Swal.fire({
-            //             icon: "error",
-            //             title: "Warning",
-            //             text: "Please fill the field",
-            //             timer: 3000
-            //         });
-            //     } else {
-            //         $.ajax({
-            //             type: "POST",
-            //             url: "{{ route('backend.career.update') }}",
-            //             data: {
-            //                 "id": id,
-            //                 "content": content,
-            //                 "lang_id": language,
-            //                 "_token": "{{ csrf_token() }}"
-            //             },
-            //             success: function(resp) {
-            //                 $('#editModal').modal('hide');
-            //                 if (resp.code == 200) {
-            //                     Swal.fire({
-            //                         icon: "success",
-            //                         title: "Success",
-            //                         text: resp.message,
-            //                         timer: 3000
-            //                     });
-            //                     table.ajax.reload();
-            //                 } else {
-            //                     Swal.fire({
-            //                         icon: "error",
-            //                         title: "Warning",
-            //                         text: resp.message,
-            //                         timer: 3000
-            //                     });
-            //                 }
-            //             }
-            //         });
-            //     }
-            // });
         });
     </script>
 @endsection

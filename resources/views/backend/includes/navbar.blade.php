@@ -1,4 +1,4 @@
-<nav class="navbar navbar-top navbar-expand navbar-dark bg-gradient-warning border-bottom">
+<nav class="navbar navbar-top navbar-expand navbar-dark bg-gradient-danger border-bottom">
     <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -25,7 +25,7 @@
                         aria-expanded="false">
                         <div class="media align-items-center">
                             <span class="avatar avatar-sm rounded-circle">
-                                <img alt="Image placeholder" src="{{ asset('argon/assets/img/theme/team-4.jpg') }}" />
+                                <img alt="Image placeholder" src="{{ asset('argon/assets/img/theme/team-1.jpg') }}" />
                             </span>
                             <div class="media-body ml-2 d-none d-lg-block">
                                 <span class="mb-0 text-sm font-weight-bold">{{ Auth::user()->name }}</span>
