@@ -208,13 +208,13 @@
                         <li>
                             <div class="dropdown">
                                 <a href="#" @click="productOpen = !productOpen">
-                                    Product
+                                    Cigarette
                                     <i class="fa-solid fa-chevron-down"></i>
                                 </a>
                                 <ul class="menu" x-show="productOpen">
                                     <li>
                                         <a class="item"
-                                            href="{{ route('frontend.products', ['lang' => $cuurent_lang, 'category' => 'Cigarette']) }}">Cigarette</a>
+                                            href="{{ route('frontend.products', ['lang' => $cuurent_lang, 'category' => 'Cigarette']) }}">National</a>
                                     </li>
                                     <li>
                                         <a class="item"
@@ -325,14 +325,14 @@
       if (itemMenu.attr('data-sub') == 'sub') $(linkItemMenu).addClass('in'); //add target link class be 'collapsed in'
     });
 
-    document.getElementById('home').style.backgroundImage = 'url("{{asset('assets/images/bg-pasinan-coridor.jpg')}}")';
-    if (wSize <= 768) document.getElementById('home').style.backgroundImage = 'url("{{asset('assets/images/bg-pasinan-coridor.jpg')}}")';
-    if (wSize <= 640) document.getElementById('home').style.backgroundImage = 'url("{{asset('assets/images/bg-pasinan-coridor.jpg')}}")';
+    document.getElementById('home').style.backgroundImage = 'url("{{asset('assets/images/bg-coridor.jpg')}}")';
+    if (wSize <= 768) document.getElementById('home').style.backgroundImage = 'url("{{asset('assets/images/bg-coridor.jpg')}}")';
+    if (wSize <= 640) document.getElementById('home').style.backgroundImage = 'url("{{asset('assets/images/bg-coridor.jpg')}}")';
 
     function bgChange(img) {
-      image = 'url("{{asset('assets/images/bg-pasinan-coridor.jpg')}}")';
-      if (wSize <= 768) { image = 'url("{{asset('assets/images/bg-pasinan-coridor.jpg')}}")'; }
-      if (wSize <= 640) { image = 'url("{{asset('assets/images/bg-pasinan-coridor.jpg')}}")'; }
+      image = 'url("{{asset('assets/images/bg-coridor.jpg')}}")';
+      if (wSize <= 768) { image = 'url("{{asset('assets/images/bg-coridor.jpg')}}")'; }
+      if (wSize <= 640) { image = 'url("{{asset('assets/images/bg-coridor.jpg')}}")'; }
       quote_text = "Perusahaan rokok Gudang Garam adalah salah satu industri rokok terkemuka di tanah air yang telah berdiri sejak tahun 1958 di kota Kediri, Jawa Timur.";
       image_title = "Gudang Garam Tower";
 

@@ -114,18 +114,7 @@
 
         .media-choose {
             display: none;
-            /* gap: 1rem;
-                                                                                  overflow-x: scroll; */
         }
-
-        /* .media-choose .box {
-                                                                                  padding: 0.5rem 4rem;
-                                                                                }
-
-                                                                                .media-choose .box h1 {
-                                                                                  text-wrap: nowrap;
-                                                                                  font-size: 1.2rem;
-                                                                                } */
 
         .content-wrapper {
             grid-template-columns: 1fr 1fr;
@@ -150,12 +139,12 @@
 <section class="container-fluid products_container" style="background-color: #edeaea;">
     <div class="row">
         @if (request()->get('category') == 'Export')
-        <div class="video-wrapper" style="display: flex; justify-content: center;">
+        {{-- <div class="video-wrapper" style="display: flex; justify-content: center;">
             <video autoplay="autoplay" loop="loop" muted="muted"
                 style="-o-filter: blur(0); filter: blur(0); width: 40rem;">
                 <source src="{{ asset('assets/video-drone.mp4') }}" type="video/mp4" />
             </video>
-        </div>
+        </div> --}}
         @endif
         <div class="col-wrapper title">
             <p style="text-align: center;">{{ $product_section?->content }}</p>
@@ -204,33 +193,5 @@
             'resizeDuration': 200,
             'wrapAround': true
         });
-
-        // $(document).ready(function(){
-        //   $('.content-wrapper').slick({
-        //     infinite: true,
-        //     slidesToShow: 3,
-        //     slidesToScroll: 3,
-        //     centerMode: true,
-        //     arrows: true,
-        //     responsive: [
-        //       {
-        //         breakpoint: 768,
-        //         settings: {
-        //           arrows: false,
-        //           centerMode: true,
-        //           slidesToShow: 1
-        //         }
-        //       },
-        //       {
-        //         breakpoint: 480,
-        //         settings: {
-        //           arrows: false,
-        //           centerMode: true,
-        //           slidesToShow: 1
-        //         }
-        //       }
-        //     ]
-        //   });
-        // });
 </script>
 @endpush

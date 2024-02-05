@@ -35,6 +35,6 @@
 
 @section('content')
 <video autoplay="autoplay" loop="loop" muted="muted" style="-o-filter: blur(0); filter: blur(0);">
-  <source src="{{ asset('assets/video-drone.mp4') }}" type="video/mp4" />
+  <source src="{{ asset('assets/Mojokerto.mp4') }}" type="video/mp4" />
 </video>
 @endsection

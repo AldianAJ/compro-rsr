@@ -110,9 +110,9 @@
 @endpush
 
 @section('content')
-    <section id="home" class="container-fluid" desktop="{{ asset('assets/images/bg-pasinan-coridor.jpg') }}"
-        tablet="{{ asset('assets/images/bg-pasinan-coridor.jpg') }}"
-        mobile="{{ asset('assets/images/bg-pasinan-coridor.jpg') }}">
+    <section id="home" class="container-fluid" desktop="{{ asset('assets/images/bg-coridor.jpg') }}"
+        tablet="{{ asset('assets/images/bg-coridor.jpg') }}"
+        mobile="{{ asset('assets/images/bg-coridor.jpg') }}">
         <div class="row">
             <div class="col-lg-8 col-wrapper" x-data="{ open: 'CSR' }">
                 <div class="media-choose">
