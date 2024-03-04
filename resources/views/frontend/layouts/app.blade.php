@@ -43,6 +43,7 @@
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCIwO80xzkuM314AsVjaq9LbHLna6ATfbI"></script>
     <script type="text/javascript" src="{{ asset('assets/javascripts/infobox.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YH4LVQ9FK3"></script>
     <script>
@@ -67,12 +68,30 @@
             }
         }
 
+        /* CSS untuk memperbaiki warna tombol dan menghilangkan outline */
+        .swal2-popup .swal2-styled:focus {
+            box-shadow: none !important;
+            outline: none !important;
+        }
+
+        .swal2-popup .swal2-confirm {
+            background-color: #28a745 !important;
+            /* Mengubah warna tombol konfirmasi menjadi hijau */
+            border-color: #28a745 !important;
+        }
+
+        .swal2-popup .swal2-cancel {
+            background-color: #dc3545 !important;
+            /* Mengubah warna tombol batal menjadi merah */
+            border-color: #dc3545 !important;
+        }
+
         .navbar-brand {
             height: unset !important;
             display: flex !important;
             align-items: center;
             margin-left: 1rem !important;
-            background-color: #000;
+            background-color: #333;
             color: #fff;
             padding: 0.4rem 1rem !important;
         }
@@ -90,7 +109,7 @@
         #topbar {
             height: unset !important;
             position: relative !important;
-            background-color: #000;
+            background-color: #333;
         }
 
         .navbar-header {
@@ -98,7 +117,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #000;
+            background-color: #333;
         }
 
         .navbar-header ul {
@@ -122,10 +141,11 @@
                 position: absolute;
                 top: 2.8rem;
                 right: -1rem;
-                background-color: #000;
+                background-color: #333;
                 padding-left: 0;
                 padding: 1rem 2.5rem;
                 flex-direction: column;
+                border-radius: 5%;
             }
 
             .navbar-header.active ul {
@@ -164,7 +184,7 @@
 
 
         .navbar-header .dropdown .menu {
-            background-color: #b92025;
+            background-color: #333;
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
@@ -173,11 +193,12 @@
             left: 0;
             padding-left: 0;
             padding: 0.5rem;
+            border-radius: 5%;
         }
 
         footer {
             padding: 0.5rem 0;
-            background-color: #b92025;
+            background-color: #333;
         }
 
         footer p {
@@ -253,9 +274,52 @@
     </main>
     <footer>
         <p style="margin-top: 0.2rem; font-size: 14px;">
-            &copy; Copyright PT Rajawali Sumber Rejeki
+            Jl. Mojoroto, Mojotamping, Bangsal, Mojokerto Regency - Jawa Timur
         </p>
     </footer>
+    <script>
+        $(document).ready(function() {
+            function verifyAge() {
+                // Cek apakah pengguna sudah menolak verifikasi sebelumnya
+                var ageVerified = localStorage.getItem('ageVerified');
+
+                // Jika sudah diverifikasi, sembunyikan verifikasi umur
+                if (ageVerified === 'true') {
+                    $('#age-verification').hide();
+                    return; // Keluar dari fungsi
+                }
+
+                Swal.fire({
+                    title: 'AGE VERIFICATION',
+                    text: 'PT RSR values our social responsibility and We need you to confirm your legal status before you proceed.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Legal Age',
+                    cancelButtonText: 'Not Legal Age',
+                    allowOutsideClick: false,
+                    focusConfirm: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#age-verification').hide();
+                        localStorage.setItem('ageVerified',
+                            'true'); // Tandai bahwa pengguna sudah diverifikasi
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        Swal.fire({
+                            text: 'You must be of legal age to view this website.',
+                            icon: 'error',
+                            showCancelButton: false,
+                            confirmButtonText: 'OK',
+                        }).then(() => {
+                            verifyAge();
+                        });
+                    }
+                });
+            }
+
+            verifyAge();
+        });
+    </script>
+
     <script>
         function getCookie(name) {
             var cookieValue = null;

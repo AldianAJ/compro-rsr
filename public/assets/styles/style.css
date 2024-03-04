@@ -53,7 +53,7 @@ main {
 }
 
 #parallax {
-    background-color: #000;
+    background-color: #333;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
@@ -295,7 +295,7 @@ table {
 
 #home {
     overflow: hidden;
-    background-color: #000;
+    background-color: #333;
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
@@ -1389,7 +1389,7 @@ table {
 
 @media (min-width: 992px) {
     #topbar {
-        background-color: #000;
+        background-color: #333;
         margin-left: 3.25rem;
         padding-left: 0;
     }
@@ -1567,7 +1567,7 @@ table {
     }
     #topbar .navbar-header .navbar-brand {
         height: 4em;
-        background-color: #000;
+        background-color: #333;
         position: relative;
         left: -15px;
         margin-left: 0;

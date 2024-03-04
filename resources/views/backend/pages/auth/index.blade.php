@@ -17,13 +17,6 @@
 </head>
 
 <body>
-    {{-- <a class="navbar-brand" href="../dashboards/dashboard.html">
-                
-            </a> --}}
-    {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"
-                aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button> --}}
     <div class="main-content">
         <div class="header bg-gradient-danger py-7 py-lg-8 pt-lg-2">
             {{-- <div class="separator separator-bottom separator-skew zindex-100">
